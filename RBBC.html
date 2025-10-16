@@ -45,12 +45,6 @@
             line-height: 1.6;
             color: var(--gray-800);
             background: var(--white);
-            background-image: 
-                radial-gradient(circle at 20% 50%, rgba(220, 38, 38, 0.03) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(220, 38, 38, 0.02) 0%, transparent 50%),
-                radial-gradient(circle at 40% 80%, rgba(220, 38, 38, 0.01) 0%, transparent 50%),
-                linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(250, 250, 250, 0.9) 100%);
-            background-attachment: fixed;
             overflow-x: hidden;
             font-weight: 400;
             margin: 0;
@@ -84,6 +78,28 @@
             .main-content .hero-nav {
                 left: 0;
                 right: 0;
+            }
+            
+            .hero-nav-links {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero-nav-links a {
+                font-size: 1rem;
+                padding: 0.5rem 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-nav-links {
+                gap: 0.5rem;
+            }
+            
+            .hero-nav-links a {
+                font-size: 0.9rem;
+                padding: 0.4rem 0.8rem;
             }
         }
 
@@ -205,63 +221,94 @@
             border-radius: 2px;
         }
 
-        /* Hero Section - Mobile First Design */
+        /* Hero Section - Modern Full Background */
         .hero {
             min-height: 100vh;
+            position: relative;
+            overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: var(--primary-red);
+        }
+
+        .hero-container {
             position: relative;
-            overflow: hidden;
-            padding: 2rem 1rem;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        @media (min-width: 768px) {
-            .hero {
-                padding: 4rem 2rem;
-            }
-        }
-
-        .hero::before {
-            content: '';
+        .hero-gallery {
             position: absolute;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-                        radial-gradient(circle at 70% 80%, rgba(0, 0, 0, 0.1) 0%, transparent 50%);
-            pointer-events: none;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .hero-bg-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .hero-bg-image.active {
+            opacity: 1;
+        }
+
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(90deg, transparent 0%, rgba(220, 38, 38, 0.3) 20%, rgba(220, 38, 38, 0.8) 50%, rgba(220, 38, 38, 0.3) 80%, transparent 100%);
+            z-index: 2;
         }
 
         .hero-content {
-            max-width: 400px;
-            margin: 0 auto;
-            padding: 0 1rem;
             position: relative;
-            z-index: 2;
+            z-index: 3;
+            max-width: 600px;
             width: 100%;
+            padding: 2rem;
             display: flex;
             flex-direction: column;
+            gap: 2rem;
             align-items: center;
             text-align: center;
-            gap: 2rem;
         }
 
         @media (min-width: 768px) {
             .hero-content {
-                max-width: 600px;
+                max-width: 700px;
                 gap: 3rem;
             }
         }
 
-        /* Hero Brand Section */
-        .hero-brand-section {
+        /* Hero Brand */
+        .hero-brand {
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .hero-brand {
+                align-items: center;
+            }
         }
 
         .hero-logo {
@@ -269,7 +316,7 @@
             height: 120px;
             border-radius: 20px;
             object-fit: cover;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
             background: var(--white);
             padding: 1rem;
         }
@@ -277,7 +324,123 @@
         @media (min-width: 768px) {
             .hero-logo {
                 width: 150px;
+                height: 150px;
             }
+        }
+
+        .hero-title {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 3.5rem;
+            font-weight: 400;
+            color: var(--white);
+            margin: 0;
+            letter-spacing: 2px;
+            line-height: 0.9;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        @media (min-width: 768px) {
+            .hero-title {
+                font-size: 4.5rem;
+                letter-spacing: 3px;
+            }
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: var(--white);
+            color: var(--primary-red);
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            border: 2px solid var(--white);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Hero Description */
+        .hero-description {
+            margin-bottom: 2rem;
+        }
+
+        .hero-description p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* Hero Actions */
+        .hero-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .hero-actions {
+                flex-direction: row;
+                gap: 1.5rem;
+            }
+        }
+
+
+        /* Gallery Navigation */
+        .hero-gallery-nav {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            z-index: 4;
+        }
+
+        .gallery-nav-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: var(--white);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .gallery-nav-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .gallery-dots {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .gallery-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-dot.active {
+            background: var(--white);
+            transform: scale(1.3);
+        }
+
+        .gallery-dot:hover {
+            background: rgba(255, 255, 255, 0.8);
         }
 
         .hero-logo-section {
@@ -290,6 +453,81 @@
             .hero-logo-section {
                 flex-direction: column;
                 gap: 1.5rem;
+            }
+            
+            .hero-content {
+                max-width: 100%;
+                padding: 1.5rem;
+                gap: 2rem;
+            }
+            
+            .hero-brand {
+                gap: 1.5rem;
+            }
+            
+            .hero-logo {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+                letter-spacing: 1px;
+            }
+            
+            .hero-badge {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.9rem;
+            }
+            
+            .hero-description {
+                font-size: 1rem;
+                line-height: 1.6;
+            }
+            
+            .hero-actions {
+                gap: 1rem;
+            }
+            
+            .hero-btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-content {
+                padding: 1rem;
+                gap: 1.5rem;
+            }
+            
+            .hero-logo {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+                letter-spacing: 0.5px;
+            }
+            
+            .hero-badge {
+                padding: 0.3rem 0.6rem;
+                font-size: 0.8rem;
+            }
+            
+            .hero-description {
+                font-size: 0.95rem;
+            }
+            
+            .hero-actions {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+            
+            .hero-btn {
+                padding: 0.7rem 1.2rem;
+                font-size: 0.95rem;
             }
         }
 
@@ -305,6 +543,46 @@
             .hero-logo-main {
                 width: 100px;
                 height: 100px;
+            }
+            
+            .hero-gallery-nav {
+                bottom: 1rem;
+            }
+            
+            .gallery-nav-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+            
+            .gallery-dots {
+                gap: 0.5rem;
+            }
+            
+            .gallery-dot {
+                width: 8px;
+                height: 8px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-gallery-nav {
+                bottom: 0.5rem;
+            }
+            
+            .gallery-nav-btn {
+                width: 35px;
+                height: 35px;
+                font-size: 0.9rem;
+            }
+            
+            .gallery-dots {
+                gap: 0.3rem;
+            }
+            
+            .gallery-dot {
+                width: 6px;
+                height: 6px;
             }
         }
 
@@ -438,183 +716,11 @@
             }
         }
 
-        /* Brand block (logo + title) */
-        .hero-brand {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 2rem;
-            margin: 2rem 0 1.5rem;
-            background: transparent;
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-            border: 3px solid var(--white);
-        }
-
-        .hero-logo {
-            height: 100%;
-            width: auto;
-            max-height: 220px;
-            border-radius: 12px;
-            object-fit: contain;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            margin: 0.75rem;
-        }
-
-        .hero-address {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            text-align: center;
-            color: var(--white);
-            max-width: 520px;
-        }
-
-        .hero-address h2 {
-            font-family: 'Playfair Display', serif;
-            font-weight: 800;
-            font-size: clamp(1.25rem, 2.8vw, 1.75rem);
-            letter-spacing: -0.3px;
-            color: var(--white);
-        }
-
-        .hero-address .addr-line {
-            color: rgba(255, 255, 255, 0.9);
-            line-height: 1.5;
-            font-weight: 500;
-        }
-
-        .hero-address-actions {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-            margin-top: 0.25rem;
-            justify-content: center;
-        }
-
-        .btn-addr-hero {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.75rem 1.5rem;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
-            border: 2px solid var(--white);
-            color: var(--white);
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-        }
-
-        .btn-addr-hero:hover {
-            transform: translateY(-2px);
-            background: var(--white);
-            color: var(--primary-red);
-            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
-        }
-
-        /* Hero Carousel */
-        .hero-carousel {
-            position: relative;
-            width: 100%;
-            max-width: 1000px;
-            aspect-ratio: 21 / 9;
-            margin: 1.5rem auto 2rem;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: var(--shadow-lg);
-            background: var(--gray-200);
-        }
-
-        .hero-carousel img {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0;
-            transition: opacity 0.8s ease;
-        }
-
-        .hero-carousel img.active {
-            opacity: 1;
-        }
-
-        .hero-carousel-dots {
-            position: absolute;
-            left: 50%;
-            bottom: 12px;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            justify-content: center;
-            z-index: 3;
-            padding: 6px 10px;
-            border-radius: 999px;
-            background: rgba(0, 0, 0, 0.15);
-            backdrop-filter: blur(6px);
-        }
-
-        .hero-carousel-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.9);
-            cursor: pointer;
-            transition: transform 0.2s ease, background 0.2s ease, opacity 0.2s ease;
-            padding: 0;
-        }
-
-        .hero-carousel-dot:hover {
-            transform: scale(1.15);
-        }
-
-        .hero-carousel-dot.active {
-            background: var(--white);
-            transform: scale(1.3);
-        }
 
 
-        .hero-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
-            font-weight: 800;
-            color: #FFD700;
-            margin: 2rem 0;
-            letter-spacing: -1px;
-            line-height: 1.1;
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
-            background: linear-gradient(180deg, #FFE681 0%, #FFD700 40%, #E6B800 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-fill-color: transparent;
-        }
 
-        .hero-title .royal {
-            color: #FFD700;
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
-        }
 
-        @media (max-width: 640px) {
-            .hero-brand {
-                gap: 1rem;
-            }
-            .hero-logo {
-                max-height: 150px;
-                border-radius: 10px;
-                margin: 0.5rem;
-            }
-            .hero-address h2 {
-                font-size: 1.1rem;
-            }
-        }
+
 
         .hero-subtitle {
             font-size: clamp(0.9rem, 2.2vw, 1.2rem);
@@ -767,11 +873,39 @@
 
         @media (max-width: 768px) {
             .container {
-                padding: 0 2rem;
+                padding: 0 1.5rem;
             }
             
             .nav-container {
-                padding: 0 2rem;
+                padding: 0 1.5rem;
+            }
+            
+            .section {
+                padding: 3rem 0;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+                margin-bottom: 1rem;
+            }
+            
+            .section-subtitle {
+                font-size: 1rem;
+                margin-bottom: 2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .section {
+                padding: 2rem 0;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
             }
         }
 
@@ -822,8 +956,6 @@
             padding: 2rem;
             box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            backdrop-filter: blur(10px);
         }
 
         .news-card:hover {
@@ -872,51 +1004,496 @@
 
         /* Teams Section */
         .teams-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
             margin-top: 2rem;
             width: 100%;
-            justify-items: center;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .team-card {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             border-radius: 20px;
-            padding: 2.5rem;
+            padding: 0;
             text-align: center;
-            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            backdrop-filter: blur(10px);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
 
         .team-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            transform: translateY(-4px);
+            border-color: var(--primary-red);
+        }
+
+        .team-photo {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 20px 20px 0 0;
         }
 
         .team-card h3 {
             font-size: 1.5rem;
             font-weight: 700;
             color: var(--gray-900);
-            margin-bottom: 1rem;
+            margin: 1.5rem 2rem 1.5rem 2rem;
             letter-spacing: -0.3px;
         }
 
-        .team-card p {
-            color: var(--gray-600);
-            line-height: 1.6;
-            letter-spacing: -0.1px;
+        @media (max-width: 768px) {
+            .teams-grid {
+                max-width: 100%;
+                gap: 2rem;
+            }
+            
+            .team-card {
+                margin: 0 1rem;
+            }
+            
+            .team-photo {
+                height: 250px;
+            }
+            
+            .team-card h3 {
+                font-size: 1.3rem;
+                margin: 1.5rem 1.5rem 0.5rem 1.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .teams-grid {
+                gap: 1.5rem;
+            }
+            
+            .team-card {
+                margin: 0 0.5rem;
+            }
+            
+            .team-photo {
+                height: 200px;
+            }
+            
+            .team-card h3 {
+                font-size: 1.2rem;
+                margin: 1rem 1rem 0.5rem 1rem;
+            }
         }
 
-        .team-photo {
-            width: 100%;
-            aspect-ratio: 16 / 9;
-            object-fit: cover;
+
+
+        /* Address Section Styles */
+        .address-content {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .address-card {
+            background: url('adresse.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            border-radius: 25px;
+            padding: 2.5rem 3rem;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .address-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(ellipse at center, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.6) 30%, rgba(255, 255, 255, 0.2) 60%, transparent 100%);
+            border-radius: 25px;
+            z-index: 1;
+        }
+
+        .address-card > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        .address-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary-red);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15);
+        }
+
+        .address-icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .address-icon svg {
+            color: var(--primary-red);
+            transition: all 0.3s ease;
+            width: 48px;
+            height: 48px;
+        }
+
+        .address-card:hover .address-icon svg {
+            transform: scale(1.1);
+        }
+
+        .address-info {
+            text-align: center;
+        }
+
+        .address-info h3 {
+            color: var(--primary-red);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .address-info p {
+            color: var(--gray-600);
+            font-size: 1.1rem;
+            line-height: 1.5;
+            margin: 0;
+            font-weight: 500;
+        }
+
+        .address-actions {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .address-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--primary-red);
+            color: var(--white);
+            padding: 1rem 2rem;
             border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary-red);
+            box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+        }
+
+        .address-btn:hover {
+            background: var(--white);
+            color: var(--primary-red);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(220, 38, 38, 0.4);
+        }
+
+        .address-btn svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .address-content {
+                max-width: 100%;
+                padding: 0 1rem;
+            }
+            
+            .address-card {
+                padding: 2rem 1.5rem;
+                gap: 1.5rem;
+            }
+            
+            .address-icon svg {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .address-info h3 {
+                font-size: 1.4rem;
+            }
+            
+            .address-info p {
+                font-size: 1rem;
+            }
+            
+            .address-actions {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+            
+            .address-btn {
+                width: 100%;
+                max-width: 280px;
+                justify-content: center;
+                padding: 1rem 2rem;
+            }
+        }
+
+        /* Sponsoring Section Styles */
+        .sponsoring-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .sponsoring-intro {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .sponsoring-intro h3 {
+            color: var(--primary-red);
+            font-size: 1.5rem;
             margin-bottom: 1rem;
-            background: var(--gray-200);
+        }
+
+        .sponsoring-intro p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: var(--gray-600);
+        }
+
+        .sponsoring-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .sponsoring-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .card-icon {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-icon svg {
+            color: var(--primary-red);
+            transition: all 0.3s ease;
+        }
+
+        .sponsoring-card:hover .card-icon svg {
+            transform: scale(1.1);
+        }
+
+        .sponsoring-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary-red);
+        }
+
+        .sponsoring-card h4 {
+            color: var(--primary-red);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .sponsoring-card p {
+            color: var(--gray-600);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .sponsoring-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sponsoring-card ul li {
+            color: var(--gray-600);
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .sponsoring-card ul li::before {
+            content: "✓";
+            color: var(--primary-red);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .sponsoring-visibility {
+            margin-bottom: 3rem;
+        }
+
+        .sponsoring-visibility h3 {
+            color: var(--primary-red);
+            font-size: 1.5rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .visibility-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .visibility-item {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .visibility-icon {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .visibility-icon svg {
+            color: var(--primary-red);
+            transition: all 0.3s ease;
+        }
+
+        .visibility-item:hover .visibility-icon svg {
+            transform: scale(1.1);
+        }
+
+        .visibility-item:hover {
+            transform: translateY(-2px);
+            border-color: var(--primary-red);
+        }
+
+        .visibility-item h4 {
+            color: var(--primary-red);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .visibility-item p {
+            color: var(--gray-600);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .sponsoring-contact {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-icon {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-icon svg {
+            color: var(--primary-red);
+            transition: all 0.3s ease;
+        }
+
+        .sponsoring-contact:hover .contact-icon svg {
+            transform: scale(1.1);
+        }
+
+        .sponsoring-contact h3 {
+            color: var(--primary-red);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .sponsoring-contact p {
+            color: var(--gray-600);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .contact-info {
+            background: rgba(220, 38, 38, 0.1);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .contact-info p {
+            margin: 0;
+            color: var(--gray-700);
+        }
+
+        .contact-info strong {
+            color: var(--primary-red);
+        }
+
+        @media (max-width: 768px) {
+            .sponsoring-content {
+                max-width: 100%;
+                padding: 0 1rem;
+            }
+            
+            .sponsoring-options {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .sponsoring-card {
+                padding: 1.5rem;
+            }
+            
+            .visibility-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .sponsoring-contact {
+                padding: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .sponsoring-card {
+                padding: 1rem;
+            }
+            
+            .sponsoring-card h4 {
+                font-size: 1.1rem;
+            }
+            
+            .sponsoring-card p {
+                font-size: 0.95rem;
+            }
+            
+            .visibility-item {
+                padding: 1rem;
+            }
+            
+            .sponsoring-contact {
+                padding: 1rem;
+            }
         }
 
         /* Training Schedule Styles */
@@ -996,6 +1573,60 @@
             color: #856404;
         }
 
+        @media (max-width: 768px) {
+            .training-schedule {
+                margin-top: 2rem;
+            }
+            
+            .schedule-category {
+                margin-bottom: 2rem;
+            }
+            
+            .category-title {
+                font-size: 1.3rem;
+                margin-bottom: 1rem;
+            }
+            
+            .schedule-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .schedule-item {
+                padding: 1rem;
+            }
+            
+            .team-name {
+                font-size: 1.1rem;
+            }
+            
+            .coach {
+                font-size: 0.9rem;
+            }
+            
+            .schedule {
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .schedule-item {
+                padding: 0.8rem;
+            }
+            
+            .team-name {
+                font-size: 1rem;
+            }
+            
+            .coach {
+                font-size: 0.85rem;
+            }
+            
+            .schedule {
+                font-size: 0.85rem;
+            }
+        }
+
         /* Contact Section */
         .contact-grid {
             display: grid;
@@ -1011,9 +1642,7 @@
             border-radius: 20px;
             padding: 2.5rem;
             box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(0, 0, 0, 0.05);
             text-align: center;
-            backdrop-filter: blur(10px);
         }
 
         .contact-card h3 {
@@ -1029,6 +1658,39 @@
             line-height: 1.6;
             margin-bottom: 1rem;
             letter-spacing: -0.1px;
+        }
+
+        @media (max-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .contact-card {
+                padding: 1.5rem;
+            }
+            
+            .contact-card h3 {
+                font-size: 1.3rem;
+            }
+            
+            .contact-card p {
+                font-size: 0.95rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .contact-card {
+                padding: 1rem;
+            }
+            
+            .contact-card h3 {
+                font-size: 1.2rem;
+            }
+            
+            .contact-card p {
+                font-size: 0.9rem;
+            }
         }
 
         .contact-card a {
@@ -1098,6 +1760,40 @@
         .footer-section p strong {
             color: var(--primary-red);
             font-weight: 600;
+        }
+
+        .social-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--gray-300);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 0.5rem 0;
+        }
+
+        .social-link:hover {
+            color: var(--white);
+            transform: translateX(5px);
+        }
+
+        .social-link.facebook:hover {
+            color: #1877f2;
+        }
+
+        .social-link.instagram:hover {
+            color: #e4405f;
+        }
+
+        .social-link svg {
+            width: 20px;
+            height: 20px;
         }
 
         .footer-bottom {
@@ -1197,15 +1893,6 @@
             scroll-behavior: smooth;
         }
 
-        /* Vertical scale overrides (~-10%) */
-        .hero-nav { padding: 0.9rem 0; }
-        .sponsors-container { padding: 0.675rem 1.8rem; }
-        .hero-brand { gap: 1.8rem; margin: 1.8rem 0 1.35rem; }
-        .hero-carousel { margin: 1.35rem auto 1.8rem; }
-        .hero-subtitle { margin-bottom: 2.7rem; }
-        .hero-cta { margin-bottom: 1.8rem; }
-        .section { padding: 4rem 0; }
-        .team-card, .contact-card { padding: 2.25rem; }
         .sponsor-slot { height: 50px; }
         .main-content { padding-top: 72px; }
         @media (max-width: 640px) {
@@ -1228,8 +1915,10 @@
             <nav class="hero-nav">
                 <ul class="hero-nav-links">
                     <li><a href="#accueil">Accueil</a></li>
+                    <li><a href="#adresse">Adresse</a></li>
                     <li><a href="#equipes">Équipes</a></li>
                     <li><a href="#entrainements">Entraînements</a></li>
+                    <li><a href="#sponsoring">Sponsoring</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
@@ -1247,27 +1936,107 @@
             
             <!-- Hero Section -->
     <section class="hero" id="accueil">
-        <div class="hero-content">
-            <!-- Logo Centré -->
-            <div class="hero-brand-section">
-                <img src="rbbc_icon.jpg" alt="Royal Blaregnies Basket Club" class="hero-logo">
-                <div class="hero-badge">Depuis 1961</div>
+        <div class="hero-container">
+            <!-- Hero Background Gallery -->
+            <div class="hero-gallery">
+                <img src="accueil1.jpg" alt="Photo club 1" class="hero-bg-image active">
+                <img src="accueil3.jpg" alt="Photo club 3" class="hero-bg-image">
+                <img src="accueil4.jpg" alt="Photo club 4" class="hero-bg-image">
+                <img src="accueil5.jpg" alt="Photo club 5" class="hero-bg-image">
+                <img src="accueil6.jpg" alt="Photo club 6" class="hero-bg-image">
             </div>
+            
+            <!-- Hero Overlay -->
+            <div class="hero-overlay"></div>
+            
+            <!-- Hero Content -->
+        <div class="hero-content">
+                <!-- Logo et Titre -->
+                <div class="hero-brand">
+                <img src="rbbc_icon.jpg" alt="Royal Blaregnies Basket Club" class="hero-logo">
+                    <h1 class="hero-title">Royal Blaregnies<br>Basket Club</h1>
+                    <div class="hero-badge">Depuis 1961</div>
+                    </div>
+                
+                <!-- Description -->
+                <div class="hero-description">
+                    <p>Un club familial qui grandit ensemble depuis plus de 60 ans. Rejoignez notre grande famille de plus de 200 membres passionnés.</p>
+                </div>
+                
+                <!-- Actions -->
+                <div class="hero-actions">
+                    <a href="#contact" class="btn btn-primary">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                        </svg>
+                        Nous contacter
+                    </a>
+                    <a href="#equipes" class="btn btn-secondary">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
+                        Nos équipes
+                    </a>
+                    </div>
+                
+                </div>
+            
+            <!-- Gallery Navigation -->
+            <div class="hero-gallery-nav">
+                <button class="gallery-nav-btn prev" onclick="changeSlide(-1)">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="15,18 9,12 15,6"/>
+                    </svg>
+                </button>
+                <div class="gallery-dots">
+                    <span class="gallery-dot active" data-slide="0"></span>
+                    <span class="gallery-dot" data-slide="1"></span>
+                    <span class="gallery-dot" data-slide="2"></span>
+                    <span class="gallery-dot" data-slide="3"></span>
+                    <span class="gallery-dot" data-slide="4"></span>
+                </div>
+                <button class="gallery-nav-btn next" onclick="changeSlide(1)">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="9,18 15,12 9,6"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </section>
 
-            <!-- Carte Adresse -->
-            <div class="hero-address-card">
-                <h3 class="address-title">📍 Notre Adresse</h3>
-                <p class="address-text">Salle omnisports E.Severyns<br>Rue de Sars 7, 7040 Quévy, Belgique</p>
-                <div class="address-buttons">
-                    <a href="https://www.google.com/maps/search/Rue+de+Sars+7,+7040+Quévy,+Belgium" target="_blank" class="address-btn">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <!-- Adresse Section -->
+    <section class="section" id="adresse">
+        <div class="container">
+            <h2 class="section-title">Notre Adresse</h2>
+            <p class="section-subtitle">Venez nous rendre visite</p>
+            
+            <div class="address-content">
+                <div class="address-card">
+                    <div class="address-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                            <circle cx="12" cy="10" r="3"/>
+                        </svg>
+                    </div>
+                    <div class="address-info">
+                        <h3>Salle omnisports E.Severyns</h3>
+                        <p>Rue de Sars 7<br>7040 Quévy, Belgique</p>
+                    </div>
+                </div>
+                
+                <div class="address-actions">
+                    <a href="https://maps.google.com/?q=Rue+de+Sars+7,+7040+Quévy,+Belgique" target="_blank" class="address-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
                             <circle cx="12" cy="10" r="3"/>
                         </svg>
                         Google Maps
                     </a>
-                    <a href="https://www.google.com/maps/dir//Rue+de+Sars+7,+7040+Quévy,+Belgium" target="_blank" class="address-btn">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <a href="https://www.google.com/maps/dir//Rue+de+Sars+7,+7040+Quévy,+Belgique" target="_blank" class="address-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M3 11l19-9-9 19-2-8-8-2z"/>
                         </svg>
                         Itinéraire
@@ -1276,7 +2045,6 @@
             </div>
         </div>
     </section>
-
 
     <!-- Équipes Section -->
     <section class="section" id="equipes">
@@ -1288,57 +2056,46 @@
                 <div class="team-card fade-in">
                     <img class="team-photo" src="https://picsum.photos/600/360?random=101" alt="Photo équipe Minibasket (U6–U8)">
                     <h3>Minibasket (U6–U8)</h3>
-                    <p>Découverte ludique du basket et développement des fondamentaux.</p>
                 </div>
                 <div class="team-card fade-in">
                     <img class="team-photo" src="https://picsum.photos/600/360?random=102" alt="Photo équipe U10">
                     <h3>U10</h3>
-                    <p>Apprentissage technique et esprit d’équipe dans une ambiance bienveillante.</p>
                 </div>
                 <div class="team-card fade-in">
                     <img class="team-photo" src="U12.jpg" alt="Photo équipe U12">
                     <h3>U12</h3>
-                    <p>Perfectionnement des bases et premières notions tactiques.</p>
                 </div>
                 <div class="team-card fade-in">
                     <img class="team-photo" src="https://picsum.photos/600/360?random=104" alt="Photo équipe U14">
                     <h3>U14</h3>
-                    <p>Consolidation technique et approche compétitive progressive.</p>
                 </div>
                 <div class="team-card fade-in">
                     <img class="team-photo" src="U14F.jpg" alt="Photo équipe U14 F">
                     <h3>U14 F</h3>
-                    <p>Équipe féminine U14 : formation, cohésion et plaisir de jouer.</p>
                 </div>
                 <div class="team-card fade-in">
                     <img class="team-photo" src="U16.jpg" alt="Photo équipe U16">
                     <h3>U16</h3>
-                    <p>Développement individuel et collectif vers la performance.</p>
                 </div>
                 <div class="team-card fade-in">
                     <img class="team-photo" src="U16F.jpg" alt="Photo équipe U16 F">
                     <h3>U16 F</h3>
-                    <p>Équipe féminine U16 : engagement, progression et compétitions.</p>
                 </div>
                 <div class="team-card fade-in">
                     <img class="team-photo" src="https://picsum.photos/600/360?random=108" alt="Photo équipe P4">
                     <h3>P4</h3>
-                    <p>Équipe seniors P4 : convivialité et compétition locale.</p>
                 </div>
                 <div class="team-card fade-in">
                     <img class="team-photo" src="https://picsum.photos/600/360?random=109" alt="Photo équipe P2B">
                     <h3>P2B</h3>
-                    <p>Équipe seniors P2B : ambition et exigence sportive.</p>
                 </div>
                 <div class="team-card fade-in">
                     <img class="team-photo" src="P2A.jpg" alt="Photo équipe P2A">
                     <h3>P2A</h3>
-                    <p>Équipe première : compétition et résultats.</p>
                 </div>
                 <div class="team-card fade-in">
                     <img class="team-photo" src="https://picsum.photos/600/360?random=111" alt="Photo équipe P3 Dames">
                     <h3>P3 Dames</h3>
-                    <p>Équipe féminine P3 : esprit d’équipe et compétition régionale.</p>
                 </div>
             </div>
         </div>
@@ -1360,28 +2117,28 @@
                             <div class="schedule">
                                 <div class="schedule-day">Mardi 20h45-22h00</div>
                                 <div class="schedule-day">Jeudi 20h30-22h00</div>
-                            </div>
-                        </div>
+                </div>
+                </div>
                         <div class="schedule-item">
                             <div class="team-name">P2B</div>
                             <div class="coach">Coach : Fatch</div>
                             <div class="schedule">
                                 <div class="schedule-day">Mardi 19h15-20h45</div>
-                            </div>
-                        </div>
+                </div>
+                </div>
                         <div class="schedule-item">
                             <div class="team-name">P4</div>
                             <div class="coach">Coach : Jamal</div>
                             <div class="schedule">
                                 <div class="schedule-day">Mercredi 20h00-21h30</div>
-                            </div>
-                        </div>
+                </div>
+                </div>
                         <div class="schedule-item">
                             <div class="team-name">P3 Dames</div>
                             <div class="coach">Coach : Chris</div>
                             <div class="schedule">
                                 <div class="schedule-day">Jeudi 19h00-20h30</div>
-                            </div>
+                </div>
                         </div>
                     </div>
                 </div>
@@ -1434,19 +2191,116 @@
             <div class="teams-grid">
                 <div class="team-card fade-in">
                     <h3>Équipe P2A</h3>
-                    <p>Notre équipe principale qui évolue en division P2A avec des joueurs expérimentés et motivés.</p>
                 </div>
                 <div class="team-card fade-in">
                     <h3>Équipe P3</h3>
-                    <p>Une équipe compétitive qui participe aux championnats de division P3 avec beaucoup d'ambition.</p>
                 </div>
                 <div class="team-card fade-in">
                     <h3>U16</h3>
-                    <p>Nos jeunes talents qui représentent l'avenir du club avec leur énergie et leur détermination.</p>
                 </div>
                 <div class="team-card fade-in">
                     <h3>U14</h3>
-                    <p>L'équipe des jeunes qui apprennent les bases du basket avec passion et sérieux.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sponsoring Section -->
+    <section class="section" id="sponsoring">
+        <div class="container">
+            <h2 class="section-title">Sponsoring</h2>
+            <p class="section-subtitle">Soutenez le Royal Blaregnies Basket Club et développez votre visibilité</p>
+            
+            <div class="sponsoring-content">
+                <div class="sponsoring-intro">
+                    <h3>Pourquoi nous soutenir ?</h3>
+                    <p>Le Royal Blaregnies Basket Club, fondé en 1961, est un club dynamique qui forme les jeunes talents et participe activement à la vie sportive locale. En nous soutenant, vous contribuez au développement du sport dans notre région et bénéficiez d'une visibilité ciblée.</p>
+                </div>
+                
+                <div class="sponsoring-options">
+                    <div class="sponsoring-card">
+                        <div class="card-icon">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                            </svg>
+                        </div>
+                        <h4>Soutien Financier</h4>
+                        <p>Tout montant est le bienvenu ! Chaque contribution nous aide à :</p>
+                        <ul>
+                            <li>Améliorer nos équipements</li>
+                            <li>Organiser des événements</li>
+                            <li>Développer nos équipes</li>
+                            <li>Former nos jeunes joueurs</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="sponsoring-card">
+                        <div class="card-icon">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20.38 3.46L16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"/>
+                            </svg>
+                        </div>
+                        <h4>Équipements</h4>
+                        <p>Fournissez des équipements sportifs et bénéficiez d'une visibilité directe :</p>
+                        <ul>
+                            <li>Maillots d'équipe</li>
+                            <li>Chaussures de sport</li>
+                            <li>Matériel d'entraînement</li>
+                            <li>Accessoires sportifs</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="sponsoring-visibility">
+                    <h3>Votre Visibilité</h3>
+                    <div class="visibility-grid">
+                        <div class="visibility-item">
+                            <div class="visibility-icon">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M20.38 3.46L16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"/>
+                                </svg>
+                            </div>
+                            <h4>Sur les Équipements</h4>
+                            <p>Logo visible sur les maillots, shorts et accessoires de nos équipes</p>
+                        </div>
+                        <div class="visibility-item">
+                            <div class="visibility-icon">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                                    <line x1="8" y1="21" x2="16" y2="21"/>
+                                    <line x1="12" y1="17" x2="12" y2="21"/>
+                                </svg>
+                            </div>
+                            <h4>Télévision dans la Buvette</h4>
+                            <p>Affichage de votre logo sur l'écran de la buvette pendant les matchs</p>
+                        </div>
+                        <div class="visibility-item">
+                            <div class="visibility-icon">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="2" y1="12" x2="22" y2="12"/>
+                                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                                </svg>
+                            </div>
+                            <h4>Site Internet</h4>
+                            <p>Présence de votre logo et lien vers votre site sur notre page web</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sponsoring-contact">
+                    <div class="contact-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                        </svg>
+                    </div>
+                    <h3>Contactez-nous</h3>
+                    <p>Intéressé par un partenariat ? Contactez notre secrétaire :</p>
+                    <div class="contact-info">
+                        <p><strong>Henri Maton</strong><br>
+                        <strong>Téléphone :</strong> 065/56 70 06<br>
+                        <strong>Email :</strong> henmaton47@gmail.com</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1482,33 +2336,30 @@
             <div class="footer-section">
                 <h3>Le Club</h3>
                 <ul>
-                    <li><a href="#accueil">Accueil</a></li>
-                    <li><a href="#equipes">Nos Équipes</a></li>
-                    <li><a href="#entrainements">Entraînements</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#adresse">Adresse</a></li>
+                <li><a href="#equipes">Nos Équipes</a></li>
+                <li><a href="#entrainements">Entraînements</a></li>
+                <li><a href="#sponsoring">Sponsoring</a></li>
+                <li><a href="#contact">Contact</a></li>
                 </ul>
             </div>
             <div class="footer-section">
-                <h3>Nos Équipes</h3>
-                <ul>
-                    <li><a href="#equipes">P2A - Coach Joseph</a></li>
-                    <li><a href="#equipes">P2B - Coach Fatch</a></li>
-                    <li><a href="#equipes">P3 Dames - Coach Chris</a></li>
-                    <li><a href="#equipes">P4 - Coach Jamal</a></li>
-                    <li><a href="#equipes">U14-U16 - Coach Léo & Martin</a></li>
-                    <li><a href="#equipes">U14F-U16F - Coach Oliver, Laura, Joël</a></li>
-                    <li><a href="#equipes">U12 - Coach Jean-Phi</a></li>
-                    <li><a href="#equipes">U10 - Coach Henri</a></li>
-                </ul>
+                <h3>Actualités</h3>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/BlaregniesBasketClub/" target="_blank" class="social-link facebook">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                        </svg>
+                        Facebook
+                    </a>
+                    <a href="https://www.instagram.com/royalblaregniesbasketclub?igsh=MTh4eXVzeGp4Z3lmMw==" target="_blank" class="social-link instagram">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                        Instagram
+                    </a>
             </div>
-            <div class="footer-section">
-                <h3>Contact</h3>
-                <p><strong>Secrétaire :</strong> Henri Maton<br>
-                <strong>Téléphone :</strong> 065/56 70 06<br>
-                <strong>Email :</strong> henmaton47@gmail.com<br>
-                <strong>Adresse :</strong><br>
-                Salle omnisports E.Severyns<br>
-                Rue de Sars 7, 7040 Quévy, Belgique</p>
             </div>
         </div>
         <div class="footer-bottom">
@@ -1554,6 +2405,57 @@
 
         // Dynamic year in footer
         document.querySelector('.footer-bottom p').innerHTML = `&copy; ${new Date().getFullYear()} Royal Blaregnies Basket Club • Tous droits réservés`;
+
+        // Hero Gallery Navigation
+        let currentSlide = 0;
+        const images = document.querySelectorAll('.hero-bg-image');
+        const dots = document.querySelectorAll('.gallery-dot');
+        const totalSlides = images.length;
+
+        function showSlide(index) {
+            images.forEach((img, i) => {
+                img.classList.toggle('active', i === index);
+            });
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+            currentSlide = index;
+        }
+
+        function changeSlide(direction) {
+            currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        function nextSlide() {
+            changeSlide(1);
+        }
+
+        // Auto-rotation
+        let autoSlideInterval = setInterval(nextSlide, 5000);
+
+        // Pause on hover
+        const hero = document.querySelector('.hero');
+        if (hero) {
+            hero.addEventListener('mouseenter', () => {
+                clearInterval(autoSlideInterval);
+            });
+            hero.addEventListener('mouseleave', () => {
+                autoSlideInterval = setInterval(nextSlide, 5000);
+            });
+        }
+
+        // Dot navigation
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                showSlide(index);
+                clearInterval(autoSlideInterval);
+                autoSlideInterval = setInterval(nextSlide, 5000);
+            });
+        });
+
+        // Button navigation
+        window.changeSlide = changeSlide;
 
 
         // Hero carousel auto-rotation + dots navigation
@@ -1649,8 +2551,5 @@
             window.addEventListener('scroll', onScroll, { passive: true });
         })();
     </script>
-        </div>
-        <div class="right-column"></div>
-    </div>
 </body>
 </html>
