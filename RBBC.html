@@ -1319,6 +1319,12 @@
 
         .footer-section ul li a:hover {
             color: var(--white);
+            transform: translateX(5px);
+        }
+
+        .footer-section p strong {
+            color: var(--primary-red);
+            font-weight: 600;
         }
 
         .footer-bottom {
@@ -1327,6 +1333,18 @@
             padding-top: 2rem;
             text-align: center;
             color: var(--gray-400);
+        }
+
+        @media (max-width: 768px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                text-align: center;
+            }
+            
+            .footer-section ul li a:hover {
+                transform: none;
+            }
         }
 
         /* Responsive Design */
@@ -1767,37 +1785,46 @@
             <div class="footer-section">
                 <h3>Le Club</h3>
                 <ul>
-                    <li><a href="#historique">Historique</a></li>
-                    <li><a href="#comite">Comité</a></li>
-                    <li><a href="#entraineurs">Entraîneurs</a></li>
-                    <li><a href="#horaires">Horaires d'entraînements</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Actualités</h3>
-                <ul>
-                    <li><a href="#news">News</a></li>
-                    <li><a href="#evenements">Événements</a></li>
-                    <li><a href="#annonces">Annonces</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Infos</h3>
-                <ul>
-                    <li><a href="#documents">Documents</a></li>
-                    <li><a href="#sponsors">Sponsors</a></li>
+                    <li><a href="#accueil">Accueil</a></li>
+                    <li><a href="#equipes">Nos Équipes</a></li>
+                    <li><a href="#entrainements">Entraînements</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </div>
             <div class="footer-section">
+                <h3>Nos Équipes</h3>
+                <ul>
+                    <li><a href="#equipes">P2A - Coach Joseph</a></li>
+                    <li><a href="#equipes">P2B - Coach Fatch</a></li>
+                    <li><a href="#equipes">P3 Dames - Coach Chris</a></li>
+                    <li><a href="#equipes">P4 - Coach Jamal</a></li>
+                    <li><a href="#equipes">U14-U16 - Coach Léo & Martin</a></li>
+                    <li><a href="#equipes">U14F-U16F - Coach Oliver, Laura, Joël</a></li>
+                    <li><a href="#equipes">U12 - Coach Jean-Phi</a></li>
+                    <li><a href="#equipes">U10 - Coach Henri</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Horaires</h3>
+                <ul>
+                    <li><a href="#entrainements">Mardi 17h45-22h00</a></li>
+                    <li><a href="#entrainements">Mercredi 20h-21h30</a></li>
+                    <li><a href="#entrainements">Jeudi 17h45-22h00</a></li>
+                    <li><a href="#entrainements">Vendredi 19h-20h30</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
                 <h3>Contact</h3>
-                <p>Secrétaire : Henri Maton<br>
-                Téléphone : 065/56 70 06<br>
-                Email : henmaton47@gmail.com</p>
+                <p><strong>Secrétaire :</strong> Henri Maton<br>
+                <strong>Téléphone :</strong> 065/56 70 06<br>
+                <strong>Email :</strong> henmaton47@gmail.com<br>
+                <strong>Adresse :</strong><br>
+                Salle omnisports E.Severyns<br>
+                Rue de Sars 7, 7040 Quévy, Belgique</p>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2024 Royal Blaregnies Basket Club • Tous droits réservés</p>
+            <p>&copy; 2025 Royal Blaregnies Basket Club • Tous droits réservés</p>
             <p style="margin-top: 0.5rem; opacity: 0.7; font-size: 0.875rem;">Fondé en 1961 • B.B.C.</p>
         </div>
     </footer>
