@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RBBC - Royal Blaregnies Basket Club</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&family=Bebas+Neue&family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             /* Couleurs RBBC */
@@ -313,18 +313,28 @@
         }
 
         .hero-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            font-weight: 800;
+            font-family: 'Bebas Neue', cursive;
+            font-size: 3rem;
+            font-weight: 400;
             color: #FFD700;
             margin: 0;
-            letter-spacing: -1px;
-            line-height: 1.1;
+            letter-spacing: 2px;
+            line-height: 0.9;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         @media (min-width: 768px) {
             .hero-title {
-                font-size: 3.5rem;
+                font-size: 4rem;
+                letter-spacing: 3px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .hero-title {
+                font-size: 4.5rem;
+                letter-spacing: 4px;
             }
         }
 
