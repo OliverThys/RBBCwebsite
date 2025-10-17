@@ -87,6 +87,11 @@
             .mobile-menu-btn {
                 display: flex;
             }
+            
+            .hero-nav {
+                justify-content: center;
+                align-items: center;
+            }
         }
         
 
@@ -198,10 +203,6 @@
             border: none;
             cursor: pointer;
             padding: 8px;
-            position: absolute;
-            right: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
         }
 
         .mobile-menu-btn span {
@@ -212,17 +213,97 @@
             border-radius: 2px;
         }
 
-        .hero-nav-links.mobile-active {
+        /* Mobile menu overlay */
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100vh;
+            background: var(--black);
+            z-index: 9999;
+            transition: left 0.3s ease;
             display: flex;
             flex-direction: column;
-            position: absolute;
-            top: 100%;
+            padding: 2rem;
+        }
+
+        .mobile-menu-overlay.active {
             left: 0;
-            right: 0;
-            background: var(--black);
-            padding: 1rem;
+        }
+
+        .mobile-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+
+        .mobile-menu-logo {
+            display: flex;
+            align-items: center;
             gap: 1rem;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .mobile-menu-logo img {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+        }
+
+        .mobile-menu-logo-text {
+            color: var(--white);
+        }
+
+        .mobile-menu-logo-text h2 {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 1.5rem;
+            color: var(--primary-red);
+            margin: 0;
+            letter-spacing: 1px;
+        }
+
+        .mobile-menu-logo-text p {
+            font-size: 0.8rem;
+            color: var(--gray-300);
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .mobile-menu-close {
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .mobile-menu-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .mobile-menu-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 500;
+            padding: 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .mobile-menu-links a:hover {
+            background: rgba(220, 38, 38, 0.1);
+            border-left-color: var(--primary-red);
+            color: var(--primary-red);
         }
 
         /* Hero Section - Modern Full Background */
@@ -2355,12 +2436,34 @@
         </div>
     </footer>
 
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <div class="mobile-menu-logo">
+                <img src="rbbc_icon.jpg" alt="RBBC Logo">
+                <div class="mobile-menu-logo-text">
+                    <h2>RBBC</h2>
+                    <p>Royal Blaregnies Basket Club</p>
+                </div>
+            </div>
+            <button class="mobile-menu-close" onclick="toggleMobileMenu()">×</button>
+        </div>
+        <ul class="mobile-menu-links">
+            <li><a href="#accueil">Accueil</a></li>
+            <li><a href="#adresse">Adresse</a></li>
+            <li><a href="#equipes">Équipes</a></li>
+            <li><a href="#entrainements">Entraînements</a></li>
+            <li><a href="#sponsoring">Sponsoring</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+
     <script>
 
         // Mobile menu toggle
         function toggleMobileMenu() {
-            const navLinks = document.querySelector('.hero-nav-links');
-            navLinks.classList.toggle('mobile-active');
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('active');
         }
 
         // Smooth scrolling for navigation links
@@ -2374,8 +2477,8 @@
                         block: 'start'
                     });
                     // Close mobile menu when clicking a link
-                    const navLinks = document.querySelector('.hero-nav-links');
-                    navLinks.classList.remove('mobile-active');
+                    const mobileMenu = document.getElementById('mobileMenu');
+                    mobileMenu.classList.remove('active');
                 }
             });
         });
