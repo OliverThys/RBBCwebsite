@@ -78,6 +78,7 @@
             .main-content .hero-nav {
                 left: 0;
                 right: 0;
+                position: relative;
             }
             
             .mobile-menu-toggle {
@@ -143,6 +144,9 @@
             cursor: pointer;
             padding: 0.5rem;
             z-index: 1001;
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
         }
 
         .mobile-menu-toggle span {
@@ -505,9 +509,9 @@
             
             .hero-brand {
                 gap: 1.5rem;
-            }
-            
-            .hero-logo {
+        }
+
+        .hero-logo {
                 width: 100px;
                 height: 100px;
             }
@@ -563,7 +567,7 @@
             }
             
             .hero-actions {
-                flex-direction: column;
+            flex-direction: column;
                 gap: 0.8rem;
             }
             
@@ -598,7 +602,7 @@
             }
             
             .gallery-dots {
-                gap: 0.5rem;
+            gap: 0.5rem;
             }
             
             .gallery-dot {
@@ -1097,9 +1101,9 @@
             
             .team-card {
                 margin: 0 1rem;
-            }
-            
-            .team-photo {
+        }
+
+        .team-photo {
                 height: 250px;
             }
             
@@ -1963,21 +1967,21 @@
         </div>
         <div class="main-content">
             <!-- Navigation -->
-        <nav class="hero-nav">
+            <nav class="hero-nav">
             <div class="mobile-menu-toggle">
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
-            <ul class="hero-nav-links">
-                <li><a href="#accueil">Accueil</a></li>
+                <ul class="hero-nav-links">
+                    <li><a href="#accueil">Accueil</a></li>
                 <li><a href="#adresse">Adresse</a></li>
-                <li><a href="#equipes">Équipes</a></li>
-                <li><a href="#entrainements">Entraînements</a></li>
+                    <li><a href="#equipes">Équipes</a></li>
+                    <li><a href="#entrainements">Entraînements</a></li>
                 <li><a href="#sponsoring">Sponsoring</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
             <!-- Sponsors Bar -->
             <div class="sponsors-bar" aria-label="Sponsors">
                 <div class="sponsors-container">
@@ -2036,7 +2040,7 @@
                         </svg>
                         Nos équipes
                     </a>
-                    </div>
+            </div>
                 
                 </div>
             
@@ -2053,7 +2057,7 @@
                     <span class="gallery-dot" data-slide="2"></span>
                     <span class="gallery-dot" data-slide="3"></span>
                     <span class="gallery-dot" data-slide="4"></span>
-                </div>
+            </div>
                 <button class="gallery-nav-btn next" onclick="changeSlide(1)">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <polyline points="9,18 15,12 9,6"/>
@@ -2080,23 +2084,23 @@
                     <div class="address-info">
                         <h3>Salle omnisports E.Severyns</h3>
                         <p>Rue de Sars 7<br>7040 Quévy, Belgique</p>
-                    </div>
                 </div>
+            </div>
                 
                 <div class="address-actions">
                     <a href="https://maps.google.com/?q=Rue+de+Sars+7,+7040+Quévy,+Belgique" target="_blank" class="address-btn">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                            <circle cx="12" cy="10" r="3"/>
-                        </svg>
-                        Google Maps
-                    </a>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                        <circle cx="12" cy="10" r="3"/>
+                    </svg>
+                    Google Maps
+                </a>
                     <a href="https://www.google.com/maps/dir//Rue+de+Sars+7,+7040+Quévy,+Belgique" target="_blank" class="address-btn">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M3 11l19-9-9 19-2-8-8-2z"/>
-                        </svg>
-                        Itinéraire
-                    </a>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 11l19-9-9 19-2-8-8-2z"/>
+                    </svg>
+                    Itinéraire
+                </a>
                 </div>
             </div>
         </div>
