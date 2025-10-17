@@ -80,15 +80,41 @@
                 right: 0;
             }
             
+            .mobile-menu-toggle {
+                display: flex;
+            }
+            
             .hero-nav-links {
-                gap: 1rem;
-                flex-wrap: wrap;
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100vh;
+                background: rgba(220, 38, 38, 0.98);
+                flex-direction: column;
                 justify-content: center;
+                align-items: center;
+                gap: 2rem;
+                transition: left 0.3s ease;
+                z-index: 1000;
+            }
+            
+            .hero-nav-links.active {
+                left: 0;
             }
             
             .hero-nav-links a {
-                font-size: 1rem;
-                padding: 0.5rem 1rem;
+                font-size: 1.5rem;
+                padding: 1rem 2rem;
+                color: var(--white);
+                text-decoration: none;
+                font-weight: 600;
+                transition: all 0.3s ease;
+            }
+            
+            .hero-nav-links a:hover {
+                color: #FFD700;
+                transform: scale(1.1);
             }
         }
         
@@ -109,7 +135,23 @@
             margin: 0;
             padding: 0;
             gap: 2rem;
-            justify-content: center;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 0.5rem;
+            z-index: 1001;
+        }
+
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--white);
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
         }
 
         .hero-nav-links a {
@@ -1814,6 +1856,15 @@
             .footer-section ul li a:hover {
                 transform: none;
             }
+            
+            .social-links {
+                align-items: center;
+                justify-content: center;
+            }
+            
+            .social-link {
+                justify-content: center;
+            }
         }
 
         /* Responsive Design */
@@ -1912,16 +1963,21 @@
         </div>
         <div class="main-content">
             <!-- Navigation -->
-            <nav class="hero-nav">
-                <ul class="hero-nav-links">
-                    <li><a href="#accueil">Accueil</a></li>
-                    <li><a href="#adresse">Adresse</a></li>
-                    <li><a href="#equipes">Équipes</a></li>
-                    <li><a href="#entrainements">Entraînements</a></li>
-                    <li><a href="#sponsoring">Sponsoring</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
+        <nav class="hero-nav">
+            <div class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="hero-nav-links">
+                <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#adresse">Adresse</a></li>
+                <li><a href="#equipes">Équipes</a></li>
+                <li><a href="#entrainements">Entraînements</a></li>
+                <li><a href="#sponsoring">Sponsoring</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
             <!-- Sponsors Bar -->
             <div class="sponsors-bar" aria-label="Sponsors">
                 <div class="sponsors-container">
@@ -2381,8 +2437,24 @@
                         block: 'start'
                     });
                 }
+                
+                // Close mobile menu if open
+                const mobileMenu = document.querySelector('.hero-nav-links');
+                if (mobileMenu && mobileMenu.classList.contains('active')) {
+                    mobileMenu.classList.remove('active');
+                }
             });
         });
+
+        // Mobile menu toggle
+        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+        const mobileMenu = document.querySelector('.hero-nav-links');
+        
+        if (mobileMenuToggle && mobileMenu) {
+            mobileMenuToggle.addEventListener('click', function() {
+                mobileMenu.classList.toggle('active');
+            });
+        }
 
         // Intersection Observer for animations
         const observerOptions = {
@@ -2552,4 +2624,5 @@
         })();
     </script>
 </body>
+</html>
 </html>
