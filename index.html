@@ -220,12 +220,13 @@
             left: -100%;
             width: 100%;
             height: 100vh;
-            background: var(--black);
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
             z-index: 9999;
-            transition: left 0.3s ease;
+            transition: left 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             display: flex;
             flex-direction: column;
-            padding: 2rem;
+            padding: 3rem 2rem 2rem;
         }
 
         .mobile-menu-overlay.active {
@@ -236,7 +237,9 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 3rem;
+            margin-bottom: 4rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .mobile-menu-logo {
@@ -246,9 +249,10 @@
         }
 
         .mobile-menu-logo img {
-            width: 50px;
-            height: 50px;
-            border-radius: 8px;
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
         }
 
         .mobile-menu-logo-text {
@@ -257,33 +261,46 @@
 
         .mobile-menu-logo-text h2 {
             font-family: 'Bebas Neue', cursive;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             color: var(--primary-red);
             margin: 0;
             letter-spacing: 1px;
         }
 
         .mobile-menu-logo-text p {
-            font-size: 0.8rem;
-            color: var(--gray-300);
+            font-size: 0.7rem;
+            color: var(--gray-400);
             margin: 0;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.8px;
+            font-weight: 500;
         }
 
         .mobile-menu-close {
-            background: none;
+            background: rgba(255, 255, 255, 0.1);
             border: none;
             color: var(--white);
-            font-size: 2rem;
+            font-size: 1.5rem;
             cursor: pointer;
-            padding: 0.5rem;
+            padding: 0.75rem;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-close:hover {
+            background: rgba(220, 38, 38, 0.2);
+            transform: rotate(90deg);
         }
 
         .mobile-menu-links {
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 0.5rem;
             list-style: none;
             margin: 0;
             padding: 0;
@@ -292,18 +309,34 @@
         .mobile-menu-links a {
             color: var(--white);
             text-decoration: none;
-            font-size: 1.2rem;
-            font-weight: 500;
-            padding: 1rem;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            border-left: 3px solid transparent;
+            font-size: 1.1rem;
+            font-weight: 400;
+            padding: 1.2rem 1.5rem;
+            border-radius: 16px;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mobile-menu-links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(220, 38, 38, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .mobile-menu-links a:hover::before {
+            left: 100%;
         }
 
         .mobile-menu-links a:hover {
-            background: rgba(220, 38, 38, 0.1);
-            border-left-color: var(--primary-red);
+            background: rgba(220, 38, 38, 0.08);
             color: var(--primary-red);
+            transform: translateX(8px);
         }
 
         /* Hero Section - Modern Full Background */
