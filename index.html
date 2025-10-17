@@ -81,27 +81,14 @@
             }
             
             .hero-nav-links {
-                gap: 1rem;
-                flex-wrap: wrap;
-                justify-content: center;
+                display: none;
             }
             
-            .hero-nav-links a {
-                font-size: 1rem;
-                padding: 0.5rem 1rem;
+            .mobile-menu-btn {
+                display: flex;
             }
         }
         
-        @media (max-width: 480px) {
-            .hero-nav-links {
-                gap: 0.5rem;
-            }
-            
-            .hero-nav-links a {
-                font-size: 0.9rem;
-                padding: 0.4rem 0.8rem;
-            }
-        }
 
         .hero-nav-links {
             display: flex;
@@ -211,6 +198,10 @@
             border: none;
             cursor: pointer;
             padding: 8px;
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
         }
 
         .mobile-menu-btn span {
@@ -219,6 +210,19 @@
             background: var(--white);
             transition: all 0.3s ease;
             border-radius: 2px;
+        }
+
+        .hero-nav-links.mobile-active {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--black);
+            padding: 1rem;
+            gap: 1rem;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
         }
 
         /* Hero Section - Modern Full Background */
@@ -1913,6 +1917,11 @@
         <div class="main-content">
             <!-- Navigation -->
             <nav class="hero-nav">
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
                 <ul class="hero-nav-links">
                     <li><a href="#accueil">Accueil</a></li>
                     <li><a href="#adresse">Adresse</a></li>
@@ -2348,6 +2357,12 @@
 
     <script>
 
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const navLinks = document.querySelector('.hero-nav-links');
+            navLinks.classList.toggle('mobile-active');
+        }
+
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -2358,6 +2373,9 @@
                         behavior: 'smooth',
                         block: 'start'
                     });
+                    // Close mobile menu when clicking a link
+                    const navLinks = document.querySelector('.hero-nav-links');
+                    navLinks.classList.remove('mobile-active');
                 }
             });
         });
@@ -2530,4 +2548,5 @@
         })();
     </script>
 </body>
+</html>
 </html>
