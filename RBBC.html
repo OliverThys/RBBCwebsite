@@ -74,6 +74,10 @@
             align-items: center;
         }
 
+        .mobile-logo {
+            display: none;
+        }
+
         .navbar-link {
             color: var(--white);
             text-decoration: none;
@@ -134,7 +138,22 @@
             }
 
             .navbar-toggle {
+            display: flex;
+            }
+
+            .mobile-logo {
                 display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin: 2rem 0;
+            }
+
+            .mobile-logo-img {
+                width: 200px;
+                height: 200px;
+                border-radius: 50px;
+                object-fit: cover;
+                box-shadow: 0 12px 48px rgba(0, 0, 0, 0.4);
             }
 
             .navbar-link {
@@ -1942,6 +1961,9 @@
             <!-- Navigation -->
             <nav class="navbar">
                 <div class="navbar-menu" id="navbarMenu">
+                    <div class="mobile-logo">
+                        <img src="rbbc_icon.jpg" alt="RBBC Logo" class="mobile-logo-img">
+                    </div>
                     <a href="#accueil" class="navbar-link">Accueil</a>
                     <a href="#adresse" class="navbar-link">Adresse</a>
                     <a href="#equipes" class="navbar-link">Équipes</a>
