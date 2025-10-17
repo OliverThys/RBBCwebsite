@@ -76,7 +76,9 @@
 
         /* Mobile Styles */
         @media (max-width: 768px) {
-            .hero-nav {
+            .main-content .hero-nav {
+                left: 0;
+                right: 0;
                 position: relative;
                 display: flex;
                 justify-content: flex-end;
@@ -163,6 +165,14 @@
             margin: 3px 0;
             transition: 0.3s;
             border-radius: 2px;
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                background: rgba(0, 0, 0, 0.5);
+                border-radius: 5px;
+                padding: 0.5rem;
+            }
         }
 
         .hero-nav-links a {
@@ -2461,10 +2471,17 @@
         const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
         const mobileMenu = document.querySelector('.hero-nav-links');
         
+        console.log('Mobile menu toggle:', mobileMenuToggle);
+        console.log('Mobile menu:', mobileMenu);
+        
         if (mobileMenuToggle && mobileMenu) {
+            console.log('Adding click listener to mobile menu toggle');
             mobileMenuToggle.addEventListener('click', function() {
+                console.log('Mobile menu toggle clicked');
                 mobileMenu.classList.toggle('active');
             });
+        } else {
+            console.log('Mobile menu elements not found');
         }
 
         // Intersection Observer for animations
