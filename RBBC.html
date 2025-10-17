@@ -82,21 +82,24 @@
                 display: flex;
                 justify-content: flex-end;
                 align-items: center;
+                padding: 1rem;
             }
             
             .mobile-menu-toggle {
-                display: flex;
+                display: flex !important;
+                position: relative;
+                z-index: 1001;
             }
             
             .hero-nav-links {
-                display: none !important;
+                display: none;
             }
             
-            .hero-nav-links.mobile-menu {
+            .hero-nav-links.mobile-open {
                 display: flex;
                 position: fixed;
                 top: 0;
-                left: -100%;
+                left: 0;
                 width: 100%;
                 height: 100vh;
                 background: rgba(220, 38, 38, 0.98);
@@ -104,15 +107,10 @@
                 justify-content: center;
                 align-items: center;
                 gap: 2rem;
-                transition: left 0.3s ease;
                 z-index: 1000;
             }
             
-            .hero-nav-links.active {
-                left: 0;
-            }
-            
-            .hero-nav-links a {
+            .hero-nav-links.mobile-open a {
                 font-size: 1.5rem;
                 padding: 1rem 2rem;
                 color: var(--white);
@@ -121,7 +119,7 @@
                 transition: all 0.3s ease;
             }
             
-            .hero-nav-links a:hover {
+            .hero-nav-links.mobile-open a:hover {
                 color: #FFD700;
                 transform: scale(1.1);
             }
@@ -152,9 +150,6 @@
             cursor: pointer;
             padding: 0.5rem;
             z-index: 1001;
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
         }
 
         .mobile-menu-toggle span {
@@ -2452,8 +2447,8 @@
                 
                 // Close mobile menu if open
                 const mobileMenu = document.querySelector('.hero-nav-links');
-                if (mobileMenu && mobileMenu.classList.contains('active')) {
-                    mobileMenu.classList.remove('active');
+                if (mobileMenu && mobileMenu.classList.contains('mobile-open')) {
+                    mobileMenu.classList.remove('mobile-open');
                 }
             });
         });
@@ -2463,11 +2458,8 @@
         const mobileMenu = document.querySelector('.hero-nav-links');
         
         if (mobileMenuToggle && mobileMenu) {
-            // Add mobile-menu class for mobile styling
-            mobileMenu.classList.add('mobile-menu');
-            
             mobileMenuToggle.addEventListener('click', function() {
-                mobileMenu.classList.toggle('active');
+                mobileMenu.classList.toggle('mobile-open');
             });
         }
 
