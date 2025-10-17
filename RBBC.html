@@ -79,13 +79,13 @@
             .hero-nav {
                 position: relative;
                 display: flex;
-                justify-content: space-between;
+                justify-content: flex-end;
                 align-items: center;
                 padding: 1rem;
             }
             
             .mobile-menu-toggle {
-                display: flex;
+                display: flex !important;
             }
             
             .hero-nav-links {
@@ -148,6 +148,12 @@
             cursor: pointer;
             padding: 0.5rem;
             z-index: 1001;
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: flex !important;
+            }
         }
 
         .mobile-menu-toggle span {
