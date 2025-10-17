@@ -79,6 +79,9 @@
                 left: 0;
                 right: 0;
                 position: relative;
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
             }
             
             .mobile-menu-toggle {
@@ -86,6 +89,11 @@
             }
             
             .hero-nav-links {
+                display: none !important;
+            }
+            
+            .hero-nav-links.mobile-menu {
+                display: flex;
                 position: fixed;
                 top: 0;
                 left: -100%;
@@ -2455,6 +2463,9 @@
         const mobileMenu = document.querySelector('.hero-nav-links');
         
         if (mobileMenuToggle && mobileMenu) {
+            // Add mobile-menu class for mobile styling
+            mobileMenu.classList.add('mobile-menu');
+            
             mobileMenuToggle.addEventListener('click', function() {
                 mobileMenu.classList.toggle('active');
             });
