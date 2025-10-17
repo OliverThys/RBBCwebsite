@@ -169,9 +169,16 @@
         
         @media (max-width: 768px) {
             .mobile-menu-toggle {
-                background: rgba(0, 0, 0, 0.5);
+                background: rgba(0, 0, 0, 0.8) !important;
                 border-radius: 5px;
                 padding: 0.5rem;
+                position: relative !important;
+                z-index: 9999 !important;
+                width: 40px !important;
+                height: 40px !important;
+                border: 2px solid white !important;
+                min-width: 40px !important;
+                min-height: 40px !important;
             }
         }
 
@@ -1993,7 +2000,7 @@
                 <li><a href="#sponsoring">Sponsoring</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
-            <div class="mobile-menu-toggle">
+            <div class="mobile-menu-toggle" style="display: none;">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -2473,6 +2480,32 @@
         
         console.log('Mobile menu toggle:', mobileMenuToggle);
         console.log('Mobile menu:', mobileMenu);
+        
+        // Force display on mobile
+        function checkMobileMenu() {
+            if (window.innerWidth <= 768) {
+                if (mobileMenuToggle) {
+                    mobileMenuToggle.style.display = 'flex';
+                    mobileMenuToggle.style.background = 'rgba(0, 0, 0, 0.8)';
+                    mobileMenuToggle.style.border = '2px solid white';
+                    mobileMenuToggle.style.borderRadius = '5px';
+                    mobileMenuToggle.style.padding = '0.5rem';
+                    mobileMenuToggle.style.zIndex = '9999';
+                    mobileMenuToggle.style.position = 'relative';
+                    mobileMenuToggle.style.width = '40px';
+                    mobileMenuToggle.style.height = '40px';
+                    console.log('Mobile menu toggle forced visible');
+                }
+            } else {
+                if (mobileMenuToggle) {
+                    mobileMenuToggle.style.display = 'none';
+                }
+            }
+        }
+        
+        // Check on load and resize
+        checkMobileMenu();
+        window.addEventListener('resize', checkMobileMenu);
         
         if (mobileMenuToggle && mobileMenu) {
             console.log('Adding click listener to mobile menu toggle');
