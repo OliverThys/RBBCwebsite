@@ -51,79 +51,98 @@
             padding: 0;
         }
 
-        /* Hero Navigation */
-        .hero-nav {
+
+        /* Navbar Styles */
+        .navbar {
             background: var(--black);
-            padding: 1rem 0;
-            margin-bottom: 0;
+            padding: 0.5rem 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             position: fixed;
             top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            transition: transform 0.3s ease;
-        }
-
-        .hero-nav.hidden {
-            transform: translateY(-100%);
-        }
-
-        /* Navbar within main content area */
-        .main-content .hero-nav {
             left: 25%; /* Start after left column */
             right: 25%; /* End before right column */
+            z-index: 1000;
+            transition: all 0.3s ease;
         }
 
-        @media (max-width: 768px) {
-            .main-content .hero-nav {
-                left: 0;
-                right: 0;
-            }
-            
-            .hero-nav-links {
-                gap: 1rem;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            
-            .hero-nav-links a {
-                font-size: 1rem;
-                padding: 0.5rem 1rem;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .hero-nav-links {
-                gap: 0.5rem;
-            }
-            
-            .hero-nav-links a {
-                font-size: 0.9rem;
-                padding: 0.4rem 0.8rem;
-            }
-        }
 
-        .hero-nav-links {
+        .navbar-menu {
             display: flex;
-            list-style: none;
-            margin: 0;
-            padding: 0;
             gap: 2rem;
+            align-items: center;
         }
 
-
-        .hero-nav-links a {
+        .navbar-link {
             color: var(--white);
             text-decoration: none;
             font-weight: 500;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+        }
+
+        .navbar-link:hover {
+            color: var(--primary-red);
+            background: rgba(220, 38, 38, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .navbar-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .hamburger-line {
+            width: 25px;
+            height: 3px;
+            background: var(--white);
+            margin: 3px 0;
+            transition: 0.3s;
             border-radius: 2px;
         }
 
-        .hero-nav-links a:hover {
-            color: var(--primary-red);
-            transform: translateY(-2px);
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            .navbar {
+                left: 0;
+                right: 0;
+                padding: 0.5rem 1rem;
+            }
+
+            .navbar-menu {
+                position: fixed;
+                top: 60px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 60px);
+                background: var(--black);
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                padding-top: 2rem;
+                transition: left 0.3s ease;
+                gap: 1rem;
+            }
+
+            .navbar-menu.active {
+                left: 0;
+            }
+
+            .navbar-toggle {
+                display: flex;
+            }
+
+            .navbar-link {
+                font-size: 1.3rem;
+                padding: 1rem 2rem;
+                width: 100%;
+                text-align: center;
+            }
         }
 
         .logo {
@@ -1921,16 +1940,23 @@
         </div>
         <div class="main-content">
             <!-- Navigation -->
-        <nav class="hero-nav">
-            <ul class="hero-nav-links">
-                <li><a href="#accueil">Accueil</a></li>
-                <li><a href="#adresse">Adresse</a></li>
-                <li><a href="#equipes">Équipes</a></li>
-                <li><a href="#entrainements">Entraînements</a></li>
-                <li><a href="#sponsoring">Sponsoring</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
+            <nav class="navbar">
+                <div class="navbar-menu" id="navbarMenu">
+                    <a href="#accueil" class="navbar-link">Accueil</a>
+                    <a href="#adresse" class="navbar-link">Adresse</a>
+                    <a href="#equipes" class="navbar-link">Équipes</a>
+                    <a href="#entrainements" class="navbar-link">Entraînements</a>
+                    <a href="#sponsoring" class="navbar-link">Sponsoring</a>
+                    <a href="#contact" class="navbar-link">Contact</a>
+                </div>
+                
+                <div class="navbar-toggle" id="navbarToggle">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </div>
+            </nav>
+            
             <!-- Sponsors Bar -->
             <div class="sponsors-bar" aria-label="Sponsors">
                 <div class="sponsors-container">
@@ -2391,8 +2417,23 @@
                     });
                 }
                 
+                // Close mobile menu if open
+                const navbarMenu = document.getElementById('navbarMenu');
+                if (navbarMenu && navbarMenu.classList.contains('active')) {
+                    navbarMenu.classList.remove('active');
+                }
             });
         });
+
+        // Mobile menu toggle
+        const navbarToggle = document.getElementById('navbarToggle');
+        const navbarMenu = document.getElementById('navbarMenu');
+        
+        if (navbarToggle && navbarMenu) {
+            navbarToggle.addEventListener('click', function() {
+                navbarMenu.classList.toggle('active');
+            });
+        }
 
 
         // Intersection Observer for animations
@@ -2520,48 +2561,8 @@
             startTimer();
         })();
 
-        // Navbar hide/show on scroll
-        (function initNavbarScroll() {
-            const navbar = document.querySelector('.hero-nav');
-            if (!navbar) return;
-
-            let lastScrollY = window.scrollY;
-            let ticking = false;
-
-            const updateNavbar = () => {
-                const currentScrollY = window.scrollY;
-                const sponsorsBar = document.querySelector('.sponsors-bar');
-                const sponsorsBottom = sponsorsBar ? (sponsorsBar.offsetTop + sponsorsBar.offsetHeight) : 0;
-
-                const scrollingDown = currentScrollY > lastScrollY;
-                const scrollingUp = currentScrollY < lastScrollY;
-                const upDelta = lastScrollY - currentScrollY;
-
-                if (scrollingDown && currentScrollY > sponsorsBottom + 10) {
-                    // Cacher rapidement après la zone sponsors
-                    navbar.classList.add('hidden');
-                } else if (scrollingUp && upDelta > 8) {
-                    // Réapparaître sur un petit défilement vers le haut
-                    navbar.classList.remove('hidden');
-                } else if (currentScrollY <= sponsorsBottom) {
-                    // Toujours visible au niveau des sponsors / haut de page
-                    navbar.classList.remove('hidden');
-                }
-
-                lastScrollY = currentScrollY;
-                ticking = false;
-            };
-
-            const onScroll = () => {
-                if (!ticking) {
-                    requestAnimationFrame(updateNavbar);
-                    ticking = true;
-                }
-            };
-
-            window.addEventListener('scroll', onScroll, { passive: true });
-        })();
     </script>
 </body>
+</html>
 </html>
 </html>
