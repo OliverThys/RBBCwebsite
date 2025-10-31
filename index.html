@@ -455,6 +455,14 @@
                 max-width: none;
                 width: 100%;
                 position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .hero-wrapper-desktop .hero-content {
+                max-width: 600px;
+                width: 100%;
             }
 
             .sponsors-bar {
@@ -2254,7 +2262,7 @@
             </div>
             
             <!-- Hero Desktop Layout (3 colonnes) -->
-            <section class="hero-wrapper-desktop" id="accueil">
+            <section class="hero-wrapper-desktop" id="accueil-desktop">
                 <!-- Hero Background Gallery -->
                 <div class="hero-gallery">
                     <img src="accueil1.jpg" alt="Photo club 1" class="hero-bg-image active">
@@ -2797,7 +2805,20 @@
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
+                let targetId = this.getAttribute('href');
+                let target = null;
+                
+                // Gérer #accueil qui peut pointer vers desktop ou mobile
+                if (targetId === '#accueil') {
+                    if (window.innerWidth >= 1200) {
+                        target = document.querySelector('#accueil-desktop');
+                    } else {
+                        target = document.querySelector('#accueil');
+                    }
+                } else {
+                    target = document.querySelector(targetId);
+                }
+                
                 if (target) {
                     target.scrollIntoView({
                         behavior: 'smooth',
