@@ -355,60 +355,77 @@
             min-height: 100vh;
             position: relative;
             overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             width: 100%;
+        }
+
+        /* Layout desktop: 3 colonnes (sponsors | hero | sponsors) */
+        .hero-wrapper-desktop {
+            display: none;
+            width: 100%;
+            height: 100vh;
+            position: relative;
+        }
+
+        .hero-wrapper-desktop .hero-gallery {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .hero-wrapper-desktop .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+        }
+
+        .hero-columns {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+            height: 100vh;
+            max-width: 1400px;
+            margin: 0 auto;
+            gap: 0;
+            position: relative;
+            z-index: 3;
         }
 
         /* Sponsors Desktop (gauche et droite) */
         .sponsors-desktop-left,
         .sponsors-desktop-right {
-            display: none;
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 4;
+            display: flex;
             flex-direction: column;
-            gap: 2rem;
+            gap: 0;
             align-items: center;
-        }
-
-        .sponsors-desktop-left {
-            left: calc(50% - 400px);
-        }
-
-        .sponsors-desktop-right {
-            right: calc(50% - 400px);
-        }
-
-        /* Desktop: afficher sponsors latéraux et cacher barre horizontale */
-        @media (min-width: 1200px) {
-            .sponsors-desktop-left,
-            .sponsors-desktop-right {
-                display: flex;
-            }
-
-            .sponsors-bar {
-                display: none;
-            }
+            justify-content: center;
+            width: 150px;
         }
 
         .sponsor-slot-vertical {
-            width: 120px;
-            height: 120px;
+            width: 150px;
+            height: 50%;
             background: rgba(255, 255, 255, 0.95);
-            border-radius: 12px;
-            padding: 1rem;
             display: flex;
             align-items: center;
             justify-content: center;
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
+            padding: 1rem;
+            border: none;
+        }
+
+        .sponsor-slot-vertical:first-child {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
         }
 
         .sponsor-slot-vertical:hover {
-            transform: translateY(-4px);
+            background: rgba(255, 255, 255, 1);
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
         }
 
@@ -426,6 +443,27 @@
             width: auto;
             height: auto;
             object-fit: contain;
+        }
+
+        /* Desktop: afficher layout 3 colonnes et cacher barre horizontale */
+        @media (min-width: 1200px) {
+            .hero-wrapper-desktop {
+                display: block;
+            }
+
+            .hero-wrapper-desktop .hero-container {
+                max-width: none;
+                width: 100%;
+                position: relative;
+            }
+
+            .sponsors-bar {
+                display: none;
+            }
+
+            .hero {
+                display: none;
+            }
         }
 
         .hero-container {
@@ -2215,104 +2253,180 @@
                 </div>
             </div>
             
-            <!-- Hero Section -->
-    <section class="hero" id="accueil">
-        <!-- Sponsors Desktop (gauche et droite) -->
-        <div class="sponsors-desktop-left" aria-label="Sponsors gauche">
-            <div class="sponsor-slot-vertical">
-                <a href="https://alyxel.be/" target="_blank" rel="noopener" aria-label="Alyxel">
-                    <img src="Sponsors/alyxel.jpg" alt="Alyxel">
-                </a>
-            </div>
-            <div class="sponsor-slot-vertical">
-                <a href="https://octopix.be/" target="_blank" rel="noopener" aria-label="Octopix">
-                    <img src="Sponsors/octopix.jpg" alt="Octopix">
-                </a>
-            </div>
-        </div>
-        <div class="sponsors-desktop-right" aria-label="Sponsors droite">
-            <div class="sponsor-slot-vertical">
-                <a href="tel:+32498505647" aria-label="Gérarbre téléphone 0498 50 56 47">
-                    <img src="Sponsors/gerarbre.jpg" alt="Gérarbre">
-                </a>
-            </div>
-            <div class="sponsor-slot-vertical">
-                <a href="tel:+32479468043" aria-label="Infirmières à domicile Elodie et Aurélie">
-                    <img src="Sponsors/elodieaurelie.jpg" alt="Infirmières à domicile Elodie et Aurélie" title="Appeler: 0479 46 80 43 ou 0474 21 08 26">
-                </a>
-            </div>
-        </div>
-        
-        <div class="hero-container">
-            <!-- Hero Background Gallery -->
-            <div class="hero-gallery">
-                <img src="accueil1.jpg" alt="Photo club 1" class="hero-bg-image active">
-                <img src="accueil3.jpg" alt="Photo club 3" class="hero-bg-image" loading="lazy">
-                <img src="accueil4.jpg" alt="Photo club 4" class="hero-bg-image" loading="lazy">
-                <img src="accueil5.jpg" alt="Photo club 5" class="hero-bg-image" loading="lazy">
-                <img src="accueil6.jpg" alt="Photo club 6" class="hero-bg-image" loading="lazy">
-            </div>
-            
-            <!-- Hero Overlay -->
-            <div class="hero-overlay"></div>
-            
-            <!-- Hero Content -->
-        <div class="hero-content">
-                <!-- Logo et Titre -->
-                <div class="hero-brand">
-                <img src="rbbc_icon.jpg" alt="Royal Blaregnies Basket Club" class="hero-logo">
-                    <h1 class="hero-title">Royal Blaregnies<br>Basket Club</h1>
-                    <div class="hero-badge">Depuis 1961</div>
+            <!-- Hero Desktop Layout (3 colonnes) -->
+            <section class="hero-wrapper-desktop" id="accueil">
+                <!-- Hero Background Gallery -->
+                <div class="hero-gallery">
+                    <img src="accueil1.jpg" alt="Photo club 1" class="hero-bg-image active">
+                    <img src="accueil3.jpg" alt="Photo club 3" class="hero-bg-image" loading="lazy">
+                    <img src="accueil4.jpg" alt="Photo club 4" class="hero-bg-image" loading="lazy">
+                    <img src="accueil5.jpg" alt="Photo club 5" class="hero-bg-image" loading="lazy">
+                    <img src="accueil6.jpg" alt="Photo club 6" class="hero-bg-image" loading="lazy">
+                </div>
+                
+                <!-- Hero Overlay -->
+                <div class="hero-overlay"></div>
+                
+                <div class="hero-columns">
+                    <!-- Colonne Sponsors Gauche -->
+                    <div class="sponsors-desktop-left" aria-label="Sponsors gauche">
+                        <div class="sponsor-slot-vertical">
+                            <a href="https://alyxel.be/" target="_blank" rel="noopener" aria-label="Alyxel">
+                                <img src="Sponsors/alyxel.jpg" alt="Alyxel">
+                            </a>
+                        </div>
+                        <div class="sponsor-slot-vertical">
+                            <a href="https://octopix.be/" target="_blank" rel="noopener" aria-label="Octopix">
+                                <img src="Sponsors/octopix.jpg" alt="Octopix">
+                            </a>
+                        </div>
                     </div>
-                
-                <!-- Description -->
-                <div class="hero-description">
-                    <p>Un club familial qui grandit ensemble depuis plus de 60 ans. Rejoignez notre grande famille de plus de 200 membres passionnés.</p>
-                </div>
-                
-                <!-- Actions -->
-                <div class="hero-actions">
-                    <a href="#contact" class="btn btn-primary">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-                        </svg>
-                        Nous contacter
-                    </a>
-                    <a href="#equipes" class="btn btn-secondary">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                            <circle cx="9" cy="7" r="4"/>
-                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                        </svg>
-                        Nos équipes
-                    </a>
+                    
+                    <!-- Colonne Hero Centrale -->
+                    <div class="hero-container">
+                        <!-- Hero Content -->
+                        <div class="hero-content">
+                            <!-- Logo et Titre -->
+                            <div class="hero-brand">
+                                <img src="rbbc_icon.jpg" alt="Royal Blaregnies Basket Club" class="hero-logo">
+                                <h1 class="hero-title">Royal Blaregnies<br>Basket Club</h1>
+                                <div class="hero-badge">Depuis 1961</div>
+                            </div>
+                            
+                            <!-- Description -->
+                            <div class="hero-description">
+                                <p>Un club familial qui grandit ensemble depuis plus de 60 ans. Rejoignez notre grande famille de plus de 200 membres passionnés.</p>
+                            </div>
+                            
+                            <!-- Actions -->
+                            <div class="hero-actions">
+                                <a href="#contact" class="btn btn-primary">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                                    </svg>
+                                    Nous contacter
+                                </a>
+                                <a href="#equipes" class="btn btn-secondary">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                        <circle cx="9" cy="7" r="4"/>
+                                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                                    </svg>
+                                    Nos équipes
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Gallery Navigation -->
+                        <div class="hero-gallery-nav">
+                            <button class="gallery-nav-btn prev" onclick="changeSlide(-1)">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="15,18 9,12 15,6"/>
+                                </svg>
+                            </button>
+                            <div class="gallery-dots">
+                                <span class="gallery-dot active" data-slide="0"></span>
+                                <span class="gallery-dot" data-slide="1"></span>
+                                <span class="gallery-dot" data-slide="2"></span>
+                                <span class="gallery-dot" data-slide="3"></span>
+                                <span class="gallery-dot" data-slide="4"></span>
+                            </div>
+                            <button class="gallery-nav-btn next" onclick="changeSlide(1)">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="9,18 15,12 9,6"/>
+                                </svg>
+                            </button>
+                        </div>
                     </div>
-                
+                    
+                    <!-- Colonne Sponsors Droite -->
+                    <div class="sponsors-desktop-right" aria-label="Sponsors droite">
+                        <div class="sponsor-slot-vertical">
+                            <a href="tel:+32498505647" aria-label="Gérarbre téléphone 0498 50 56 47">
+                                <img src="Sponsors/gerarbre.jpg" alt="Gérarbre">
+                            </a>
+                        </div>
+                        <div class="sponsor-slot-vertical">
+                            <a href="tel:+32479468043" aria-label="Infirmières à domicile Elodie et Aurélie">
+                                <img src="Sponsors/elodieaurelie.jpg" alt="Infirmières à domicile Elodie et Aurélie" title="Appeler: 0479 46 80 43 ou 0474 21 08 26">
+                            </a>
+                        </div>
+                    </div>
                 </div>
-            
-            <!-- Gallery Navigation -->
-            <div class="hero-gallery-nav">
-                <button class="gallery-nav-btn prev" onclick="changeSlide(-1)">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="15,18 9,12 15,6"/>
-                    </svg>
-                </button>
-                <div class="gallery-dots">
-                    <span class="gallery-dot active" data-slide="0"></span>
-                    <span class="gallery-dot" data-slide="1"></span>
-                    <span class="gallery-dot" data-slide="2"></span>
-                    <span class="gallery-dot" data-slide="3"></span>
-                    <span class="gallery-dot" data-slide="4"></span>
+            </section>
+
+            <!-- Hero Section Mobile -->
+            <section class="hero" id="accueil">
+                <div class="hero-container">
+                    <!-- Hero Background Gallery -->
+                    <div class="hero-gallery">
+                        <img src="accueil1.jpg" alt="Photo club 1" class="hero-bg-image active">
+                        <img src="accueil3.jpg" alt="Photo club 3" class="hero-bg-image" loading="lazy">
+                        <img src="accueil4.jpg" alt="Photo club 4" class="hero-bg-image" loading="lazy">
+                        <img src="accueil5.jpg" alt="Photo club 5" class="hero-bg-image" loading="lazy">
+                        <img src="accueil6.jpg" alt="Photo club 6" class="hero-bg-image" loading="lazy">
+                    </div>
+                    
+                    <!-- Hero Overlay -->
+                    <div class="hero-overlay"></div>
+                    
+                    <!-- Hero Content -->
+                    <div class="hero-content">
+                        <!-- Logo et Titre -->
+                        <div class="hero-brand">
+                            <img src="rbbc_icon.jpg" alt="Royal Blaregnies Basket Club" class="hero-logo">
+                            <h1 class="hero-title">Royal Blaregnies<br>Basket Club</h1>
+                            <div class="hero-badge">Depuis 1961</div>
+                        </div>
+                        
+                        <!-- Description -->
+                        <div class="hero-description">
+                            <p>Un club familial qui grandit ensemble depuis plus de 60 ans. Rejoignez notre grande famille de plus de 200 membres passionnés.</p>
+                        </div>
+                        
+                        <!-- Actions -->
+                        <div class="hero-actions">
+                            <a href="#contact" class="btn btn-primary">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                                </svg>
+                                Nous contacter
+                            </a>
+                            <a href="#equipes" class="btn btn-secondary">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                    <circle cx="9" cy="7" r="4"/>
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                                </svg>
+                                Nos équipes
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Gallery Navigation -->
+                    <div class="hero-gallery-nav">
+                        <button class="gallery-nav-btn prev" onclick="changeSlide(-1)">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="15,18 9,12 15,6"/>
+                            </svg>
+                        </button>
+                        <div class="gallery-dots">
+                            <span class="gallery-dot active" data-slide="0"></span>
+                            <span class="gallery-dot" data-slide="1"></span>
+                            <span class="gallery-dot" data-slide="2"></span>
+                            <span class="gallery-dot" data-slide="3"></span>
+                            <span class="gallery-dot" data-slide="4"></span>
+                        </div>
+                        <button class="gallery-nav-btn next" onclick="changeSlide(1)">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="9,18 15,12 9,6"/>
+                            </svg>
+                        </button>
+                    </div>
                 </div>
-                <button class="gallery-nav-btn next" onclick="changeSlide(1)">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="9,18 15,12 9,6"/>
-                    </svg>
-                </button>
-            </div>
-        </div>
-    </section>
+            </section>
 
     <!-- Adresse Section -->
     <section class="section" id="adresse">
