@@ -369,10 +369,11 @@
 
         .hero-columns {
             display: grid;
-            grid-template-columns: auto 1200px auto;
+            grid-template-columns: auto minmax(600px, 1200px) auto;
             align-items: stretch;
             height: 100vh;
-            max-width: 1400px;
+            max-width: 100%;
+            width: 100%;
             margin: 0 auto;
             gap: 0;
             position: relative;
@@ -453,12 +454,45 @@
                 width: 100%;
             }
 
+            .hero-wrapper-desktop .hero-gallery {
+                width: 100%;
+                height: 100%;
+            }
+
+            .hero-wrapper-desktop .hero-bg-image {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
             .sponsors-bar {
                 display: none;
             }
 
             .hero {
                 display: none;
+            }
+        }
+
+        /* Écrans moyens : ajuster la colonne centrale */
+        @media (min-width: 900px) and (max-width: 1199px) {
+            .hero-columns {
+                grid-template-columns: auto minmax(600px, 1fr) auto;
+            }
+
+            .hero-wrapper-desktop .hero-container {
+                min-width: 0;
+            }
+        }
+
+        /* Écrans trop petits pour le layout 3 colonnes */
+        @media (max-width: 899px) {
+            .hero-wrapper-desktop {
+                display: none !important;
+            }
+
+            .hero {
+                display: block !important;
             }
         }
 
@@ -471,6 +505,7 @@
             align-items: center;
             justify-content: center;
             margin: 0 auto;
+            overflow: hidden;
         }
 
         .hero-gallery {
@@ -489,8 +524,10 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            object-position: center;
             opacity: 0;
             transition: opacity 1s ease-in-out;
+            will-change: opacity;
         }
 
         .hero-bg-image.active {
