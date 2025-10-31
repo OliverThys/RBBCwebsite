@@ -116,16 +116,11 @@
 
         /* Navbar within main content area */
         .main-content .hero-nav {
-            left: 25%; /* Start after left column */
-            right: 25%; /* End before right column */
+            left: 0;
+            right: 0;
         }
 
         @media (max-width: 768px) {
-            .main-content .hero-nav {
-                left: 0;
-                right: 0;
-            }
-            
             .hero-nav-links {
                 display: none !important;
             }
@@ -140,7 +135,6 @@
                 display: flex;
             }
         }
-        
 
         .hero-nav-links {
             display: flex;
@@ -972,35 +966,29 @@
 
         .main-wrapper {
             display: grid;
-            grid-template-columns: 1fr 2fr 1fr;
+            grid-template-columns: 1fr;
             min-height: 100vh;
             width: 100%;
             overflow-x: hidden;
         }
 
         .main-content {
-            grid-column: 2;
+            grid-column: 1;
             display: flex;
             flex-direction: column;
-            border-left: 1px solid var(--black);
-            border-right: 1px solid var(--black);
+            border-left: none;
+            border-right: none;
             overflow: hidden;
             position: relative;
             padding-top: 80px; /* Compensate for fixed navbar */
         }
 
         .left-column {
-            grid-column: 1;
-            background: var(--white);
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            padding: 3rem 2rem;
+            display: none;
         }
 
         .right-column {
-            grid-column: 3;
-            background: var(--white);
+            display: none;
         }
 
         .left-logo {
@@ -1028,20 +1016,6 @@
 
         /* Tablettes et petites fenêtres (769px - 1023px) */
         @media (min-width: 769px) and (max-width: 1023px) {
-            .main-wrapper {
-                grid-template-columns: 1fr;
-            }
-
-            .left-column,
-            .right-column {
-                display: none;
-            }
-
-            .main-content {
-                border-left: none;
-                border-right: none;
-            }
-
             .main-content .hero-nav {
                 left: 0;
                 right: 0;
@@ -2053,19 +2027,6 @@
 
         /* Responsive Design */
         @media (max-width: 768px) {
-            .main-wrapper {
-                grid-template-columns: 1fr;
-            }
-
-            .left-column {
-                display: none;
-            }
-
-            .right-column {
-                display: none;
-            }
-
-
             .nav-links {
                 display: none;
                 position: absolute;
