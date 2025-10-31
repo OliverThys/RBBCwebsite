@@ -101,7 +101,10 @@
         .hero-nav {
             background: var(--black);
             padding: 1rem 0;
+            margin: 0;
             margin-bottom: 0;
+            border: none;
+            outline: none;
             position: fixed;
             top: 0;
             left: 0;
@@ -367,6 +370,8 @@
             margin: 0;
             padding: 0;
             z-index: 1;
+            border: none;
+            outline: none;
         }
 
 
@@ -439,10 +444,26 @@
             .main-content {
                 padding-top: 0;
                 position: relative;
+                margin-top: 0;
             }
 
             .hero-wrapper-desktop {
                 display: block;
+                margin-top: -2px;
+            }
+
+            .hero-columns {
+                margin-top: 0;
+                padding-top: 0;
+            }
+
+            /* S'assurer qu'il n'y a pas d'espace visible */
+            .hero-wrapper-desktop,
+            .hero-columns,
+            .hero-container,
+            .hero-gallery {
+                border: none;
+                outline: none;
             }
 
             /* Les sections après le hero */
@@ -1118,6 +1139,8 @@
             min-height: 100vh;
             width: 100%;
             overflow-x: hidden;
+            margin: 0;
+            padding: 0;
         }
 
         .main-content {
