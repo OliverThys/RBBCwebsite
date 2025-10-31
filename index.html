@@ -2917,21 +2917,51 @@
 
         // Hero Gallery Navigation
         let currentSlide = 0;
-        const images = document.querySelectorAll('.hero-bg-image');
-        const dots = document.querySelectorAll('.gallery-dot');
-        const totalSlides = images.length;
+
+        function getActiveHeroSection() {
+            const heroDesktop = document.querySelector('.hero-wrapper-desktop');
+            const heroMobile = document.querySelector('.hero');
+            
+            // Vérifier quelle section est visible
+            if (heroDesktop && window.getComputedStyle(heroDesktop).display !== 'none') {
+                return {
+                    container: heroDesktop,
+                    images: heroDesktop.querySelectorAll('.hero-bg-image'),
+                    dots: heroDesktop.querySelectorAll('.gallery-dot')
+                };
+            } else if (heroMobile && window.getComputedStyle(heroMobile).display !== 'none') {
+                return {
+                    container: heroMobile,
+                    images: heroMobile.querySelectorAll('.hero-bg-image'),
+                    dots: heroMobile.querySelectorAll('.gallery-dot')
+                };
+            }
+            return null;
+        }
 
         function showSlide(index) {
-            images.forEach((img, i) => {
-                img.classList.toggle('active', i === index);
+            const activeSection = getActiveHeroSection();
+            if (!activeSection || !activeSection.images || activeSection.images.length === 0) return;
+            
+            const totalSlides = activeSection.images.length;
+            const slideIndex = index % totalSlides;
+            
+            activeSection.images.forEach((img, i) => {
+                img.classList.toggle('active', i === slideIndex);
             });
-            dots.forEach((dot, i) => {
-                dot.classList.toggle('active', i === index);
-            });
-            currentSlide = index;
+            if (activeSection.dots && activeSection.dots.length > 0) {
+                activeSection.dots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === slideIndex);
+                });
+            }
+            currentSlide = slideIndex;
         }
 
         function changeSlide(direction) {
+            const activeSection = getActiveHeroSection();
+            if (!activeSection || !activeSection.images || activeSection.images.length === 0) return;
+            
+            const totalSlides = activeSection.images.length;
             currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
             showSlide(currentSlide);
         }
@@ -2939,6 +2969,23 @@
         function nextSlide() {
             changeSlide(1);
         }
+
+        // Initialiser le carousel au chargement
+        function initCarousel() {
+            const activeSection = getActiveHeroSection();
+            if (activeSection && activeSection.images && activeSection.images.length > 0) {
+                // S'assurer qu'au moins une image est visible
+                showSlide(0);
+            }
+        }
+        
+        // Initialiser immédiatement et après le chargement
+        initCarousel();
+        window.addEventListener('load', initCarousel);
+        window.addEventListener('resize', () => {
+            // Réinitialiser lors du redimensionnement au cas où on change de section
+            setTimeout(initCarousel, 100);
+        });
 
         // Auto-rotation
         let autoSlideInterval = setInterval(nextSlide, 5000);
@@ -2966,13 +3013,19 @@
             heroWrapperDesktop.addEventListener('mouseleave', resumeCarousel);
         }
 
-        // Dot navigation
-        dots.forEach((dot, index) => {
-            dot.addEventListener('click', () => {
-                showSlide(index);
-                clearInterval(autoSlideInterval);
-                autoSlideInterval = setInterval(nextSlide, 5000);
-            });
+        // Dot navigation - utiliser event delegation
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('gallery-dot')) {
+                const activeSection = getActiveHeroSection();
+                if (!activeSection || !activeSection.dots) return;
+                
+                const dotIndex = Array.from(activeSection.dots).indexOf(e.target);
+                if (dotIndex !== -1) {
+                    showSlide(dotIndex);
+                    clearInterval(autoSlideInterval);
+                    autoSlideInterval = setInterval(nextSlide, 5000);
+                }
+            }
         });
 
         // Button navigation
