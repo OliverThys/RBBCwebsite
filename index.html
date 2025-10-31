@@ -2906,15 +2906,27 @@
         // Auto-rotation
         let autoSlideInterval = setInterval(nextSlide, 5000);
 
-        // Pause on hover
+        // Pause on hover - gérer les deux sections hero
         const hero = document.querySelector('.hero');
+        const heroWrapperDesktop = document.querySelector('.hero-wrapper-desktop');
+        
+        function pauseCarousel() {
+            clearInterval(autoSlideInterval);
+        }
+        
+        function resumeCarousel() {
+            clearInterval(autoSlideInterval);
+            autoSlideInterval = setInterval(nextSlide, 5000);
+        }
+        
         if (hero) {
-            hero.addEventListener('mouseenter', () => {
-                clearInterval(autoSlideInterval);
-            });
-            hero.addEventListener('mouseleave', () => {
-                autoSlideInterval = setInterval(nextSlide, 5000);
-            });
+            hero.addEventListener('mouseenter', pauseCarousel);
+            hero.addEventListener('mouseleave', resumeCarousel);
+        }
+        
+        if (heroWrapperDesktop) {
+            heroWrapperDesktop.addEventListener('mouseenter', pauseCarousel);
+            heroWrapperDesktop.addEventListener('mouseleave', resumeCarousel);
         }
 
         // Dot navigation
