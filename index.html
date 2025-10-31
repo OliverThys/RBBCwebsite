@@ -366,7 +366,7 @@
         .hero {
             min-height: 85vh;
             position: relative;
-            overflow: hidden;
+            overflow: visible;
             width: 100%;
         }
 
@@ -374,16 +374,15 @@
         .hero::after {
             content: '';
             position: absolute;
-            bottom: 0;
+            bottom: -40px;
             left: 0;
             right: 0;
             height: 80px;
-            background: linear-gradient(to top, 
-                rgba(255, 255, 255, 0) 0%,
-                rgba(255, 255, 255, 0.3) 30%,
-                rgba(255, 255, 255, 0.6) 60%,
-                rgba(255, 255, 255, 0.9) 100%);
-            clip-path: polygon(0% 0%, 0% 30%, 5% 20%, 15% 15%, 25% 10%, 35% 8%, 50% 5%, 65% 8%, 75% 10%, 85% 15%, 95% 20%, 100% 30%, 100% 0%);
+            background: radial-gradient(ellipse 200% 100% at 50% 0%, 
+                rgba(255, 255, 255, 0.95) 0%,
+                rgba(255, 255, 255, 0.7) 30%,
+                rgba(250, 250, 250, 0.5) 60%,
+                transparent 100%);
             z-index: 10;
             pointer-events: none;
         }
@@ -399,23 +398,22 @@
             z-index: 1;
             border: none;
             outline: none;
-            overflow: hidden;
+            overflow: visible;
         }
 
         /* Transition courbe en bas du hero desktop */
         .hero-wrapper-desktop::after {
             content: '';
             position: absolute;
-            bottom: 0;
+            bottom: -40px;
             left: 0;
             right: 0;
             height: 80px;
-            background: linear-gradient(to top, 
-                rgba(255, 255, 255, 0) 0%,
-                rgba(255, 255, 255, 0.3) 30%,
-                rgba(255, 255, 255, 0.6) 60%,
-                rgba(255, 255, 255, 0.9) 100%);
-            clip-path: polygon(0% 0%, 0% 30%, 5% 20%, 15% 15%, 25% 10%, 35% 8%, 50% 5%, 65% 8%, 75% 10%, 85% 15%, 95% 20%, 100% 30%, 100% 0%);
+            background: radial-gradient(ellipse 200% 100% at 50% 0%, 
+                rgba(255, 255, 255, 0.95) 0%,
+                rgba(255, 255, 255, 0.7) 30%,
+                rgba(250, 250, 250, 0.5) 60%,
+                transparent 100%);
             z-index: 10;
             pointer-events: none;
         }
@@ -521,13 +519,14 @@
             /* Transition spéciale pour la première section après le hero */
             .hero-wrapper-desktop ~ .section:first-of-type::before,
             .hero ~ .section:first-of-type::before {
-                height: 80px;
-                background: linear-gradient(to bottom, 
-                    rgba(0, 0, 0, 0.1) 0%,
-                    rgba(0, 0, 0, 0.05) 20%,
-                    rgba(255, 255, 255, 0.5) 60%,
-                    rgba(255, 255, 255, 0.8) 100%);
-                clip-path: polygon(0% 100%, 0% 30%, 5% 20%, 15% 15%, 25% 10%, 35% 8%, 50% 5%, 65% 8%, 75% 10%, 85% 15%, 95% 20%, 100% 30%, 100% 100%);
+                height: 120px;
+                top: -60px;
+                background: radial-gradient(ellipse 200% 150% at 50% 100%, 
+                    rgba(0, 0, 0, 0.08) 0%,
+                    rgba(0, 0, 0, 0.04) 20%,
+                    rgba(255, 255, 255, 0.6) 50%,
+                    rgba(255, 255, 255, 0.9) 80%,
+                    transparent 100%);
             }
 
             .hero-wrapper-desktop .hero-container {
@@ -1196,7 +1195,7 @@
             outline-offset: 2px;
         }
 
-        /* Apple-style Sections avec textures et transitions graphiques */
+        /* Sections avec textures et transitions graphiques */
         .section {
             padding: 6rem 0;
             position: relative;
@@ -1206,52 +1205,44 @@
                 radial-gradient(circle at 100% 100%, rgba(220, 38, 38, 0.04) 0%, transparent 40%),
                 linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
             backdrop-filter: blur(10px);
-            overflow: hidden;
+            overflow: visible;
         }
 
-        /* Séparateur courbe en haut de chaque section */
+        /* Transition en haut de chaque section avec gradient radial */
         .section::before {
             content: '';
             position: absolute;
-            top: 0;
+            top: -40px;
             left: 0;
             right: 0;
-            height: 60px;
-            background: linear-gradient(to bottom, 
-                rgba(255, 255, 255, 0) 0%,
-                rgba(255, 255, 255, 0.3) 30%,
-                rgba(255, 255, 255, 0.5) 60%,
-                rgba(255, 255, 255, 0.7) 100%);
-            clip-path: polygon(0% 100%, 0% 60%, 10% 50%, 20% 45%, 30% 40%, 40% 35%, 50% 30%, 60% 35%, 70% 40%, 80% 45%, 90% 50%, 100% 60%, 100% 100%);
+            height: 80px;
+            background: radial-gradient(ellipse 200% 100% at 50% 100%, 
+                rgba(255, 255, 255, 0.95) 0%,
+                rgba(255, 255, 255, 0.7) 30%,
+                rgba(250, 250, 250, 0.5) 60%,
+                transparent 100%);
             z-index: 1;
+            pointer-events: none;
         }
 
-        /* Séparateur courbe en bas de chaque section */
+        /* Transition en bas de chaque section avec gradient radial */
         .section::after {
             content: '';
             position: absolute;
-            bottom: 0;
+            bottom: -40px;
             left: 0;
             right: 0;
-            height: 60px;
-            background: linear-gradient(to top, 
-                rgba(250, 250, 250, 0) 0%,
-                rgba(250, 250, 250, 0.3) 30%,
-                rgba(250, 250, 250, 0.5) 60%,
-                rgba(250, 250, 250, 0.7) 100%);
-            clip-path: polygon(0% 0%, 0% 40%, 10% 50%, 20% 55%, 30% 60%, 40% 65%, 50% 70%, 60% 65%, 70% 60%, 80% 55%, 90% 50%, 100% 40%, 100% 0%);
+            height: 80px;
+            background: radial-gradient(ellipse 200% 100% at 50% 0%, 
+                rgba(250, 250, 250, 0.95) 0%,
+                rgba(250, 250, 250, 0.7) 30%,
+                rgba(255, 255, 255, 0.5) 60%,
+                transparent 100%);
             z-index: 1;
+            pointer-events: none;
         }
 
-        /* Ombres portées pour créer de la profondeur */
-        .section:not(:first-child) {
-            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.03);
-        }
-
-        .section:not(:last-child) {
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
-        }
-
+        /* Sections paires */
         .section:nth-child(even) {
             background: rgba(250, 250, 250, 0.85);
             background-image: 
@@ -1260,41 +1251,36 @@
                 linear-gradient(45deg, rgba(250, 250, 250, 0.1) 0%, rgba(250, 250, 250, 0.05) 100%);
         }
 
-        /* Inverser les séparateurs pour les sections paires */
+        /* Inverser les couleurs des transitions pour sections paires */
         .section:nth-child(even)::before {
-            background: linear-gradient(to bottom, 
-                rgba(250, 250, 250, 0) 0%,
-                rgba(250, 250, 250, 0.3) 30%,
-                rgba(250, 250, 250, 0.5) 60%,
-                rgba(250, 250, 250, 0.7) 100%);
-            clip-path: polygon(0% 100%, 0% 40%, 10% 50%, 20% 55%, 30% 60%, 40% 65%, 50% 70%, 60% 65%, 70% 60%, 80% 55%, 90% 50%, 100% 40%, 100% 100%);
+            background: radial-gradient(ellipse 200% 100% at 50% 100%, 
+                rgba(250, 250, 250, 0.95) 0%,
+                rgba(250, 250, 250, 0.7) 30%,
+                rgba(255, 255, 255, 0.5) 60%,
+                transparent 100%);
         }
 
         .section:nth-child(even)::after {
-            background: linear-gradient(to top, 
-                rgba(255, 255, 255, 0) 0%,
-                rgba(255, 255, 255, 0.3) 30%,
-                rgba(255, 255, 255, 0.5) 60%,
-                rgba(255, 255, 255, 0.7) 100%);
-            clip-path: polygon(0% 0%, 0% 60%, 10% 50%, 20% 45%, 30% 40%, 40% 35%, 50% 30%, 60% 35%, 70% 40%, 80% 45%, 90% 50%, 100% 60%, 100% 0%);
+            background: radial-gradient(ellipse 200% 100% at 50% 0%, 
+                rgba(255, 255, 255, 0.95) 0%,
+                rgba(255, 255, 255, 0.7) 30%,
+                rgba(250, 250, 250, 0.5) 60%,
+                transparent 100%);
         }
 
-        /* Assurer que le contenu passe au-dessus des séparateurs */
+        /* Ombres douces entre sections */
+        .section:not(:first-child) {
+            box-shadow: 0 -4px 25px rgba(0, 0, 0, 0.04);
+        }
+
+        .section:not(:last-child) {
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.04);
+        }
+
+        /* Assurer que le contenu passe au-dessus */
         .section > .container {
             position: relative;
             z-index: 2;
-        }
-
-        /* Animation de transition douce au scroll */
-        .section {
-            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-                        opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        /* Ligne de séparation subtile entre sections */
-        .section + .section::before {
-            border-top: 1px solid rgba(220, 38, 38, 0.05);
-            margin-top: -1px;
         }
 
 
