@@ -366,26 +366,10 @@
         .hero {
             min-height: 85vh;
             position: relative;
-            overflow: visible;
+            overflow: hidden;
             width: 100%;
         }
 
-        /* Transition courbe en bas du hero mobile */
-        .hero::after {
-            content: '';
-            position: absolute;
-            bottom: -40px;
-            left: 0;
-            right: 0;
-            height: 80px;
-            background: radial-gradient(ellipse 200% 100% at 50% 0%, 
-                rgba(255, 255, 255, 0.95) 0%,
-                rgba(255, 255, 255, 0.7) 30%,
-                rgba(250, 250, 250, 0.5) 60%,
-                transparent 100%);
-            z-index: 10;
-            pointer-events: none;
-        }
 
         /* Layout desktop: 3 colonnes (sponsors | hero | sponsors) */
         .hero-wrapper-desktop {
@@ -398,25 +382,8 @@
             z-index: 1;
             border: none;
             outline: none;
-            overflow: visible;
         }
 
-        /* Transition courbe en bas du hero desktop */
-        .hero-wrapper-desktop::after {
-            content: '';
-            position: absolute;
-            bottom: -40px;
-            left: 0;
-            right: 0;
-            height: 80px;
-            background: radial-gradient(ellipse 200% 100% at 50% 0%, 
-                rgba(255, 255, 255, 0.95) 0%,
-                rgba(255, 255, 255, 0.7) 30%,
-                rgba(250, 250, 250, 0.5) 60%,
-                transparent 100%);
-            z-index: 10;
-            pointer-events: none;
-        }
 
 
         .hero-columns {
@@ -516,18 +483,6 @@
                 z-index: 2;
             }
 
-            /* Transition spéciale pour la première section après le hero */
-            .hero-wrapper-desktop ~ .section:first-of-type::before,
-            .hero ~ .section:first-of-type::before {
-                height: 120px;
-                top: -60px;
-                background: radial-gradient(ellipse 200% 150% at 50% 100%, 
-                    rgba(0, 0, 0, 0.08) 0%,
-                    rgba(0, 0, 0, 0.04) 20%,
-                    rgba(255, 255, 255, 0.6) 50%,
-                    rgba(255, 255, 255, 0.9) 80%,
-                    transparent 100%);
-            }
 
             .hero-wrapper-desktop .hero-container {
                 max-width: 100%;
@@ -1195,7 +1150,7 @@
             outline-offset: 2px;
         }
 
-        /* Sections avec textures et transitions graphiques */
+        /* Apple-style Sections avec textures */
         .section {
             padding: 6rem 0;
             position: relative;
@@ -1205,82 +1160,14 @@
                 radial-gradient(circle at 100% 100%, rgba(220, 38, 38, 0.04) 0%, transparent 40%),
                 linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
             backdrop-filter: blur(10px);
-            overflow: visible;
         }
 
-        /* Transition en haut de chaque section avec gradient radial */
-        .section::before {
-            content: '';
-            position: absolute;
-            top: -40px;
-            left: 0;
-            right: 0;
-            height: 80px;
-            background: radial-gradient(ellipse 200% 100% at 50% 100%, 
-                rgba(255, 255, 255, 0.95) 0%,
-                rgba(255, 255, 255, 0.7) 30%,
-                rgba(250, 250, 250, 0.5) 60%,
-                transparent 100%);
-            z-index: 1;
-            pointer-events: none;
-        }
-
-        /* Transition en bas de chaque section avec gradient radial */
-        .section::after {
-            content: '';
-            position: absolute;
-            bottom: -40px;
-            left: 0;
-            right: 0;
-            height: 80px;
-            background: radial-gradient(ellipse 200% 100% at 50% 0%, 
-                rgba(250, 250, 250, 0.95) 0%,
-                rgba(250, 250, 250, 0.7) 30%,
-                rgba(255, 255, 255, 0.5) 60%,
-                transparent 100%);
-            z-index: 1;
-            pointer-events: none;
-        }
-
-        /* Sections paires */
         .section:nth-child(even) {
             background: rgba(250, 250, 250, 0.85);
             background-image: 
                 radial-gradient(circle at 100% 0%, rgba(220, 38, 38, 0.03) 0%, transparent 40%),
                 radial-gradient(circle at 0% 100%, rgba(220, 38, 38, 0.03) 0%, transparent 40%),
                 linear-gradient(45deg, rgba(250, 250, 250, 0.1) 0%, rgba(250, 250, 250, 0.05) 100%);
-        }
-
-        /* Inverser les couleurs des transitions pour sections paires */
-        .section:nth-child(even)::before {
-            background: radial-gradient(ellipse 200% 100% at 50% 100%, 
-                rgba(250, 250, 250, 0.95) 0%,
-                rgba(250, 250, 250, 0.7) 30%,
-                rgba(255, 255, 255, 0.5) 60%,
-                transparent 100%);
-        }
-
-        .section:nth-child(even)::after {
-            background: radial-gradient(ellipse 200% 100% at 50% 0%, 
-                rgba(255, 255, 255, 0.95) 0%,
-                rgba(255, 255, 255, 0.7) 30%,
-                rgba(250, 250, 250, 0.5) 60%,
-                transparent 100%);
-        }
-
-        /* Ombres douces entre sections */
-        .section:not(:first-child) {
-            box-shadow: 0 -4px 25px rgba(0, 0, 0, 0.04);
-        }
-
-        .section:not(:last-child) {
-            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.04);
-        }
-
-        /* Assurer que le contenu passe au-dessus */
-        .section > .container {
-            position: relative;
-            z-index: 2;
         }
 
 
@@ -1300,8 +1187,7 @@
             flex-direction: column;
             border-left: none;
             border-right: none;
-            overflow-x: hidden;
-            overflow-y: visible;
+            overflow: hidden;
             position: relative;
             padding-top: 80px; /* Compensate for fixed navbar */
         }
