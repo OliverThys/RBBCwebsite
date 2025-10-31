@@ -1026,6 +1026,86 @@
             padding: 0 4rem;
         }
 
+        /* Tablettes et petites fenêtres (769px - 1023px) */
+        @media (min-width: 769px) and (max-width: 1023px) {
+            .main-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .left-column,
+            .right-column {
+                display: none;
+            }
+
+            .main-content {
+                border-left: none;
+                border-right: none;
+            }
+
+            .main-content .hero-nav {
+                left: 0;
+                right: 0;
+            }
+
+            .hero-nav-links {
+                gap: 1.5rem;
+            }
+
+            .hero-nav-links a {
+                font-size: 1.1rem;
+            }
+
+            .container {
+                padding: 0 2.5rem;
+            }
+
+            .section {
+                padding: 4rem 0;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .section-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .teams-grid,
+            .contact-grid {
+                max-width: 700px;
+            }
+
+            .schedule-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .news-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .sponsoring-options {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .visibility-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .sponsor-slot {
+                height: 100px;
+            }
+
+            .hero-logo {
+                width: 140px;
+                height: 140px;
+            }
+
+            .hero-title {
+                font-size: 3.5rem;
+            }
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 0 1.5rem;
