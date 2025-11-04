@@ -44,27 +44,27 @@ const Contact = () => {
               </svg>
             </div>
             <h3 className="text-2xl font-display font-semibold text-gray-900 mb-4 uppercase">
-              Secrétaire
+              Comité
             </h3>
             <p className="text-gray-700 mb-2">
-              <strong>{contactInfo.secretary.name}</strong>
+              <strong>{contactInfo.committee.name}</strong>
             </p>
             <p className="text-gray-700 mb-2">
               Téléphone :{' '}
               <a
-                href={`tel:${contactInfo.secretary.phone.replace(/\//g, '')}`}
+                href={`tel:${contactInfo.committee.phone.replace(/\//g, '')}`}
                 className="text-rbbc-red hover:underline"
               >
-                {contactInfo.secretary.phone}
+                {contactInfo.committee.phone}
               </a>
             </p>
             <p className="text-gray-700">
               Email :{' '}
               <a
-                href={`mailto:${contactInfo.secretary.email}`}
+                href={`mailto:${contactInfo.committee.email}`}
                 className="text-rbbc-red hover:underline"
               >
-                {contactInfo.secretary.email}
+                {contactInfo.committee.email}
               </a>
             </p>
           </motion.div>

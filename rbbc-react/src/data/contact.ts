@@ -1,5 +1,5 @@
 export interface ContactInfo {
-  secretary: {
+  committee: {
     name: string;
     phone: string;
     email: string;
@@ -15,7 +15,7 @@ export interface ContactInfo {
 }
 
 export const contactInfo: ContactInfo = {
-  secretary: {
+  committee: {
     name: 'Henri Maton',
     phone: '065/56 70 06',
     email: 'comiterbbc@gmail.com',

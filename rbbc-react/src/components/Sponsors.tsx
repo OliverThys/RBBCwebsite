@@ -184,7 +184,7 @@ const Sponsors = () => {
             </div>
             <h3 className="text-3xl font-display font-bold mb-4 uppercase">Contactez-nous</h3>
             <p className="text-lg mb-6 opacity-90">
-              Intéressé par un partenariat ? Contactez notre secrétaire
+              Intéressé par un partenariat ? Contactez notre comité
             </p>
             <div className="text-lg">
               <p className="font-semibold mb-2">Henri Maton</p>
