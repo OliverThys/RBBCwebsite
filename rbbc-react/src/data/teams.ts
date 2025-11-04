@@ -9,13 +9,13 @@ export const teams: Team[] = [
   {
     id: 'minibasket',
     name: 'Minibasket (U6–U8)',
-    image: 'https://picsum.photos/600/360?random=101',
+    image: '/u6u8.png',
     category: 'jeunes',
   },
   {
     id: 'u10',
     name: 'U10',
-    image: 'https://picsum.photos/600/360?random=102',
+    image: '/U10.png',
     category: 'jeunes',
   },
   {
