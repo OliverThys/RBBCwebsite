@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { useState, useEffect } from 'react'
 import { sponsors } from '../data/sponsors'
 import { getImagePath } from '../utils/images'
 
