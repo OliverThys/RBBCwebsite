@@ -108,8 +108,8 @@ const Navbar = ({ isScrolled }: NavbarProps) => {
             transition={{ type: 'tween', duration: 0.3 }}
             className="fixed inset-0 bg-black z-40 md:hidden"
           >
-            <div className="flex flex-col h-full">
-              <div className="flex justify-center items-center py-8">
+            <div className="flex flex-col h-full pt-20">
+              <div className="flex justify-center items-center py-6">
                 <img
                   src={getImagePath('/rbbc_icon.jpg')}
                   alt="RBBC Logo"
