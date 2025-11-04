@@ -69,7 +69,7 @@ const SponsorsBar = () => {
               </motion.div>
             ))}
             {/* Duplicate for seamless loop */}
-            {sponsors.map((sponsor, index) => (
+            {sponsors.map((sponsor) => (
               <div
                 key={`sponsor-2-${sponsor.id}`}
                 className="flex-shrink-0"
