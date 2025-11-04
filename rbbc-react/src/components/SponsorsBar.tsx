@@ -134,6 +134,8 @@ const SponsorsBar = () => {
               </motion.div>
             ))}
             </div>
+            {/* Spacer for mobile */}
+            <div className="flex-shrink-0 w-8 md:w-0"></div>
             {/* Duplicate for seamless loop */}
             <div className="flex space-x-8 md:space-x-12 flex-shrink-0">
             {shuffledSponsors.map((sponsor) => (
