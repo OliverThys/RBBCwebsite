@@ -20,7 +20,7 @@ const SponsorsBar = () => {
 
         {/* Infinite scroll container */}
         <div className="relative overflow-hidden">
-          <div className="flex space-x-8 md:space-x-12 md:animate-scroll" style={{ width: 'fit-content' }}>
+          <div className="flex space-x-8 md:space-x-12 animate-scroll" style={{ width: 'fit-content' }}>
             {/* First set of sponsors */}
             {sponsors.map((sponsor, index) => (
               <motion.div
