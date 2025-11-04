@@ -1,8 +1,51 @@
 import { motion } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react'
 import { sponsors } from '../data/sponsors'
 import { getImagePath } from '../utils/images'
 
 const SponsorsBar = () => {
+  const firstSetRef = useRef<HTMLDivElement>(null)
+  const [scrollOffset, setScrollOffset] = useState('50%')
+
+  useEffect(() => {
+    const updateScrollOffset = () => {
+      if (firstSetRef.current) {
+        const width = firstSetRef.current.offsetWidth
+        setScrollOffset(`-${width}px`)
+      }
+    }
+
+    // Wait for images to load
+    const timeout = setTimeout(updateScrollOffset, 100)
+    window.addEventListener('resize', updateScrollOffset)
+    
+    // Update when images load
+    const images = firstSetRef.current?.querySelectorAll('img')
+    if (images) {
+      let loadedCount = 0
+      const totalImages = images.length
+      images.forEach((img) => {
+        if (img.complete) {
+          loadedCount++
+        } else {
+          img.addEventListener('load', () => {
+            loadedCount++
+            if (loadedCount === totalImages) {
+              updateScrollOffset()
+            }
+          })
+        }
+      })
+      if (loadedCount === totalImages) {
+        updateScrollOffset()
+      }
+    }
+
+    return () => {
+      clearTimeout(timeout)
+      window.removeEventListener('resize', updateScrollOffset)
+    }
+  }, [])
 
   return (
     <section className="bg-gray-900 overflow-hidden flex flex-col justify-center" style={{ minHeight: '140px', height: '140px', maxHeight: '140px' }}>
@@ -21,9 +64,15 @@ const SponsorsBar = () => {
 
         {/* Infinite scroll container */}
         <div className="relative overflow-hidden">
-          <div className="flex animate-scroll" style={{ width: 'fit-content' }}>
+          <div 
+            className="flex animate-scroll" 
+            style={{ 
+              width: 'fit-content',
+              '--scroll-offset': scrollOffset
+            } as React.CSSProperties & { '--scroll-offset': string }}
+          >
             {/* First set of sponsors */}
-            <div className="flex space-x-8 md:space-x-12 flex-shrink-0">
+            <div ref={firstSetRef} className="flex space-x-8 md:space-x-12 flex-shrink-0">
             {sponsors.map((sponsor, index) => (
               <motion.div
                 key={`sponsor-1-${sponsor.id}`}
