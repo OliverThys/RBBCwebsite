@@ -44,17 +44,11 @@ const Sponsors = () => {
           {sponsors.map((sponsor, index) => (
             <motion.div
               key={sponsor.id}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              initial={isMobile ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
+              whileInView={isMobile ? { opacity: 1, scale: 1 } : { opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              transition={isMobile ? { duration: 0 } : { duration: 0.5, delay: index * 0.1 }}
               className="bg-white rounded-xl p-4 md:p-6 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center h-24 md:h-32"
-              style={{
-                '@media (max-width: 768px)': {
-                  initial: { opacity: 1, scale: 1 },
-                  whileInView: { opacity: 1, scale: 1 },
-                }
-              }}
             >
               {sponsor.link ? (
                 <a
