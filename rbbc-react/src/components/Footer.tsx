@@ -11,7 +11,7 @@ const Footer = () => {
                   href="#accueil"
                   onClick={(e) => {
                     e.preventDefault()
-                    document.getElementById('accueil')?.scrollIntoView({ behavior: 'smooth' })
+                    window.scrollTo({ top: 0, behavior: 'smooth' })
                   }}
                   className="text-gray-400 hover:text-white transition-colors"
                 >

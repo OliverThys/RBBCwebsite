@@ -3,17 +3,26 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 const heroImages = [
   '/accueil1.jpg',
-  '/accueil2.jpg',
   '/accueil3.jpg',
   '/accueil4.jpg',
   '/accueil5.jpg',
-  '/accueil6.jpg',
 ]
+
+// Preload images for better quality
+const preloadImages = () => {
+  heroImages.forEach((src) => {
+    const img = new Image()
+    img.src = src
+  })
+}
 
 const Hero = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
 
   useEffect(() => {
+    // Preload images on mount
+    preloadImages()
+    
     const interval = setInterval(() => {
       setCurrentImageIndex((prev) => (prev + 1) % heroImages.length)
     }, 5000)
@@ -26,15 +35,30 @@ const Hero = () => {
   }
 
   return (
-    <section id="accueil" className="relative h-screen flex items-center justify-center overflow-hidden">
+    <section id="accueil" className="relative flex items-center justify-center overflow-hidden" style={{ minHeight: 'calc(100vh - 64px - 140px)', height: 'calc(100vh - 64px - 140px)', marginTop: '64px', paddingTop: '0' }}>
       {/* Image Carousel */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0" style={{ willChange: 'contents', transform: 'translateZ(0)' }}>
         <AnimatePresence mode="wait">
           <motion.img
             key={currentImageIndex}
             src={heroImages[currentImageIndex]}
             alt={`Hero image ${currentImageIndex + 1}`}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover" 
+            style={{ 
+              minWidth: '100%', 
+              minHeight: '100%', 
+              width: '100%', 
+              height: '100%', 
+              objectFit: 'cover',
+              imageRendering: 'auto',
+              filter: 'contrast(1.1) brightness(1.05) saturate(1.1)',
+              WebkitFilter: 'contrast(1.1) brightness(1.05) saturate(1.1)',
+              transform: 'translateZ(0)',
+              backfaceVisibility: 'hidden',
+              WebkitBackfaceVisibility: 'hidden'
+            }}
+            loading="eager"
+            fetchPriority="high"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -62,7 +86,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-4xl md:text-6xl lg:text-7xl font-display font-bold text-white mb-6 uppercase tracking-wide"
+          className="text-4xl md:text-6xl lg:text-7xl font-bebas text-white mb-6 uppercase font-black" style={{ letterSpacing: '2px', lineHeight: '0.9', textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5), 0 0 2px rgba(0, 0, 0, 0.3)', WebkitTextStroke: '1px rgba(255, 255, 255, 0.1)', fontWeight: '900' }}
         >
           Royal Blaregnies Basket Club
         </motion.h1>

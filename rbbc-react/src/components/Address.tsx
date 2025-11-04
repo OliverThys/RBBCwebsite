@@ -20,10 +20,10 @@ const Address = () => {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div className="max-w-2xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
             className="bg-gray-50 rounded-2xl p-8 shadow-lg"
@@ -40,8 +40,11 @@ const Address = () => {
               {contactInfo.address.name}
             </h3>
             <p className="text-gray-700 mb-2">{contactInfo.address.street}</p>
-            <p className="text-gray-700 mb-6">
+            <p className="text-gray-700 mb-4">
               {contactInfo.address.postalCode} {contactInfo.address.city}, {contactInfo.address.country}
+            </p>
+            <p className="text-gray-700 mb-6 font-medium">
+              Parking accessible jusqu'à 22h
             </p>
             <a
               href={contactInfo.address.mapsUrl}
@@ -70,45 +73,6 @@ const Address = () => {
               </svg>
               Itinéraire
             </a>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="bg-gray-50 rounded-2xl p-8 shadow-lg flex flex-col justify-center"
-          >
-            <div className="mb-6">
-              <svg
-                className="w-16 h-16 text-rbbc-red mx-auto mb-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                />
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                />
-              </svg>
-            </div>
-            <h3 className="text-2xl font-display font-semibold text-gray-900 mb-4 uppercase">
-              Accès facile
-            </h3>
-            <p className="text-gray-700 mb-4">
-              Parking disponible sur place
-            </p>
-            <p className="text-gray-700">
-              Accessible en voiture depuis Blaregnies et les environs
-            </p>
           </motion.div>
         </div>
       </div>

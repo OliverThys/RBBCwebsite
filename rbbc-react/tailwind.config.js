@@ -13,7 +13,12 @@ export default {
       },
       fontFamily: {
         'display': ['Oswald', 'sans-serif'],
+        'bebas': ['Bebas Neue', 'sans-serif'],
+        'anton': ['Anton', 'sans-serif'],
         'body': ['Montserrat', 'Inter', 'system-ui', 'sans-serif'],
+      },
+      fontWeight: {
+        'bebas-bold': '900',
       },
     },
   },

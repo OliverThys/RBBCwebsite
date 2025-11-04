@@ -26,13 +26,13 @@ export const teams: Team[] = [
   },
   {
     id: 'u14',
-    name: 'U14',
-    image: 'https://picsum.photos/600/360?random=104',
+    name: 'U14G',
+    image: '/U14G.jpg',
     category: 'jeunes',
   },
   {
     id: 'u14f',
-    name: 'U14 F',
+    name: 'U14F',
     image: '/U14F.jpg',
     category: 'jeunes',
   },
@@ -44,14 +44,14 @@ export const teams: Team[] = [
   },
   {
     id: 'u16f',
-    name: 'U16 F',
+    name: 'U16F',
     image: '/U16F.jpg',
     category: 'jeunes',
   },
   {
     id: 'p4',
     name: 'P4',
-    image: 'https://picsum.photos/600/360?random=108',
+    image: '/P4.jpg',
     category: 'seniors',
   },
   {

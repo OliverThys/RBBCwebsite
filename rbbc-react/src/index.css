@@ -3,9 +3,6 @@
 @tailwind utilities;
 
 @layer base {
-  * {
-    @apply border-border;
-  }
   body {
     @apply bg-white text-gray-800 font-body antialiased;
     background-image: 
@@ -19,5 +16,22 @@
   .text-balance {
     text-wrap: balance;
   }
+}
+
+/* Custom scroll animation for sponsors */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll {
+  animation: scroll 40s linear infinite;
+  display: flex;
+  width: fit-content;
+  will-change: transform;
 }
 

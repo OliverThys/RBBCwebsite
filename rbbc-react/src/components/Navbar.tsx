@@ -24,10 +24,14 @@ const Navbar = ({ isScrolled }: NavbarProps) => {
   const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault()
     const targetId = href.replace('#', '')
-    const target = document.getElementById(targetId === 'accueil' ? 'hero' : targetId)
     
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    if (targetId === 'accueil') {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    } else {
+      const target = document.getElementById(targetId)
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }
     }
     handleLinkClick()
   }

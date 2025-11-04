@@ -39,23 +39,27 @@ export const sponsors: Sponsor[] = [
   },
   {
     id: 'sponsor7',
-    name: 'Sponsor 7',
+    name: 'Octopix',
     image: '/Sponsors/sponsor7.jpg',
+    link: 'https://octopix.be/',
   },
   {
     id: 'sponsor8',
-    name: 'Sponsor 8',
+    name: 'Infirmières à domicile Elodie et Aurélie',
     image: '/Sponsors/sponsor8.jpg',
+    phone: '+32479468043',
   },
   {
     id: 'sponsor9',
-    name: 'Sponsor 9',
+    name: 'Gérarbre',
     image: '/Sponsors/sponsor9.jpg',
+    phone: '+32498505647',
   },
   {
     id: 'sponsor10',
-    name: 'Sponsor 10',
+    name: 'Alyxel',
     image: '/Sponsors/sponsor10.jpg',
+    link: 'https://alyxel.be/',
   },
 ];
 
