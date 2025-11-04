@@ -109,11 +109,11 @@ const Navbar = ({ isScrolled }: NavbarProps) => {
             className="fixed inset-0 bg-black z-40 md:hidden"
           >
             <div className="flex flex-col h-full">
-              <div className="flex justify-center items-center py-12">
+              <div className="flex justify-center items-center py-8">
                 <img
                   src={getImagePath('/rbbc_icon.jpg')}
                   alt="RBBC Logo"
-                  className="w-48 h-48 rounded-full object-cover"
+                  className="w-24 h-24 md:w-48 md:h-48 rounded-full object-cover"
                 />
               </div>
               <nav className="flex-1 flex items-center justify-center">

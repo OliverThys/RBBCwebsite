@@ -27,7 +27,7 @@ const Sponsors = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 mb-16"
+          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6 mb-16"
         >
           {sponsors.map((sponsor, index) => (
             <motion.div
@@ -36,7 +36,7 @@ const Sponsors = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center h-32"
+              className="bg-white rounded-xl p-4 md:p-6 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center h-24 md:h-32"
             >
               {sponsor.link ? (
                 <a
@@ -66,7 +66,7 @@ const Sponsors = () => {
                 </a>
               ) : (
                 <img
-                  src={sponsor.image}
+                  src={getImagePath(sponsor.image)}
                   alt={sponsor.name}
                   className="max-w-full max-h-full object-contain"
                   loading="lazy"

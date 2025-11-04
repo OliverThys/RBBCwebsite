@@ -3,8 +3,13 @@
 @tailwind utilities;
 
 @layer base {
-  body {
+  html, body {
     @apply bg-white text-gray-800 font-body antialiased;
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100%;
+  }
+  body {
     background-image: 
       radial-gradient(circle at 20% 50%, rgba(220, 38, 38, 0.03) 0%, transparent 50%),
       radial-gradient(circle at 80% 80%, rgba(220, 38, 38, 0.03) 0%, transparent 50%);
@@ -33,5 +38,11 @@
   display: flex;
   width: fit-content;
   will-change: transform;
+}
+
+@media (max-width: 768px) {
+  .animate-scroll {
+    animation: scroll 20s linear infinite;
+  }
 }
 
