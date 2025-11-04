@@ -3,6 +3,17 @@ import { sponsors } from '../data/sponsors'
 import { getImagePath } from '../utils/images'
 
 const Sponsors = () => {
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
   return (
     <section id="sponsoring" className="py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -37,6 +48,12 @@ const Sponsors = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="bg-white rounded-xl p-4 md:p-6 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center h-24 md:h-32"
+              style={{
+                '@media (max-width: 768px)': {
+                  initial: { opacity: 1, scale: 1 },
+                  whileInView: { opacity: 1, scale: 1 },
+                }
+              }}
             >
               {sponsor.link ? (
                 <a
