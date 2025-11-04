@@ -1,11 +1,24 @@
 import { motion } from 'framer-motion'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useMemo } from 'react'
 import { sponsors } from '../data/sponsors'
 import { getImagePath } from '../utils/images'
+
+// Fisher-Yates shuffle algorithm
+const shuffleArray = <T,>(array: T[]): T[] => {
+  const shuffled = [...array]
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
+  }
+  return shuffled
+}
 
 const SponsorsBar = () => {
   const firstSetRef = useRef<HTMLDivElement>(null)
   const [scrollOffset, setScrollOffset] = useState('50%')
+  
+  // Randomize sponsors order once on component mount
+  const shuffledSponsors = useMemo(() => shuffleArray(sponsors), [])
 
   useEffect(() => {
     const updateScrollOffset = () => {
@@ -73,7 +86,7 @@ const SponsorsBar = () => {
           >
             {/* First set of sponsors */}
             <div ref={firstSetRef} className="flex space-x-8 md:space-x-12 flex-shrink-0">
-            {sponsors.map((sponsor, index) => (
+            {shuffledSponsors.map((sponsor, index) => (
               <motion.div
                 key={`sponsor-1-${sponsor.id}`}
                 initial={{ opacity: 0, scale: 0.8 }}
@@ -123,7 +136,7 @@ const SponsorsBar = () => {
             </div>
             {/* Duplicate for seamless loop */}
             <div className="flex space-x-8 md:space-x-12 flex-shrink-0">
-            {sponsors.map((sponsor) => (
+            {shuffledSponsors.map((sponsor) => (
               <div
                 key={`sponsor-2-${sponsor.id}`}
                 className="flex-shrink-0"
