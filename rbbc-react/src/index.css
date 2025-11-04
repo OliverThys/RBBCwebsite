@@ -35,6 +35,7 @@
 
 .animate-scroll {
   animation: scroll 40s linear infinite;
+  animation-fill-mode: both;
   display: flex;
   width: fit-content;
   will-change: transform;
@@ -43,6 +44,7 @@
 @media (max-width: 768px) {
   .animate-scroll {
     animation: scroll 10s linear infinite;
+    animation-fill-mode: both;
   }
 }
 

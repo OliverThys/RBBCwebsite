@@ -3,6 +3,7 @@ import { sponsors } from '../data/sponsors'
 import { getImagePath } from '../utils/images'
 
 const SponsorsBar = () => {
+
   return (
     <section className="bg-gray-900 overflow-hidden flex flex-col justify-center" style={{ minHeight: '140px', height: '140px', maxHeight: '140px' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
@@ -20,8 +21,9 @@ const SponsorsBar = () => {
 
         {/* Infinite scroll container */}
         <div className="relative overflow-hidden">
-          <div className="flex space-x-8 md:space-x-12 animate-scroll" style={{ width: 'fit-content' }}>
+          <div className="flex animate-scroll" style={{ width: 'fit-content' }}>
             {/* First set of sponsors */}
+            <div className="flex space-x-8 md:space-x-12 flex-shrink-0">
             {sponsors.map((sponsor, index) => (
               <motion.div
                 key={`sponsor-1-${sponsor.id}`}
@@ -69,7 +71,9 @@ const SponsorsBar = () => {
                 )}
               </motion.div>
             ))}
+            </div>
             {/* Duplicate for seamless loop */}
+            <div className="flex space-x-8 md:space-x-12 flex-shrink-0">
             {sponsors.map((sponsor) => (
               <div
                 key={`sponsor-2-${sponsor.id}`}
@@ -113,6 +117,7 @@ const SponsorsBar = () => {
                 )}
               </div>
             ))}
+            </div>
           </div>
         </div>
       </div>
