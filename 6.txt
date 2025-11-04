@@ -1,0 +1,1 @@
+[2025-10-17T23:39:06.330+00:00] assistant: Bonjour, je suis HelloJade, votre assistante vocale post-hospitalisation d'EpiCURA. Pour commencer, pouvez-vous me confirmer votre nom complet et votre date de naissance, s'il vous plaît ?
