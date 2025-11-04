@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { sponsors } from '../data/sponsors'
+import { getImagePath } from '../utils/images'
 
 const SponsorsBar = () => {
   return (
@@ -38,7 +39,7 @@ const SponsorsBar = () => {
                     className="block h-12 md:h-14 w-auto transition-all duration-300 opacity-70 hover:opacity-100"
                   >
                     <img
-                      src={sponsor.image}
+                      src={getImagePath(sponsor.image)}
                       alt={sponsor.name}
                       className="h-full w-auto object-contain"
                       loading="lazy"
@@ -50,7 +51,7 @@ const SponsorsBar = () => {
                     className="block h-12 md:h-14 w-auto transition-all duration-300 opacity-70 hover:opacity-100"
                   >
                     <img
-                      src={sponsor.image}
+                      src={getImagePath(sponsor.image)}
                       alt={sponsor.name}
                       className="h-full w-auto object-contain"
                       loading="lazy"
@@ -59,7 +60,7 @@ const SponsorsBar = () => {
                 ) : (
                   <div className="h-12 md:h-14 w-auto opacity-70">
                     <img
-                      src={sponsor.image}
+                      src={getImagePath(sponsor.image)}
                       alt={sponsor.name}
                       className="h-full w-auto object-contain"
                       loading="lazy"
@@ -82,7 +83,7 @@ const SponsorsBar = () => {
                     className="block h-12 md:h-14 w-auto transition-all duration-300 opacity-70 hover:opacity-100"
                   >
                     <img
-                      src={sponsor.image}
+                      src={getImagePath(sponsor.image)}
                       alt={sponsor.name}
                       className="h-full w-auto object-contain"
                       loading="lazy"
@@ -94,7 +95,7 @@ const SponsorsBar = () => {
                     className="block h-12 md:h-14 w-auto transition-all duration-300 opacity-70 hover:opacity-100"
                   >
                     <img
-                      src={sponsor.image}
+                      src={getImagePath(sponsor.image)}
                       alt={sponsor.name}
                       className="h-full w-auto object-contain"
                       loading="lazy"
@@ -103,7 +104,7 @@ const SponsorsBar = () => {
                 ) : (
                   <div className="h-12 md:h-14 w-auto opacity-70">
                     <img
-                      src={sponsor.image}
+                      src={getImagePath(sponsor.image)}
                       alt={sponsor.name}
                       className="h-full w-auto object-contain"
                       loading="lazy"

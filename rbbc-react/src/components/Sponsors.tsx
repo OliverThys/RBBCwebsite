@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { sponsors } from '../data/sponsors'
+import { getImagePath } from '../utils/images'
 
 const Sponsors = () => {
   return (
@@ -45,7 +46,7 @@ const Sponsors = () => {
                   className="w-full h-full flex items-center justify-center"
                 >
                   <img
-                    src={sponsor.image}
+                    src={getImagePath(sponsor.image)}
                     alt={sponsor.name}
                     className="max-w-full max-h-full object-contain"
                     loading="lazy"
@@ -57,7 +58,7 @@ const Sponsors = () => {
                   className="w-full h-full flex items-center justify-center"
                 >
                   <img
-                    src={sponsor.image}
+                    src={getImagePath(sponsor.image)}
                     alt={sponsor.name}
                     className="max-w-full max-h-full object-contain"
                     loading="lazy"

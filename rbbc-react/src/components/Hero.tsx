@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { getImagePath } from '../utils/images'
 
 const heroImages = [
   '/accueil1.jpg',
   '/accueil3.jpg',
   '/accueil4.jpg',
   '/accueil5.jpg',
-]
+].map(getImagePath)
 
 // Preload images for better quality
 const preloadImages = () => {
@@ -77,7 +78,7 @@ const Hero = () => {
           className="mb-8"
         >
           <img
-            src="/rbbc_icon.jpg"
+            src={getImagePath('/rbbc_icon.jpg')}
             alt="RBBC Logo"
             className="w-32 h-32 md:w-48 md:h-48 mx-auto rounded-full object-cover shadow-2xl mb-6"
           />

@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { teams } from '../data/teams'
+import { getImagePath } from '../utils/images'
 
 const Teams = () => {
   const seniorTeams = teams.filter((team) => team.category === 'seniors')
@@ -41,7 +42,7 @@ const Teams = () => {
                 >
                   <div className="aspect-video overflow-hidden">
                     <img
-                      src={team.image}
+                      src={getImagePath(team.image)}
                       alt={`Photo équipe ${team.name}`}
                       className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
                       loading="lazy"
@@ -74,7 +75,7 @@ const Teams = () => {
                 >
                   <div className="aspect-video overflow-hidden">
                     <img
-                      src={team.image}
+                      src={getImagePath(team.image)}
                       alt={`Photo équipe ${team.name}`}
                       className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
                       loading="lazy"

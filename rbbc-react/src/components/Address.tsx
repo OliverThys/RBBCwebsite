@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { contactInfo } from '../data/contact'
+import { getImagePath } from '../utils/images'
 
 const Address = () => {
   return (
@@ -30,7 +31,7 @@ const Address = () => {
           >
             <div className="mb-6">
               <img
-                src="/adresse.jpg"
+                src={getImagePath('/adresse.jpg')}
                 alt="Salle omnisports"
                 className="w-full h-64 object-cover rounded-lg"
                 loading="lazy"

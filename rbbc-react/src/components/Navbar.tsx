@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { getImagePath } from '../utils/images'
 
 interface NavbarProps {
   isScrolled: boolean
@@ -110,7 +111,7 @@ const Navbar = ({ isScrolled }: NavbarProps) => {
             <div className="flex flex-col h-full">
               <div className="flex justify-center items-center py-12">
                 <img
-                  src="/rbbc_icon.jpg"
+                  src={getImagePath('/rbbc_icon.jpg')}
                   alt="RBBC Logo"
                   className="w-48 h-48 rounded-full object-cover"
                 />
