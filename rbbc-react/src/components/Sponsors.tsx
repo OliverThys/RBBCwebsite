@@ -192,10 +192,10 @@ const Sponsors = () => {
               <p>
                 Email :{' '}
                 <a
-                  href="mailto:henmaton47@gmail.com"
+                  href="mailto:comiterbbc@gmail.com"
                   className="underline hover:opacity-80 transition-opacity"
                 >
-                  henmaton47@gmail.com
+                  comiterbbc@gmail.com
                 </a>
               </p>
             </div>

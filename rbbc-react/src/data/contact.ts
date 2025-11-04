@@ -18,7 +18,7 @@ export const contactInfo: ContactInfo = {
   secretary: {
     name: 'Henri Maton',
     phone: '065/56 70 06',
-    email: 'henmaton47@gmail.com',
+    email: 'comiterbbc@gmail.com',
   },
   address: {
     name: 'Salle omnisports E.Severyns',
