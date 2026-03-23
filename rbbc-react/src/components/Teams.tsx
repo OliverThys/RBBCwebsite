@@ -24,14 +24,14 @@ const Teams = () => {
         >
           <div>
             <div className="section-label mb-4">Nos équipes</div>
-            <h2 className="font-display text-[clamp(2.5rem,6vw,5rem)] text-gray-900 leading-none">
+            <h2 className="font-display text-[clamp(2.5rem,6vw,5rem)] text-white leading-none">
               DE TOUS<br />
               <span className="text-red-700">LES NIVEAUX</span>
             </h2>
           </div>
 
           {/* Filters */}
-          <div className="flex items-center gap-2 bg-white rounded-sm p-1 shadow-sm border border-gray-200">
+          <div className="flex items-center gap-2 bg-surface-2 rounded-sm p-1 border border-white/10">
             {([
               { value: 'all', label: 'Toutes' },
               { value: 'seniors', label: 'Seniors' },
@@ -43,7 +43,7 @@ const Teams = () => {
                 className={`px-5 py-2 text-sm font-semibold rounded-sm transition-all duration-200 ${
                   filter === btn.value
                     ? 'bg-red-700 text-white'
-                    : 'text-gray-500 hover:text-gray-900'
+                    : 'text-white/50 hover:text-white'
                 }`}
               >
                 {btn.label}
@@ -119,11 +119,11 @@ const Teams = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mt-16 flex flex-col sm:flex-row items-center justify-between gap-6 p-5 sm:p-8 border border-gray-200 bg-white rounded-sm shadow-sm"
+          className="mt-16 flex flex-col sm:flex-row items-center justify-between gap-6 p-5 sm:p-8 border border-white/10 bg-surface-2 rounded-sm"
         >
           <div>
-            <h3 className="font-display text-2xl md:text-3xl text-gray-900 mb-1">Rejoins l'aventure</h3>
-            <p className="text-gray-500 text-sm">Débutant ou confirmé, il y a une place pour toi au RBBC.</p>
+            <h3 className="font-display text-2xl md:text-3xl text-white mb-1">Rejoins l'aventure</h3>
+            <p className="text-white/50 text-sm">Débutant ou confirmé, il y a une place pour toi au RBBC.</p>
           </div>
           <a
             href="#contact"

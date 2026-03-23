@@ -14,11 +14,11 @@ export default {
           900: '#7F1D1D',
         },
         surface: {
-          DEFAULT: '#F9F9FB',
-          2: '#FFFFFF',
-          3: '#E8E8EC',
+          DEFAULT: '#1E1E22',
+          2: '#27272B',
+          3: '#303036',
         },
-        'off-black': '#F0F0F2',
+        'off-black': '#18181B',
       },
       fontFamily: {
         display: ['Bebas Neue', 'sans-serif'],

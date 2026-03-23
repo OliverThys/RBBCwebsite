@@ -15,7 +15,7 @@ const Address = () => {
           className="mb-14"
         >
           <div className="section-label mb-4">Où nous trouver</div>
-          <h2 className="font-display text-[clamp(2.5rem,6vw,5rem)] text-gray-900 leading-none">
+          <h2 className="font-display text-[clamp(2.5rem,6vw,5rem)] text-white leading-none">
             NOTRE ADRESSE
           </h2>
         </motion.div>
@@ -26,7 +26,7 @@ const Address = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="grid lg:grid-cols-2 overflow-hidden rounded-sm border border-gray-200 shadow-sm"
+          className="grid lg:grid-cols-2 overflow-hidden rounded-sm border border-white/10"
         >
           {/* Photo */}
           <div className="relative h-48 sm:h-60 lg:h-auto overflow-hidden">
@@ -41,7 +41,7 @@ const Address = () => {
 
           {/* Info */}
           <div className="p-5 sm:p-8 md:p-12 bg-surface-2 flex flex-col justify-center">
-            <h3 className="font-display text-3xl md:text-4xl text-gray-900 mb-8">
+            <h3 className="font-display text-3xl md:text-4xl text-white mb-8">
               {contactInfo.address.name}
             </h3>
 
@@ -54,9 +54,9 @@ const Address = () => {
                   </svg>
                 </div>
                 <div>
-                  <p className="text-gray-400 text-xs uppercase tracking-widest mb-1">Adresse</p>
-                  <p className="text-gray-800 font-medium">{contactInfo.address.street}</p>
-                  <p className="text-gray-800 font-medium">{contactInfo.address.postalCode} {contactInfo.address.city}</p>
+                  <p className="text-white/40 text-xs uppercase tracking-widest mb-1">Adresse</p>
+                  <p className="text-white font-medium">{contactInfo.address.street}</p>
+                  <p className="text-white font-medium">{contactInfo.address.postalCode} {contactInfo.address.city}</p>
                 </div>
               </div>
 
@@ -67,8 +67,8 @@ const Address = () => {
                   </svg>
                 </div>
                 <div>
-                  <p className="text-gray-400 text-xs uppercase tracking-widest mb-1">Parking</p>
-                  <p className="text-gray-800 font-medium">Accessible jusqu'à 22h</p>
+                  <p className="text-white/40 text-xs uppercase tracking-widest mb-1">Parking</p>
+                  <p className="text-white font-medium">Accessible jusqu'à 22h</p>
                 </div>
               </div>
             </div>
