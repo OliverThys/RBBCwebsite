@@ -26,7 +26,7 @@ const Hero = () => {
   }
 
   return (
-    <section id="accueil" className="relative h-screen min-h-[640px] flex flex-col overflow-hidden bg-off-black">
+    <section id="accueil" className="relative h-screen min-h-[640px] flex flex-col overflow-hidden bg-[#0A0A0A]">
 
       {/* Background photo carousel */}
       <div className="absolute inset-0">
@@ -47,8 +47,8 @@ const Hero = () => {
         </AnimatePresence>
 
         {/* Gradient overlays */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/50 to-black/20" />
-        <div className="absolute inset-0 bg-gradient-to-t from-off-black via-transparent to-black/40" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-black/10 md:from-black/85 md:via-black/50 md:to-black/20" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-black/40" />
       </div>
 
       {/* Content */}

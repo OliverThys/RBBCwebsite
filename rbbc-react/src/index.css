@@ -10,14 +10,14 @@
   }
 
   html, body {
-    @apply bg-off-black text-white font-body antialiased;
+    @apply bg-off-black text-gray-900 font-body antialiased;
     overflow-x: hidden;
     width: 100%;
     max-width: 100%;
   }
 
   * {
-    @apply border-white/10;
+    @apply border-gray-200;
   }
 }
 
@@ -85,7 +85,7 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #080808;
+  background: #F0F0F2;
 }
 
 ::-webkit-scrollbar-thumb {

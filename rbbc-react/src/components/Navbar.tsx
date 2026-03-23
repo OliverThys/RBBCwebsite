@@ -53,7 +53,7 @@ const Navbar = () => {
         transition={{ duration: 0.5, ease: 'easeOut' }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled
-            ? 'bg-off-black/95 backdrop-blur-md border-b border-white/8 shadow-2xl'
+            ? 'bg-[#0A0A0A]/95 backdrop-blur-md border-b border-white/8 shadow-2xl'
             : 'bg-transparent'
         }`}
       >
@@ -154,7 +154,7 @@ const Navbar = () => {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', stiffness: 350, damping: 35 }}
-              className="fixed top-0 right-0 bottom-0 w-72 max-w-[85vw] bg-off-black border-l border-white/8 z-50 lg:hidden"
+              className="fixed top-0 right-0 bottom-0 w-72 max-w-[85vw] bg-[#0A0A0A] border-l border-white/8 z-50 lg:hidden"
             >
               <div className="flex flex-col h-full p-8 pt-20">
                 <ul className="flex-1 space-y-1">

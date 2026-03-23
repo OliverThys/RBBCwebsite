@@ -35,7 +35,7 @@ const Sponsors = () => {
           className="mb-14"
         >
           <div className="section-label mb-4">Nos partenaires</div>
-          <h2 className="font-display text-[clamp(2.5rem,6vw,5rem)] text-white leading-none">
+          <h2 className="font-display text-[clamp(2.5rem,6vw,5rem)] text-gray-900 leading-none">
             ILS NOUS<br />
             <span className="text-red-700">SOUTIENNENT</span>
           </h2>
@@ -80,7 +80,7 @@ const Sponsors = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.04 }}
-                className="group relative h-24 sm:h-28 md:h-32 bg-white rounded-sm overflow-hidden border border-white/5 hover:border-red-700/40 transition-colors duration-300"
+                className="group relative h-24 sm:h-28 md:h-32 bg-white rounded-sm overflow-hidden border border-gray-200 hover:border-red-700/40 transition-colors duration-300 shadow-sm"
               >
                 {inner}
               </motion.div>
@@ -98,7 +98,7 @@ const Sponsors = () => {
             className="mb-10"
           >
             <div className="section-label mb-3">Pourquoi nous soutenir</div>
-            <h3 className="font-display text-3xl md:text-4xl text-white">
+            <h3 className="font-display text-3xl md:text-4xl text-gray-900">
               DEVENEZ PARTENAIRE
             </h3>
           </motion.div>
@@ -111,11 +111,11 @@ const Sponsors = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.08 }}
-                className="p-6 bg-surface border border-white/8 rounded-sm hover:border-red-700/30 transition-colors duration-300 group"
+                className="p-6 bg-white border border-gray-200 rounded-sm hover:border-red-700/30 transition-colors duration-300 group shadow-sm"
               >
                 <div className="w-1 h-8 bg-red-700 rounded-full mb-5 group-hover:h-10 transition-all duration-300" />
-                <h4 className="font-display text-xl text-white mb-2">{benefit.title}</h4>
-                <p className="text-white/50 text-sm leading-relaxed">{benefit.description}</p>
+                <h4 className="font-display text-xl text-gray-900 mb-2">{benefit.title}</h4>
+                <p className="text-gray-500 text-sm leading-relaxed">{benefit.description}</p>
               </motion.div>
             ))}
           </div>

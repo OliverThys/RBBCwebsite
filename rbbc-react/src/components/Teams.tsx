@@ -24,14 +24,14 @@ const Teams = () => {
         >
           <div>
             <div className="section-label mb-4">Nos équipes</div>
-            <h2 className="font-display text-[clamp(2.5rem,6vw,5rem)] text-white leading-none">
+            <h2 className="font-display text-[clamp(2.5rem,6vw,5rem)] text-gray-900 leading-none">
               DE TOUS<br />
               <span className="text-red-700">LES NIVEAUX</span>
             </h2>
           </div>
 
           {/* Filters */}
-          <div className="flex items-center gap-2 bg-surface rounded-sm p-1">
+          <div className="flex items-center gap-2 bg-white rounded-sm p-1 shadow-sm border border-gray-200">
             {([
               { value: 'all', label: 'Toutes' },
               { value: 'seniors', label: 'Seniors' },
@@ -43,7 +43,7 @@ const Teams = () => {
                 className={`px-5 py-2 text-sm font-semibold rounded-sm transition-all duration-200 ${
                   filter === btn.value
                     ? 'bg-red-700 text-white'
-                    : 'text-white/50 hover:text-white'
+                    : 'text-gray-500 hover:text-gray-900'
                 }`}
               >
                 {btn.label}
@@ -63,7 +63,7 @@ const Teams = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.35, delay: index * 0.04 }}
-                className="group relative h-56 sm:h-64 md:h-72 overflow-hidden rounded-sm cursor-pointer"
+                className="group relative h-56 sm:h-64 md:h-72 overflow-hidden rounded-sm cursor-pointer shadow-sm"
               >
                 {/* Photo */}
                 <img
@@ -81,7 +81,7 @@ const Teams = () => {
                   <span className={`px-2.5 py-1 text-xs font-bold uppercase tracking-wide rounded-sm ${
                     team.category === 'seniors'
                       ? 'bg-red-700 text-white'
-                      : 'bg-surface-2/80 text-white/80 border border-white/20'
+                      : 'bg-white/80 text-gray-800 border border-white/40'
                   }`}>
                     {team.category === 'seniors' ? 'Senior' : 'Jeune'}
                   </span>
@@ -119,11 +119,11 @@ const Teams = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mt-16 flex flex-col sm:flex-row items-center justify-between gap-6 p-5 sm:p-8 border border-white/8 bg-surface rounded-sm"
+          className="mt-16 flex flex-col sm:flex-row items-center justify-between gap-6 p-5 sm:p-8 border border-gray-200 bg-white rounded-sm shadow-sm"
         >
           <div>
-            <h3 className="font-display text-2xl md:text-3xl text-white mb-1">Rejoins l'aventure</h3>
-            <p className="text-white/50 text-sm">Débutant ou confirmé, il y a une place pour toi au RBBC.</p>
+            <h3 className="font-display text-2xl md:text-3xl text-gray-900 mb-1">Rejoins l'aventure</h3>
+            <p className="text-gray-500 text-sm">Débutant ou confirmé, il y a une place pour toi au RBBC.</p>
           </div>
           <a
             href="#contact"

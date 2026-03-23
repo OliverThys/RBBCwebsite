@@ -15,7 +15,7 @@ const Address = () => {
           className="mb-14"
         >
           <div className="section-label mb-4">Où nous trouver</div>
-          <h2 className="font-display text-[clamp(2.5rem,6vw,5rem)] text-white leading-none">
+          <h2 className="font-display text-[clamp(2.5rem,6vw,5rem)] text-gray-900 leading-none">
             NOTRE ADRESSE
           </h2>
         </motion.div>
@@ -26,7 +26,7 @@ const Address = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="grid lg:grid-cols-2 overflow-hidden rounded-sm border border-white/8"
+          className="grid lg:grid-cols-2 overflow-hidden rounded-sm border border-gray-200 shadow-sm"
         >
           {/* Photo */}
           <div className="relative h-48 sm:h-60 lg:h-auto overflow-hidden">
@@ -41,34 +41,34 @@ const Address = () => {
 
           {/* Info */}
           <div className="p-5 sm:p-8 md:p-12 bg-surface-2 flex flex-col justify-center">
-            <h3 className="font-display text-3xl md:text-4xl text-white mb-8">
+            <h3 className="font-display text-3xl md:text-4xl text-gray-900 mb-8">
               {contactInfo.address.name}
             </h3>
 
             <div className="space-y-5 mb-10">
               <div className="flex items-start gap-4">
-                <div className="mt-0.5 w-10 h-10 flex-shrink-0 bg-red-700/15 border border-red-700/30 rounded-sm flex items-center justify-center">
+                <div className="mt-0.5 w-10 h-10 flex-shrink-0 bg-red-700/10 border border-red-700/20 rounded-sm flex items-center justify-center">
                   <svg className="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
                 </div>
                 <div>
-                  <p className="text-white/40 text-xs uppercase tracking-widest mb-1">Adresse</p>
-                  <p className="text-white font-medium">{contactInfo.address.street}</p>
-                  <p className="text-white font-medium">{contactInfo.address.postalCode} {contactInfo.address.city}</p>
+                  <p className="text-gray-400 text-xs uppercase tracking-widest mb-1">Adresse</p>
+                  <p className="text-gray-800 font-medium">{contactInfo.address.street}</p>
+                  <p className="text-gray-800 font-medium">{contactInfo.address.postalCode} {contactInfo.address.city}</p>
                 </div>
               </div>
 
               <div className="flex items-start gap-4">
-                <div className="mt-0.5 w-10 h-10 flex-shrink-0 bg-red-700/15 border border-red-700/30 rounded-sm flex items-center justify-center">
+                <div className="mt-0.5 w-10 h-10 flex-shrink-0 bg-red-700/10 border border-red-700/20 rounded-sm flex items-center justify-center">
                   <svg className="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
                 </div>
                 <div>
-                  <p className="text-white/40 text-xs uppercase tracking-widest mb-1">Parking</p>
-                  <p className="text-white font-medium">Accessible jusqu'à 22h</p>
+                  <p className="text-gray-400 text-xs uppercase tracking-widest mb-1">Parking</p>
+                  <p className="text-gray-800 font-medium">Accessible jusqu'à 22h</p>
                 </div>
               </div>
             </div>
