@@ -16,17 +16,17 @@ export interface ContactInfo {
 
 export const contactInfo: ContactInfo = {
   committee: {
-    name: 'Henri Maton',
+    name: 'Comité RBBC',
     phone: '065/56 70 06',
     email: 'comiterbbc@gmail.com',
   },
   address: {
-    name: 'Salle omnisports E.Severyns',
-    street: 'Rue de Sars 7',
-    city: 'Quévy',
+    name: 'Salle omnisports de Blaregnies',
+    street: 'Rue de Sars 5',
+    city: 'Blaregnies',
     postalCode: '7040',
     country: 'Belgique',
-    mapsUrl: 'https://www.google.com/maps/search/Rue+de+Sars+7,+7040+Quévy,+Belgium',
+    mapsUrl: 'https://www.google.com/maps/search/Rue+de+Sars+5,+7040+Blaregnies,+Belgium',
   },
 };
 

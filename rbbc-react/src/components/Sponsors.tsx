@@ -90,7 +90,7 @@ const Sponsors = () => (
           <div className="relative">
             <h3 className="font-display text-2xl sm:text-3xl text-white mb-3">DEVENEZ PARTENAIRE</h3>
             <p className="text-white/70 text-sm leading-relaxed">
-              Contactez Henri Maton pour discuter des opportunités de sponsoring adaptées à votre entreprise.
+              Contactez le comité pour discuter des opportunités de sponsoring adaptées à votre entreprise.
             </p>
           </div>
           <div className="relative mt-6 flex flex-col gap-2.5">
