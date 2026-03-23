@@ -1,21 +1,12 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
 import { getImagePath } from '../utils/images'
-import AnimatedCounter from './AnimatedCounter'
-
 const heroImages = [
   '/accueil1.jpg',
   '/accueil3.jpg',
   '/accueil4.jpg',
   '/accueil5.jpg',
 ].map(getImagePath)
-
-const stats = [
-  { end: 1961, suffix: '', label: 'Fondé en' },
-  { end: 200, suffix: '+', label: 'Joueurs' },
-  { end: 11, suffix: '', label: 'Équipes' },
-  { end: 60, suffix: '+', label: 'Ans d\'histoire' },
-]
 
 const Hero = () => {
   const [currentIndex, setCurrentIndex] = useState(0)
