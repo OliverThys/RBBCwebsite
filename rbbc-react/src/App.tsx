@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import SponsorsBar from './components/SponsorsBar'
@@ -10,20 +10,21 @@ import Contact from './components/Contact'
 import Footer from './components/Footer'
 
 function App() {
-  const [isScrolled, setIsScrolled] = useState(false)
-
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
+    // Smooth scroll behavior
+    document.documentElement.style.scrollBehavior = 'smooth'
+    
+    // Prevent horizontal overflow
+    document.body.style.overflowX = 'hidden'
+    
+    return () => {
+      document.documentElement.style.scrollBehavior = 'auto'
     }
-
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
   return (
-    <div className="min-h-screen bg-white overflow-x-hidden">
-      <Navbar isScrolled={isScrolled} />
+    <div className="min-h-screen bg-black overflow-x-hidden">
+      <Navbar />
       <main className="overflow-x-hidden">
         <Hero />
         <SponsorsBar />
@@ -39,4 +40,3 @@ function App() {
 }
 
 export default App
-

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
 import { getImagePath } from '../utils/images'
+import AnimatedCounter from './AnimatedCounter'
 
 const heroImages = [
   '/accueil1.jpg',
@@ -9,135 +10,128 @@ const heroImages = [
   '/accueil5.jpg',
 ].map(getImagePath)
 
-// Preload images for better quality
-const preloadImages = () => {
-  heroImages.forEach((src) => {
-    const img = new Image()
-    img.src = src
-  })
-}
+const stats = [
+  { end: 1961, suffix: '', label: 'Fondé en' },
+  { end: 200, suffix: '+', label: 'Joueurs' },
+  { end: 11, suffix: '', label: 'Équipes' },
+  { end: 60, suffix: '+', label: 'Ans d\'histoire' },
+]
 
 const Hero = () => {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const { scrollY } = useScroll()
+  const opacity = useTransform(scrollY, [0, 500], [1, 0])
+  const y = useTransform(scrollY, [0, 500], [0, 80])
 
   useEffect(() => {
-    // Preload images on mount
-    preloadImages()
-    
     const interval = setInterval(() => {
-      setCurrentImageIndex((prev) => (prev + 1) % heroImages.length)
-    }, 5000)
-
+      setCurrentIndex(prev => (prev + 1) % heroImages.length)
+    }, 6000)
     return () => clearInterval(interval)
   }, [])
 
-  const goToSlide = (index: number) => {
-    setCurrentImageIndex(index)
+  const scrollTo = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
 
   return (
-    <section id="accueil" className="relative flex items-center justify-center overflow-hidden" style={{ minHeight: 'calc(100vh - 64px - 140px)', height: 'calc(100vh - 64px - 140px)', marginTop: '64px', paddingTop: '0' }}>
-      {/* Image Carousel */}
-      <div className="absolute inset-0" style={{ willChange: 'contents', transform: 'translateZ(0)' }}>
-        <AnimatePresence mode="wait">
-          <motion.img
-            key={currentImageIndex}
-            src={heroImages[currentImageIndex]}
-            alt={`Hero image ${currentImageIndex + 1}`}
-            className="w-full h-full object-cover" 
-            style={{ 
-              minWidth: '100%', 
-              minHeight: '100%', 
-              width: '100%', 
-              height: '100%', 
-              objectFit: 'cover',
-              imageRendering: 'auto',
-              filter: 'contrast(1.1) brightness(1.05) saturate(1.1)',
-              WebkitFilter: 'contrast(1.1) brightness(1.05) saturate(1.1)',
-              transform: 'translateZ(0)',
-              backfaceVisibility: 'hidden',
-              WebkitBackfaceVisibility: 'hidden'
-            }}
-            loading="eager"
-            fetchPriority="high"
+    <section id="accueil" className="relative h-screen min-h-[640px] flex flex-col overflow-hidden bg-off-black">
+
+      {/* Background photo carousel */}
+      <div className="absolute inset-0">
+        <AnimatePresence mode="sync">
+          <motion.div
+            key={currentIndex}
+            className="absolute inset-0"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 1 }}
-          />
+            transition={{ duration: 1.2 }}
+          >
+            <div
+              className="absolute inset-0 bg-cover bg-center scale-[1.03]"
+              style={{ backgroundImage: `url(${heroImages[currentIndex]})` }}
+            />
+          </motion.div>
         </AnimatePresence>
-        <div className="absolute inset-0 bg-black/40" />
+
+        {/* Gradient overlays */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/50 to-black/20" />
+        <div className="absolute inset-0 bg-gradient-to-t from-off-black via-transparent to-black/40" />
       </div>
 
       {/* Content */}
-      <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
+      <motion.div
+        style={{ opacity, y }}
+        className="relative z-10 flex flex-col justify-center flex-1 max-w-7xl mx-auto w-full px-6 sm:px-8 lg:px-12 pt-20"
+      >
+        {/* Club label */}
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="mb-6"
+        >
+          <span className="section-label">Royal Blaregnies Basket Club</span>
+        </motion.div>
+
+        {/* Main headline */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.7, delay: 0.5 }}
           className="mb-8"
         >
-          <img
-            src={getImagePath('/rbbc_icon.jpg')}
-            alt="RBBC Logo"
-            className="w-32 h-32 md:w-48 md:h-48 mx-auto rounded-full object-cover shadow-2xl mb-6"
-          />
+          <h1 className="font-display leading-[0.9] text-white">
+            <span className="block text-[clamp(3.5rem,10vw,9rem)]">LA PASSION</span>
+            <span className="block text-[clamp(3.5rem,10vw,9rem)] text-red-700">DU BASKET</span>
+            <span className="block text-[clamp(3.5rem,10vw,9rem)]">DEPUIS 1961</span>
+          </h1>
         </motion.div>
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-4xl md:text-6xl lg:text-7xl font-bebas text-white mb-6 uppercase font-black" style={{ letterSpacing: '2px', lineHeight: '0.9', textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5), 0 0 2px rgba(0, 0, 0, 0.3)', WebkitTextStroke: '1px rgba(255, 255, 255, 0.1)', fontWeight: '900' }}
-        >
-          Royal Blaregnies Basket Club
-        </motion.h1>
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="flex flex-col sm:flex-row gap-4 justify-center mt-8"
-        >
-          <a
-            href="#contact"
-            onClick={(e) => {
-              e.preventDefault()
-              const target = document.getElementById('contact')
-              if (target) {
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' })
-              }
-            }}
-            className="px-8 py-3 bg-rbbc-red text-white font-semibold rounded-lg hover:bg-rbbc-red-dark transition-colors duration-200 shadow-lg"
-          >
-            Nous contacter
-          </a>
-          <a
-            href="#equipes"
-            onClick={(e) => {
-              e.preventDefault()
-              const target = document.getElementById('equipes')
-              if (target) {
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' })
-              }
-            }}
-            className="px-8 py-3 bg-white/10 backdrop-blur-sm text-white font-semibold rounded-lg border-2 border-white hover:bg-white/20 transition-all duration-200"
-          >
-            Nos équipes
-          </a>
-        </motion.div>
-      </div>
 
-      {/* Dots Navigation */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 flex space-x-2">
-        {heroImages.map((_, index) => (
+        {/* Subtitle */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.9 }}
+          className="text-white/60 text-base md:text-lg max-w-lg mb-10 leading-relaxed"
+        >
+          Club de basketball basé à Blaregnies, en Province de Hainaut.
+          Du minibasket aux seniors, nous accueillons tous les passionnés.
+        </motion.p>
+
+        {/* CTAs */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 1.1 }}
+          className="flex flex-wrap gap-4 mb-16"
+        >
           <button
-            key={index}
-            onClick={() => goToSlide(index)}
-            className={`w-3 h-3 rounded-full transition-all duration-200 ${
-              index === currentImageIndex
-                ? 'bg-white w-8'
-                : 'bg-white/50 hover:bg-white/75'
+            onClick={() => scrollTo('equipes')}
+            className="px-7 py-3.5 bg-red-700 hover:bg-red-600 text-white font-semibold text-sm tracking-wide transition-colors duration-200 rounded-sm"
+          >
+            Découvrir nos équipes
+          </button>
+          <button
+            onClick={() => scrollTo('contact')}
+            className="px-7 py-3.5 bg-transparent border border-white/30 hover:border-white text-white font-semibold text-sm tracking-wide transition-colors duration-200 rounded-sm"
+          >
+            Nous rejoindre
+          </button>
+        </motion.div>
+      </motion.div>
+
+      {/* Image dots */}
+      <div className="relative z-10 flex justify-center gap-2 pb-4">
+        {heroImages.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setCurrentIndex(i)}
+            className={`transition-all duration-300 rounded-full ${
+              i === currentIndex ? 'w-6 h-1.5 bg-red-600' : 'w-1.5 h-1.5 bg-white/30 hover:bg-white/60'
             }`}
-            aria-label={`Go to slide ${index + 1}`}
+            aria-label={`Image ${i + 1}`}
           />
         ))}
       </div>
@@ -146,4 +140,3 @@ const Hero = () => {
 }
 
 export default Hero
-

@@ -5,7 +5,7 @@ export const getImagePath = (path: string): string => {
     return path
   }
   
-  // Get base URL from Vite (includes /RBBCwebsite/ in production)
+  // Get base URL from Vite (configured for root domain)
   const base = import.meta.env.BASE_URL
   
   // Remove leading slash from path if present, then add base

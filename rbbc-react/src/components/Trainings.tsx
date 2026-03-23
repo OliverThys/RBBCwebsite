@@ -2,114 +2,146 @@ import { motion } from 'framer-motion'
 import { trainingSchedules } from '../data/teams'
 
 const Trainings = () => {
-  const seniorTrainings = trainingSchedules.filter((_, index) => index < 4)
-  const youngTrainings = trainingSchedules.filter((_, index) => index >= 4)
+  const seniorTrainings = trainingSchedules.filter((_, i) => i < 4)
+  const youngTrainings = trainingSchedules.filter((_, i) => i >= 4)
+
+  const TrainingCard = ({ training, index, accent }: {
+    training: typeof trainingSchedules[0]
+    index: number
+    accent: 'red' | 'neutral'
+  }) => (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay: index * 0.08 }}
+      className="bg-surface-2 border border-white/8 rounded-sm p-6 hover:border-red-700/40 transition-colors duration-300"
+    >
+      <div className="flex items-start justify-between mb-5">
+        <h4 className="font-display text-xl sm:text-2xl text-white">{training.teamName}</h4>
+        {accent === 'red' && (
+          <span className="px-2 py-0.5 bg-red-700/20 border border-red-700/40 text-red-500 text-xs font-semibold uppercase rounded-sm">
+            Senior
+          </span>
+        )}
+        {accent === 'neutral' && (
+          <span className="px-2 py-0.5 bg-white/5 border border-white/15 text-white/50 text-xs font-semibold uppercase rounded-sm">
+            Jeune
+          </span>
+        )}
+      </div>
+
+      {/* Coach */}
+      <div className="flex items-center gap-3 mb-5 pb-5 border-b border-white/8">
+        <div className="w-8 h-8 bg-red-700/15 border border-red-700/30 rounded-sm flex items-center justify-center flex-shrink-0">
+          <svg className="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+          </svg>
+        </div>
+        <div>
+          <p className="text-white/40 text-xs uppercase tracking-widest">Coach</p>
+          <p className="text-white text-sm font-semibold">{training.coach}</p>
+        </div>
+      </div>
+
+      {/* Schedule */}
+      <ul className="space-y-2">
+        {training.days.map((day, i) => (
+          <li key={i} className="flex items-center gap-3">
+            <div className="w-1.5 h-1.5 rounded-full bg-red-700 flex-shrink-0" />
+            <span className={`text-sm ${day === 'À confirmer' ? 'text-white/30 italic' : 'text-white/70'}`}>
+              {day}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </motion.div>
+  )
 
   return (
-    <section id="entrainements" className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="entrainements" className="relative py-24 md:py-32 bg-surface overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+
+        {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="mb-14"
         >
-          <h2 className="text-4xl md:text-5xl font-display font-bold text-gray-900 mb-4 uppercase tracking-wide">
-            Entraînements
+          <div className="section-label mb-4">Horaires</div>
+          <h2 className="font-display text-[clamp(2.5rem,6vw,5rem)] text-white leading-none">
+            ENTRAÎNEMENTS
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Horaires d'entraînement et coachs par équipe
-          </p>
         </motion.div>
 
-        <div className="space-y-12 max-w-5xl mx-auto">
-          {/* Seniors */}
+        {/* Seniors */}
+        <div className="mb-14">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: -16 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.5 }}
+            className="flex items-center gap-4 mb-8"
           >
-            <h3 className="text-2xl font-display font-semibold text-gray-900 mb-6 uppercase">
-              Équipes Seniors
-            </h3>
-            <div className="grid md:grid-cols-2 gap-6">
-              {seniorTrainings.map((training, index) => (
-                <motion.div
-                  key={training.teamName}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="bg-gray-50 rounded-xl p-6 shadow-lg"
-                >
-                  <div className="text-xl font-display font-semibold text-rbbc-red mb-2">
-                    {training.teamName}
-                  </div>
-                  <div className="text-gray-600 mb-4">Coach : {training.coach}</div>
-                  <div className="space-y-2">
-                    {training.days.map((day, dayIndex) => (
-                      <div
-                        key={dayIndex}
-                        className={`text-gray-700 ${
-                          day === 'À confirmer' ? 'italic text-gray-500' : ''
-                        }`}
-                      >
-                        {day}
-                      </div>
-                    ))}
-                  </div>
-                </motion.div>
-              ))}
+            <div className="w-1 h-8 bg-red-700 rounded-full" />
+            <div>
+              <h3 className="font-display text-3xl text-white">SENIORS</h3>
+              <p className="text-white/40 text-xs uppercase tracking-widest">Compétition & Excellence</p>
             </div>
           </motion.div>
-
-          {/* Jeunes */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h3 className="text-2xl font-display font-semibold text-gray-900 mb-6 uppercase">
-              Équipes Jeunes
-            </h3>
-            <div className="grid md:grid-cols-2 gap-6">
-              {youngTrainings.map((training, index) => (
-                <motion.div
-                  key={training.teamName}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="bg-gray-50 rounded-xl p-6 shadow-lg"
-                >
-                  <div className="text-xl font-display font-semibold text-rbbc-red mb-2">
-                    {training.teamName}
-                  </div>
-                  <div className="text-gray-600 mb-4">Coach : {training.coach}</div>
-                  <div className="space-y-2">
-                    {training.days.map((day, dayIndex) => (
-                      <div
-                        key={dayIndex}
-                        className={`text-gray-700 ${
-                          day === 'À confirmer' ? 'italic text-gray-500' : ''
-                        }`}
-                      >
-                        {day}
-                      </div>
-                    ))}
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
+          <div className="grid md:grid-cols-2 gap-4">
+            {seniorTrainings.map((t, i) => (
+              <TrainingCard key={t.teamName} training={t} index={i} accent="red" />
+            ))}
+          </div>
         </div>
+
+        {/* Jeunes */}
+        <div className="mb-14">
+          <motion.div
+            initial={{ opacity: 0, x: -16 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="flex items-center gap-4 mb-8"
+          >
+            <div className="w-1 h-8 bg-white/20 rounded-full" />
+            <div>
+              <h3 className="font-display text-3xl text-white">JEUNES</h3>
+              <p className="text-white/40 text-xs uppercase tracking-widest">Formation & Talent</p>
+            </div>
+          </motion.div>
+          <div className="grid md:grid-cols-2 gap-4">
+            {youngTrainings.map((t, i) => (
+              <TrainingCard key={t.teamName} training={t} index={i} accent="neutral" />
+            ))}
+          </div>
+        </div>
+
+        {/* Location strip */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="flex flex-col sm:flex-row items-center gap-4 p-6 bg-surface-2 border border-white/8 rounded-sm"
+        >
+          <div className="w-10 h-10 flex-shrink-0 bg-red-700/15 border border-red-700/30 rounded-sm flex items-center justify-center">
+            <svg className="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+          </div>
+          <div>
+            <p className="text-white font-semibold">Salle de Sports René Delrue</p>
+            <p className="text-white/40 text-sm">Rue de Blaregnies 1C, 7040 Blaregnies</p>
+          </div>
+        </motion.div>
       </div>
     </section>
   )
 }
 
 export default Trainings
-

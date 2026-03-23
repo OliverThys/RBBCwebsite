@@ -1,9 +1,7 @@
-import { motion } from 'framer-motion'
 import { useEffect, useRef, useState, useMemo } from 'react'
 import { sponsors } from '../data/sponsors'
 import { getImagePath } from '../utils/images'
 
-// Fisher-Yates shuffle algorithm
 const shuffleArray = <T,>(array: T[]): T[] => {
   const shuffled = [...array]
   for (let i = shuffled.length - 1; i > 0; i--) {
@@ -13,182 +11,94 @@ const shuffleArray = <T,>(array: T[]): T[] => {
   return shuffled
 }
 
+const SponsorItem = ({ sponsor, prefix }: { sponsor: typeof sponsors[0]; prefix: string }) => {
+  const img = (
+    <img
+      src={getImagePath(sponsor.image)}
+      alt={sponsor.name}
+      className="h-full w-auto object-contain opacity-60 hover:opacity-100 transition-opacity duration-300"
+      loading="lazy"
+    />
+  )
+
+  const wrapperClass = "flex-shrink-0 h-12 md:h-14 flex items-center"
+
+  if (sponsor.link) {
+    return (
+      <div key={`${prefix}-${sponsor.id}`} className={wrapperClass}>
+        <a href={sponsor.link} target="_blank" rel="noopener noreferrer" className="block h-full hover:scale-105 transition-transform duration-300">
+          {img}
+        </a>
+      </div>
+    )
+  }
+  if (sponsor.phone) {
+    return (
+      <div key={`${prefix}-${sponsor.id}`} className={wrapperClass}>
+        <a href={`tel:${sponsor.phone}`} className="block h-full hover:scale-105 transition-transform duration-300">
+          {img}
+        </a>
+      </div>
+    )
+  }
+  return (
+    <div key={`${prefix}-${sponsor.id}`} className={wrapperClass}>
+      {img}
+    </div>
+  )
+}
+
 const SponsorsBar = () => {
   const firstSetRef = useRef<HTMLDivElement>(null)
-  const [scrollOffset, setScrollOffset] = useState('50%')
-  
-  // Randomize sponsors order once on component mount
+  const [scrollOffset, setScrollOffset] = useState('-50%')
   const shuffledSponsors = useMemo(() => shuffleArray(sponsors), [])
 
   useEffect(() => {
-    const updateScrollOffset = () => {
+    const update = () => {
       if (firstSetRef.current) {
-        const width = firstSetRef.current.offsetWidth
-        setScrollOffset(`-${width}px`)
+        const spacerWidth = window.innerWidth >= 768 ? 64 : 48
+        setScrollOffset(`-${firstSetRef.current.offsetWidth + spacerWidth}px`)
       }
     }
-
-    // Wait for images to load
-    const timeout = setTimeout(updateScrollOffset, 100)
-    window.addEventListener('resize', updateScrollOffset)
-    
-    // Update when images load
-    const images = firstSetRef.current?.querySelectorAll('img')
-    if (images) {
-      let loadedCount = 0
-      const totalImages = images.length
-      images.forEach((img) => {
-        if (img.complete) {
-          loadedCount++
-        } else {
-          img.addEventListener('load', () => {
-            loadedCount++
-            if (loadedCount === totalImages) {
-              updateScrollOffset()
-            }
-          })
-        }
-      })
-      if (loadedCount === totalImages) {
-        updateScrollOffset()
-      }
-    }
-
+    const timeout = setTimeout(update, 150)
+    window.addEventListener('resize', update)
     return () => {
       clearTimeout(timeout)
-      window.removeEventListener('resize', updateScrollOffset)
+      window.removeEventListener('resize', update)
     }
   }, [])
 
   return (
-    <section className="bg-gray-900 overflow-hidden flex flex-col justify-center" style={{ minHeight: '140px', height: '140px', maxHeight: '140px' }}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-3"
-        >
-          <h3 className="text-white text-xs md:text-sm font-semibold uppercase tracking-wider opacity-80">
-            Nos Partenaires
-          </h3>
-        </motion.div>
+    <section className="bg-surface border-y border-white/8 py-6 overflow-hidden">
+      <div className="flex items-center gap-6 mb-4 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+        <span className="section-label flex-shrink-0">Nos partenaires</span>
+        <div className="flex-1 h-px bg-white/8" />
+      </div>
 
-        {/* Infinite scroll container */}
-        <div className="relative overflow-hidden">
-          <div 
-            className="flex animate-scroll" 
-            style={{ 
-              width: 'fit-content',
-              '--scroll-offset': scrollOffset
-            } as React.CSSProperties & { '--scroll-offset': string }}
-          >
-            {/* First set of sponsors */}
-            <div ref={firstSetRef} className="flex space-x-8 md:space-x-12 flex-shrink-0">
-            {shuffledSponsors.map((sponsor, index) => (
-              <motion.div
-                key={`sponsor-1-${sponsor.id}`}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="flex-shrink-0"
-              >
-                {sponsor.link ? (
-                  <a
-                    href={sponsor.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block h-12 md:h-14 w-auto transition-all duration-300 opacity-70 hover:opacity-100"
-                  >
-                    <img
-                      src={getImagePath(sponsor.image)}
-                      alt={sponsor.name}
-                      className="h-full w-auto object-contain"
-                      loading="lazy"
-                    />
-                  </a>
-                ) : sponsor.phone ? (
-                  <a
-                    href={`tel:${sponsor.phone}`}
-                    className="block h-12 md:h-14 w-auto transition-all duration-300 opacity-70 hover:opacity-100"
-                  >
-                    <img
-                      src={getImagePath(sponsor.image)}
-                      alt={sponsor.name}
-                      className="h-full w-auto object-contain"
-                      loading="lazy"
-                    />
-                  </a>
-                ) : (
-                  <div className="h-12 md:h-14 w-auto opacity-70">
-                    <img
-                      src={getImagePath(sponsor.image)}
-                      alt={sponsor.name}
-                      className="h-full w-auto object-contain"
-                      loading="lazy"
-                    />
-                  </div>
-                )}
-              </motion.div>
+      <div className="relative overflow-hidden">
+        <div
+          className="flex items-center animate-sponsor-scroll"
+          style={{
+            width: 'fit-content',
+            '--scroll-offset': scrollOffset,
+            '--scroll-duration': `${Math.max(20, shuffledSponsors.length * 3)}s`,
+          } as React.CSSProperties & { '--scroll-offset': string; '--scroll-duration': string }}
+        >
+          <div ref={firstSetRef} className="flex items-center gap-12 md:gap-16 flex-shrink-0 px-6">
+            {shuffledSponsors.map((s) => (
+              <SponsorItem key={`a-${s.id}`} sponsor={s} prefix="a" />
             ))}
-            </div>
-            {/* Spacer for mobile */}
-            <div className="flex-shrink-0 w-8 md:w-0"></div>
-            {/* Duplicate for seamless loop */}
-            <div className="flex space-x-8 md:space-x-12 flex-shrink-0">
-            {shuffledSponsors.map((sponsor) => (
-              <div
-                key={`sponsor-2-${sponsor.id}`}
-                className="flex-shrink-0"
-              >
-                {sponsor.link ? (
-                  <a
-                    href={sponsor.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block h-12 md:h-14 w-auto transition-all duration-300 opacity-70 hover:opacity-100"
-                  >
-                    <img
-                      src={getImagePath(sponsor.image)}
-                      alt={sponsor.name}
-                      className="h-full w-auto object-contain"
-                      loading="lazy"
-                    />
-                  </a>
-                ) : sponsor.phone ? (
-                  <a
-                    href={`tel:${sponsor.phone}`}
-                    className="block h-12 md:h-14 w-auto transition-all duration-300 opacity-70 hover:opacity-100"
-                  >
-                    <img
-                      src={getImagePath(sponsor.image)}
-                      alt={sponsor.name}
-                      className="h-full w-auto object-contain"
-                      loading="lazy"
-                    />
-                  </a>
-                ) : (
-                  <div className="h-12 md:h-14 w-auto opacity-70">
-                    <img
-                      src={getImagePath(sponsor.image)}
-                      alt={sponsor.name}
-                      className="h-full w-auto object-contain"
-                      loading="lazy"
-                    />
-                  </div>
-                )}
-              </div>
+          </div>
+          <div className="flex-shrink-0 w-12 md:w-16" />
+          <div className="flex items-center gap-12 md:gap-16 flex-shrink-0 px-6">
+            {shuffledSponsors.map((s) => (
+              <SponsorItem key={`b-${s.id}`} sponsor={s} prefix="b" />
             ))}
-            </div>
           </div>
         </div>
       </div>
-
     </section>
   )
 }
 
 export default SponsorsBar
-
