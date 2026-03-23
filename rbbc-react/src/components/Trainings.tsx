@@ -1,147 +1,100 @@
 import { motion } from 'framer-motion'
-import { trainingSchedules } from '../data/teams'
+import { weekSchedule } from '../data/teams'
+import { contactInfo } from '../data/contact'
 
-const Trainings = () => {
-  const seniorTrainings = trainingSchedules.filter((_, i) => i < 4)
-  const youngTrainings = trainingSchedules.filter((_, i) => i >= 4)
+const Trainings = () => (
+  <section id="entrainements" className="relative py-14 md:py-20 bg-surface overflow-hidden">
+    <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
 
-  const TrainingCard = ({ training, index, accent }: {
-    training: typeof trainingSchedules[0]
-    index: number
-    accent: 'red' | 'neutral'
-  }) => (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.08 }}
-      className="bg-surface-2 border border-white/10 rounded-sm p-6 hover:border-red-700/40 transition-colors duration-300"
-    >
-      <div className="flex items-start justify-between mb-5">
-        <h4 className="font-display text-xl sm:text-2xl text-white">{training.teamName}</h4>
-        {accent === 'red' && (
-          <span className="px-2 py-0.5 bg-red-700/10 border border-red-700/30 text-red-600 text-xs font-semibold uppercase rounded-sm">
-            Senior
-          </span>
-        )}
-        {accent === 'neutral' && (
-          <span className="px-2 py-0.5 bg-white/5 border border-white/15 text-white/50 text-xs font-semibold uppercase rounded-sm">
-            Jeune
-          </span>
-        )}
-      </div>
-
-      {/* Coach */}
-      <div className="flex items-center gap-3 mb-5 pb-5 border-b border-white/10">
-        <div className="w-8 h-8 bg-red-700/15 border border-red-700/30 rounded-sm flex items-center justify-center flex-shrink-0">
-          <svg className="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-          </svg>
-        </div>
+      {/* Header */}
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10"
+      >
         <div>
-          <p className="text-white/40 text-xs uppercase tracking-widest">Coach</p>
-          <p className="text-white text-sm font-semibold">{training.coach}</p>
-        </div>
-      </div>
-
-      {/* Schedule */}
-      <ul className="space-y-2">
-        {training.days.map((day, i) => (
-          <li key={i} className="flex items-center gap-3">
-            <div className="w-1.5 h-1.5 rounded-full bg-red-700 flex-shrink-0" />
-            <span className={`text-sm ${day === 'À confirmer' ? 'text-white/30 italic' : 'text-white/70'}`}>
-              {day}
-            </span>
-          </li>
-        ))}
-      </ul>
-    </motion.div>
-  )
-
-  return (
-    <section id="entrainements" className="relative py-24 md:py-32 bg-surface overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-14"
-        >
           <div className="section-label mb-4">Horaires</div>
           <h2 className="font-display text-[clamp(2.5rem,6vw,5rem)] text-white leading-none">
             ENTRAÎNEMENTS
           </h2>
-        </motion.div>
-
-        {/* Seniors */}
-        <div className="mb-14">
-          <motion.div
-            initial={{ opacity: 0, x: -16 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="flex items-center gap-4 mb-8"
-          >
-            <div className="w-1 h-8 bg-red-700 rounded-full" />
-            <div>
-              <h3 className="font-display text-3xl text-white">SENIORS</h3>
-              <p className="text-white/40 text-xs uppercase tracking-widest">Compétition & Excellence</p>
-            </div>
-          </motion.div>
-          <div className="grid md:grid-cols-2 gap-4">
-            {seniorTrainings.map((t, i) => (
-              <TrainingCard key={t.teamName} training={t} index={i} accent="red" />
-            ))}
-          </div>
         </div>
-
-        {/* Jeunes */}
-        <div className="mb-14">
-          <motion.div
-            initial={{ opacity: 0, x: -16 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="flex items-center gap-4 mb-8"
-          >
-            <div className="w-1 h-8 bg-white/20 rounded-full" />
-            <div>
-              <h3 className="font-display text-3xl text-white">JEUNES</h3>
-              <p className="text-white/40 text-xs uppercase tracking-widest">Formation & Talent</p>
-            </div>
-          </motion.div>
-          <div className="grid md:grid-cols-2 gap-4">
-            {youngTrainings.map((t, i) => (
-              <TrainingCard key={t.teamName} training={t} index={i} accent="neutral" />
-            ))}
-          </div>
-        </div>
-
-        {/* Location strip */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+        <motion.a
+          href={contactInfo.address.mapsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="flex flex-col sm:flex-row items-center gap-4 p-6 bg-surface-2 border border-white/10 rounded-sm"
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="inline-flex items-center gap-2 px-4 py-2.5 bg-surface-2 border border-white/10 hover:border-red-700/40 rounded-sm text-sm text-white/60 hover:text-white transition-all duration-200 self-start md:self-auto"
         >
-          <div className="w-10 h-10 flex-shrink-0 bg-red-700/15 border border-red-700/30 rounded-sm flex items-center justify-center">
-            <svg className="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>
-          </div>
-          <div>
-            <p className="text-white font-semibold">Salle de Sports René Delrue</p>
-            <p className="text-white/40 text-sm">Rue de Blaregnies 1C, 7040 Blaregnies</p>
-          </div>
-        </motion.div>
+          <svg className="w-4 h-4 text-red-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+          {contactInfo.address.name}
+        </motion.a>
+      </motion.div>
+
+      {/* Weekly grid */}
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {weekSchedule.map((dayData, di) => (
+          <motion.div
+            key={dayData.day}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: di * 0.08 }}
+            className="bg-surface-2 border border-white/15 rounded-sm overflow-hidden hover:border-red-700/40 transition-colors duration-300"
+          >
+            <div className="flex items-center justify-between px-4 py-3 border-b border-white/15 bg-white/[0.04]">
+              <h4 className="font-display text-2xl text-white">{dayData.day}</h4>
+              <span className="text-white/50 text-xs">{dayData.slots.length} séance{dayData.slots.length > 1 ? 's' : ''}</span>
+            </div>
+
+            <div className="divide-y divide-white/10">
+              {dayData.slots.map((slot, si) => (
+                <div key={si} className="p-4">
+                  <div className="flex items-start justify-between gap-2 mb-1">
+                    <span className="text-white font-semibold text-sm leading-tight">{slot.team}</span>
+                    <span className={`flex-shrink-0 text-[10px] font-bold uppercase px-1.5 py-0.5 rounded-sm tracking-wide ${
+                      slot.category === 'seniors'
+                        ? 'bg-red-700/30 text-red-400 border border-red-700/40'
+                        : 'bg-white/8 text-white/60 border border-white/20'
+                    }`}>
+                      {slot.category === 'seniors' ? 'S' : 'J'}
+                    </span>
+                  </div>
+                  <p className="text-white/60 text-xs mb-1.5">{slot.coach}</p>
+                  <p className="font-mono text-red-400 text-xs font-semibold tracking-wide">{slot.time}</p>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        ))}
       </div>
-    </section>
-  )
-}
+
+      {/* U12 / U10 note */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5, delay: 0.3 }}
+        className="mt-4 flex flex-col sm:flex-row items-start sm:items-center gap-3 px-5 py-4 bg-white/[0.04] border border-white/15 rounded-sm"
+      >
+        <svg className="w-4 h-4 text-white/50 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <p className="text-white/60 text-sm">
+          <span className="text-white/80 font-medium">U12 (Jean-Phi) & U10 (Henri)</span>
+          {' '}— Horaires en cours de confirmation. Contactez-nous pour plus d'informations.
+        </p>
+      </motion.div>
+
+    </div>
+  </section>
+)
 
 export default Trainings

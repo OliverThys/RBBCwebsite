@@ -74,6 +74,45 @@ export const teams: Team[] = [
   },
 ];
 
+export interface DaySlot {
+  time: string;
+  team: string;
+  category: 'seniors' | 'jeunes';
+  coach: string;
+}
+
+export const weekSchedule: { day: string; slots: DaySlot[] }[] = [
+  {
+    day: 'Mardi',
+    slots: [
+      { time: '17h45–19h15', team: 'U14–U16',   category: 'jeunes',  coach: 'Léo & Martin' },
+      { time: '19h15–20h45', team: 'P2B',        category: 'seniors', coach: 'Fatch' },
+      { time: '20h45–22h00', team: 'P2A',        category: 'seniors', coach: 'Joseph' },
+    ],
+  },
+  {
+    day: 'Mercredi',
+    slots: [
+      { time: '20h00–21h30', team: 'P4',         category: 'seniors', coach: 'Jamal' },
+    ],
+  },
+  {
+    day: 'Jeudi',
+    slots: [
+      { time: '17h45–19h00', team: 'U14F–U16F',  category: 'jeunes',  coach: 'Oliver, Laura, Joël' },
+      { time: '19h00–20h30', team: 'P3 Dames',   category: 'seniors', coach: 'Chris' },
+      { time: '20h30–22h00', team: 'P2A',        category: 'seniors', coach: 'Joseph' },
+    ],
+  },
+  {
+    day: 'Vendredi',
+    slots: [
+      { time: '19h00–20h30', team: 'U14–U16',   category: 'jeunes',  coach: 'Léo & Martin' },
+      { time: '19h30–21h00', team: 'U14F–U16F', category: 'jeunes',  coach: 'Oliver, Laura, Joël' },
+    ],
+  },
+];
+
 export interface TrainingSchedule {
   teamName: string;
   coach: string;

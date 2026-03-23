@@ -1,3 +1,4 @@
+import React from 'react'
 import { getImagePath } from '../utils/images'
 
 const Footer = () => {
@@ -64,8 +65,8 @@ const Footer = () => {
               </div>
             </div>
             <p className="text-white/40 text-sm leading-relaxed max-w-sm mb-5">
-              Fondé en 1961, le Royal Blaregnies Basket Club est un pilier du basketball dans la région du Hainaut.
-              Nous formons les champions de demain et cultivons la passion du sport.
+              Club familial basé à Blaregnies, le RBBC accueille les garçons et les filles dès 6 ans.
+              Nos formateurs accompagnent chaque joueur dans sa progression, du minibasket jusqu'en compétition.
             </p>
             <div className="flex gap-2">
               {socialLinks.map(s => (
