@@ -13,7 +13,7 @@ const Hero = () => {
   }
 
   return (
-    <section id="accueil" className="relative h-[85vh] min-h-[500px] max-h-[750px] flex flex-col overflow-hidden bg-[#0A0A0A]">
+    <section id="accueil" className="relative flex-1 min-h-0 flex flex-col overflow-hidden bg-[#0A0A0A]">
 
       {/* Background photo */}
       <div className="absolute inset-0">

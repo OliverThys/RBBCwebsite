@@ -22,8 +22,11 @@ function App() {
     <div className="min-h-screen bg-black overflow-x-hidden">
       <Navbar />
       <main className="overflow-x-hidden">
-        <Hero />
-        <StatsBanner />
+        {/* Hero + StatsBanner = exactement 100dvh */}
+        <div className="h-[100dvh] flex flex-col">
+          <Hero />
+          <StatsBanner />
+        </div>
         <SponsorsBar />
         <Teams />
         <Trainings />
