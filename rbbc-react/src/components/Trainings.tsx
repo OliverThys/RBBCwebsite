@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion'
-import { weekSchedule } from '../data/teams'
 import { contactInfo } from '../data/contact'
 
 const Trainings = () => (
@@ -38,59 +37,27 @@ const Trainings = () => (
         </motion.a>
       </motion.div>
 
-      {/* Weekly grid */}
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {weekSchedule.map((dayData, di) => (
-          <motion.div
-            key={dayData.day}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: di * 0.08 }}
-            className="bg-surface-2 border border-white/15 rounded-sm overflow-hidden hover:border-red-700/40 transition-colors duration-300"
-          >
-            <div className="flex items-center justify-between px-4 py-3 border-b border-white/15 bg-white/[0.04]">
-              <h4 className="font-display text-2xl text-white">{dayData.day}</h4>
-              <span className="text-white/50 text-xs">{dayData.slots.length} séance{dayData.slots.length > 1 ? 's' : ''}</span>
-            </div>
-
-            <div className="divide-y divide-white/10">
-              {dayData.slots.map((slot, si) => (
-                <div key={si} className="p-4">
-                  <div className="flex items-start justify-between gap-2 mb-1">
-                    <span className="text-white font-semibold text-sm leading-tight">{slot.team}</span>
-                    <span className={`flex-shrink-0 text-[10px] font-bold uppercase px-1.5 py-0.5 rounded-sm tracking-wide ${
-                      slot.category === 'seniors'
-                        ? 'bg-red-700/30 text-red-400 border border-red-700/40'
-                        : 'bg-white/8 text-white/60 border border-white/20'
-                    }`}>
-                      {slot.category === 'seniors' ? 'S' : 'J'}
-                    </span>
-                  </div>
-                  <p className="text-white/60 text-xs mb-1.5">{slot.coach}</p>
-                  <p className="font-mono text-red-400 text-xs font-semibold tracking-wide">{slot.time}</p>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-        ))}
-      </div>
-
-      {/* U12 / U10 note */}
+      {/* Message horaires */}
       <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.5, delay: 0.3 }}
-        className="mt-4 flex flex-col sm:flex-row items-start sm:items-center gap-3 px-5 py-4 bg-white/[0.04] border border-white/15 rounded-sm"
+        transition={{ duration: 0.6 }}
+        className="flex flex-col sm:flex-row items-start sm:items-center gap-5 p-6 sm:p-8 bg-surface-2 border border-white/15 rounded-sm"
       >
-        <svg className="w-4 h-4 text-white/50 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-        <p className="text-white/60 text-sm">
-          <span className="text-white/80 font-medium">U12 (Jean-Phi) & U10 (Henri)</span>
-          {' '}— Horaires en cours de confirmation. Contactez-nous pour plus d'informations.
-        </p>
+        <div className="w-12 h-12 flex-shrink-0 bg-red-700/15 border border-red-700/30 rounded-sm flex items-center justify-center">
+          <svg className="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+        </div>
+        <div>
+          <p className="font-display text-2xl sm:text-3xl text-white leading-none mb-2">
+            Horaires 2025–2026 en cours de discussion
+          </p>
+          <p className="text-white/60 text-sm">
+            Les nouveaux horaires seront communiqués prochainement. Contactez-nous pour plus d'informations.
+          </p>
+        </div>
       </motion.div>
 
     </div>

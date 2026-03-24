@@ -57,7 +57,7 @@ export const teams: Team[] = [
   {
     id: 'p2b',
     name: 'P2B',
-    image: 'https://picsum.photos/600/360?random=109',
+    image: '/P2B.jpg',
     category: 'seniors',
   },
   {
