@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import StatsBanner from './components/StatsBanner'
@@ -8,8 +9,9 @@ import Trainings from './components/Trainings'
 import Sponsors from './components/Sponsors'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
+import SponsoringPage from './SponsoringPage'
 
-function App() {
+function HomePage() {
   useEffect(() => {
     document.documentElement.style.scrollBehavior = 'smooth'
     document.body.style.overflowX = 'hidden'
@@ -35,6 +37,15 @@ function App() {
       </main>
       <Footer />
     </div>
+  )
+}
+
+function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/sponsoring" element={<SponsoringPage />} />
+    </Routes>
   )
 }
 
