@@ -37,15 +37,35 @@ const SponsoringNavbar = () => {
               <img src={getImagePath('/rbbc_icon.jpg')} alt="RBBC" className="w-full h-full object-cover" />
             </div>
             <div className="hidden sm:block leading-none">
-              <div className="font-display text-xl tracking-wide" style={{ color: '#0D0D0D' }}>RBBC</div>
-              <div className="text-[10px] uppercase tracking-widest font-medium" style={{ color: '#9CA3AF' }}>Royal Blaregnies</div>
+              <div
+                className="font-display text-xl tracking-wide transition-colors duration-300"
+                style={{ color: scrolled ? '#0D0D0D' : '#ffffff' }}
+              >
+                RBBC
+              </div>
+              <div
+                className="text-[10px] uppercase tracking-widest font-medium transition-colors duration-300"
+                style={{ color: scrolled ? '#9CA3AF' : 'rgba(255,255,255,0.75)' }}
+              >
+                Royal Blaregnies
+              </div>
             </div>
           </Link>
 
           {/* Centre */}
           <div className="hidden lg:flex flex-col items-center">
-            <div className="text-[10px] uppercase tracking-[0.3em] font-medium" style={{ color: '#9CA3AF' }}>Dossier de partenariat</div>
-            <div className="font-display text-lg tracking-wide leading-tight" style={{ color: '#0D0D0D' }}>Saison 2025–2026</div>
+            <div
+              className="text-[10px] uppercase tracking-[0.3em] font-medium transition-colors duration-300"
+              style={{ color: scrolled ? '#9CA3AF' : 'rgba(255,255,255,0.7)' }}
+            >
+              Dossier de partenariat
+            </div>
+            <div
+              className="font-display text-lg tracking-wide leading-tight transition-colors duration-300"
+              style={{ color: scrolled ? '#0D0D0D' : '#ffffff' }}
+            >
+              Saison 2025–2026
+            </div>
           </div>
 
           {/* Actions */}
@@ -60,9 +80,9 @@ const SponsoringNavbar = () => {
             <Link
               to="/"
               className="flex items-center gap-1.5 text-sm font-medium transition-colors duration-200 group"
-              style={{ color: '#4B5563' }}
-              onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = '#0D0D0D'}
-              onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = '#4B5563'}
+              style={{ color: scrolled ? '#4B5563' : 'rgba(255,255,255,0.85)' }}
+              onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = scrolled ? '#0D0D0D' : '#ffffff'}
+              onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = scrolled ? '#4B5563' : 'rgba(255,255,255,0.85)'}
             >
               <svg className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform duration-200"
                 fill="none" stroke="currentColor" viewBox="0 0 24 24">

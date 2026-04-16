@@ -1,308 +1,746 @@
+import { useRef, useState, useEffect } from 'react'
+import type { ReactNode } from 'react'
+import { motion, useInView, AnimatePresence } from 'framer-motion'
 import SponsoringNavbar from './components/SponsoringNavbar'
 import Footer from './components/Footer'
 import { getImagePath } from './utils/images'
 
 const RED  = '#C41230'
-const BLUE = '#003087'
+const DARK = '#09101f'
 
-// ─── Helpers ────────────────────────────────────────────────────────────────
-const SectionTitle = ({ num, title }: { num: string; title: string }) => (
-  <h2 className="text-base font-bold uppercase mb-4" style={{ color: RED }}>
-    <span className="underline underline-offset-2">{num}. {title}</span>
-  </h2>
-)
 
-const PackIcon = () => (
-  <span className="text-xl mr-1">🏅</span>
-)
+// ─── Scroll-triggered fade-up wrapper ──────────────────────────────────────
+const FadeUp = ({
+  children,
+  delay = 0,
+  className = '',
+}: {
+  children: ReactNode
+  delay?: number
+  className?: string
+}) => {
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true, margin: '-80px' })
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 36 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.65, delay, ease: [0.25, 0.46, 0.45, 0.94] }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  )
+}
 
-const Check = () => (
-  <span className="font-bold mr-1" style={{ color: RED }}>✓</span>
-)
+// ─── Simple carousel ────────────────────────────────────────────────────────
+const CAROUSEL_H = 260 // px — hauteur fixe, ~20% sous proportion naturelle
 
-// ─── Page ───────────────────────────────────────────────────────────────────
-const SponsoringPage = () => (
-  <div className="bg-white min-h-screen">
-    <SponsoringNavbar />
+const Carousel = ({ images }: { images: { src: string; alt: string }[] }) => {
+  const [idx, setIdx] = useState(0)
+  const n = images.length
+  const prev = () => setIdx(i => (i - 1 + n) % n)
+  const next = () => setIdx(i => (i + 1) % n)
 
-    {/* ══ DOCUMENT ══════════════════════════════════════════════════════════ */}
-    <main className="pt-20 pb-16 max-w-4xl mx-auto px-6 sm:px-10 text-[#1a1a1a]" style={{ fontFamily: 'Arial, sans-serif', fontSize: '14px', lineHeight: '1.6' }}>
+  // Auto-play
+  useEffect(() => {
+    const t = setInterval(() => setIdx(i => (i + 1) % n), 3000)
+    return () => clearInterval(t)
+  }, [n])
 
-      {/* ── EN-TÊTE ─────────────────────────────────────────────────────── */}
-      <header className="flex items-start gap-6 mb-6 pb-4 border-b-2" style={{ borderColor: RED }}>
-        <img src={getImagePath('/rbbc_icon.jpg')} alt="RBBC" className="w-20 h-20 object-contain flex-shrink-0" />
-        <div>
-          <p className="text-2xl font-bold leading-tight">DOSSIER DE PARTENARIAT</p>
-          <p className="text-xl font-bold mb-2">Saison 2026-2027</p>
-          <p className="text-base font-bold tracking-wide">
-            <span style={{ color: RED }}>R</span>OYAL{' '}
-            <span style={{ color: BLUE }}>B</span>LAREGNIES{' '}
-            <span style={{ color: RED }}>B</span>ASKET{' '}
-            <span style={{ color: BLUE }}>C</span>LUB
-          </p>
-        </div>
-      </header>
+  return (
+    <div className="relative">
+      {/* Conteneur hauteur fixe — la page ne bouge pas */}
+      <div
+        className="relative overflow-hidden bg-gray-50"
+        style={{ height: CAROUSEL_H }}
+      >
+        <AnimatePresence mode="wait">
+          <motion.img
+            key={idx}
+            src={images[idx].src}
+            alt={images[idx].alt}
+            className="absolute inset-0 w-full h-full object-contain"
+            initial={{ opacity: 0, x: 24 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -24 }}
+            transition={{ duration: 0.3, ease: 'easeOut' }}
+          />
+        </AnimatePresence>
 
-      {/* ── PHOTO HERO ──────────────────────────────────────────────────── */}
-      <div className="w-full mb-8 overflow-hidden" style={{ height: '280px' }}>
-        <img
-          src={getImagePath('/HeaderRBBCJeunes.png')}
-          alt="Équipe RBBC"
-          className="w-full h-full object-cover object-top"
-        />
+        {/* Flèches */}
+        <button
+          onClick={prev}
+          aria-label="Photo précédente"
+          className="absolute left-2 top-1/2 -translate-y-1/2 w-11 h-11 flex items-center justify-center text-white text-2xl font-bold z-10"
+          style={{ backgroundColor: 'rgba(0,0,0,0.45)' }}
+          onMouseEnter={e => (e.currentTarget.style.backgroundColor = 'rgba(0,0,0,0.7)')}
+          onMouseLeave={e => (e.currentTarget.style.backgroundColor = 'rgba(0,0,0,0.45)')}
+        >‹</button>
+        <button
+          onClick={next}
+          aria-label="Photo suivante"
+          className="absolute right-2 top-1/2 -translate-y-1/2 w-11 h-11 flex items-center justify-center text-white text-2xl font-bold z-10"
+          style={{ backgroundColor: 'rgba(0,0,0,0.45)' }}
+          onMouseEnter={e => (e.currentTarget.style.backgroundColor = 'rgba(0,0,0,0.7)')}
+          onMouseLeave={e => (e.currentTarget.style.backgroundColor = 'rgba(0,0,0,0.45)')}
+        >›</button>
       </div>
 
-      {/* ══ SECTION 1 — UN PILIER SPORTIF ════════════════════════════════ */}
-      <section className="mb-8">
-        <SectionTitle num="1" title="LE RBBC : UN PILIER SPORTIF DEPUIS 1961" />
+      {/* Dots */}
+      <div className="flex justify-center gap-1.5 mt-3">
+        {images.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setIdx(i)}
+            className="w-2 h-2 rounded-full transition-colors"
+            style={{ backgroundColor: i === idx ? RED : '#D1D5DB' }}
+          />
+        ))}
+      </div>
+    </div>
+  )
+}
 
-        <blockquote className="text-center italic font-bold text-base my-4">
-          « Plus qu'un club, une institution locale. »
-        </blockquote>
-
-        <p className="mb-3">
-          Fondé en 1961 à l'initiative de Stéphane Pilaete, le Royal Blaregnies Basket Club traverse les
-          décennies avec une <strong>mission inchangée</strong> :
-        </p>
-
-        <p className="mb-3">
-          – <strong>former des joueuses et joueurs dans un esprit de fair-play, de dépassement de soi et de
-          cohésion</strong>.
-        </p>
-
-        <p className="mb-3">
-          Aujourd'hui, le RBBC est un <strong>acteur majeur de la vie sociale</strong> de l'entité de Quévy.
-        </p>
-
-        <p className="mb-3">
-          Notre salle omnisports Emile Severyns est la <strong>seule infrastructure</strong> de ce type regroupant
-          les habitants des <strong>10 villages</strong> de la commune.
-        </p>
-
-        <p className="mb-3" style={{ color: RED, fontWeight: 'bold' }}>
-          Chaque week-end, ce sont des dizaines de familles, de jeunes et de supporters qui s'y rassemblent.
-        </p>
-
-        <p className="mb-3">
-          Avec plus de 10 équipes des U10 aux U18 , 2 équipes d'hommes et une de dames ce sont pas
-          loin de <strong>120 matchs qui se jouent à domicile</strong> soutenus par de nombreux supporters.
-        </p>
-
-        <p className="font-bold">Le club regroupe actuellement 200 affiliés et leurs familles</p>
-      </section>
-
-      {/* ══ SPONSORISER LE RBBC ══════════════════════════════════════════ */}
-      <section className="mb-8 p-5 border" style={{ borderColor: '#ddd', backgroundColor: '#fafafa' }}>
-        <p className="font-bold text-base mb-4 underline underline-offset-2">Sponsoriser le RBBC, c'est donc :</p>
-
-        <div className="flex gap-6 items-start">
-          <div className="flex-1 space-y-3">
-            <div className="flex items-start gap-2">
-              <span className="text-lg flex-shrink-0">→</span>
-              <p>
-                Associer votre <strong>image</strong> aux valeurs positives du sport (santé, jeunesse, équipe).
-              </p>
-            </div>
-            <div className="flex items-start gap-2">
-              <span className="text-lg flex-shrink-0">→</span>
-              <p>
-                Bénéficier d'une <strong>visibilité ciblée</strong> sur l'ensemble de la population de Quévy.
-              </p>
-            </div>
-            <div className="flex items-start gap-2">
-              <span className="text-lg flex-shrink-0">→</span>
-              <p>
-                <strong>Soutenir</strong> concrètement la formation des jeunes et la vie associative locale.
-              </p>
-            </div>
-
-            <p className="mt-3 text-sm">
-              Le club ainsi investi au sein même du village de Blaregnies il participe à de nombreux événements
-              où ses partenaires peuvent être visibles : week-end fancy-fair, coupe du Hainaut, Soirée du Club,
-              souper, bingo, lots, fonds mais aussi fête à Beria de Quévy, souper annuel etc...
-            </p>
-          </div>
-
-          <div className="hidden sm:block flex-shrink-0 w-40">
-            <img src={getImagePath('/accueil1.jpg')} alt="" className="w-full h-32 object-cover" />
-          </div>
-        </div>
-      </section>
-
-      {/* ══ SECTION 2 — VOTRE VISIBILITÉ ════════════════════════════════ */}
-      <section className="mb-8">
-        <SectionTitle num="2" title="VOTRE VISIBILITÉ : UNE EXPOSITION UNIQUE" />
-
-        <p className="mb-4">
-          En devenant partenaire, votre entreprise, restaurant ou commerce bénéficie d'une exposition
-          multi-supports au cœur de l'action :
-        </p>
-
-        <div className="grid sm:grid-cols-2 gap-6">
-          <div className="space-y-5">
-            {/* Terrain */}
-            <div>
-              <p className="font-bold flex items-center gap-1 mb-1">
-                <Check />Sur le terrain <span className="font-normal text-sm">(Salle Emile Severyns)</span>
-              </p>
-              <ul className="text-sm space-y-0.5 pl-4">
-                <li>Panneaux publicitaires fixés aux murs du gymnase (intérieur).</li>
-                <li>Totems et affiches dans les zones de passage.</li>
-              </ul>
-            </div>
-
-            {/* Digital */}
-            <div>
-              <p className="font-bold flex items-center gap-1 mb-1">
-                <Check />Sur le digital <span className="font-normal text-sm">(Réseaux Sociaux)</span>
-              </p>
-              <ul className="text-sm space-y-0.5 pl-4">
-                <li>Logo intégré aux visuels hebdomadaires :</li>
-                <li className="pl-4">– Programme du week-end, Résultats du match,</li>
-                <li className="pl-4">– Rendez-vous dédiés.</li>
-                <li>Une publication dédiée "Présentation du partenaire" par saison.</li>
-              </ul>
-            </div>
-
-            {/* Buvette */}
-            <div>
-              <p className="font-bold flex items-center gap-1 mb-1">
-                <Check />En buvette <span className="font-normal text-sm">(convivialité)</span>
-              </p>
-              <ul className="text-sm space-y-0.5 pl-4">
-                <li>Diffusion de votre logo ou vos offres sur l'écran TV de la buvette pendant les matchs et les temps de repas.</li>
-              </ul>
-            </div>
-          </div>
-
-          {/* Images exemple */}
-          <div className="space-y-3">
-            <div className="grid grid-cols-2 gap-2">
-              <div>
-                <img src={getImagePath('/accueil3.jpg')} alt="Programme du week-end" className="w-full h-28 object-cover" />
-                <p className="text-[10px] text-center mt-1 text-gray-500">Exemple visuel digital</p>
-              </div>
-              <div>
-                <img src={getImagePath('/accueil4.jpg')} alt="Match domicile" className="w-full h-28 object-cover" />
-                <p className="text-[10px] text-center mt-1 text-gray-500">Match à domicile</p>
-              </div>
-            </div>
-            <img src={getImagePath('/accueil2.jpg')} alt="Ambiance salle" className="w-full h-28 object-cover" />
-          </div>
-        </div>
-      </section>
-
-      {/* ══ GALERIE VIE ASSOCIATIVE ══════════════════════════════════════ */}
-      <section className="mb-8">
-        <div className="grid grid-cols-3 gap-3 mb-3">
-          <img src={getImagePath('/accueil5.jpg')} alt="Kermesse" className="w-full h-36 object-cover" />
-          <img src={getImagePath('/accueil6.jpg')} alt="Événement" className="w-full h-36 object-cover" />
-          <img src={getImagePath('/accueil1.jpg')} alt="Supporters" className="w-full h-36 object-cover" />
-        </div>
-        <p className="text-sm italic text-center text-gray-600">
-          Vie associative participative : le club est très représenté et populaire.
-        </p>
-      </section>
-
-      {/* ══ SECTION 3 — FORMULES ════════════════════════════════════════ */}
-      <section className="mb-8" id="formules">
-        <SectionTitle num="3" title="NOS FORMULES DE PARTENARIAT" />
-        <p className="mb-5">Nous proposons trois niveaux d'engagement pour s'adapter à vos objectifs.</p>
-
-        {/* Pack Partenaire */}
-        <div className="mb-6 border-l-4 pl-4" style={{ borderColor: '#cd7f32' }}>
-          <p className="font-bold text-base mb-1"><PackIcon />PACK PARTENAIRE</p>
-          <p className="mb-2">Idéal pour affirmer votre <strong><u>présence locale</u></strong>.</p>
-          <ul className="text-sm space-y-1 pl-2">
-            <li><strong>Salle :</strong> Logo sur le panneau collectif "Nos Partenaires" (entrée de salle).</li>
-            <li><strong>Digital :</strong> Mention de remerciement dans les publications saisonnières sur nos réseaux sociaux.</li>
-            <li><strong>Événement :</strong> Invitation à la soirée de fin de saison du club.</li>
-          </ul>
-          <p className="mt-2 font-bold">Investissement : ____250____ € / an</p>
-        </div>
-
-        {/* Pack Privilège */}
-        <div className="mb-6 border-l-4 pl-4" style={{ borderColor: '#aaa9ad' }}>
-          <p className="font-bold text-base mb-1"><PackIcon />PACK PRIVILÈGE</p>
-          <p className="mb-2">Recommandé pour une <strong><u>visibilité dynamique</u></strong>.</p>
-          <ul className="text-sm space-y-1 pl-2">
-            <li>Tous les avantages du Pack Partenaire.</li>
-            <li><strong>Salle :</strong> Panneau individuel (ou partagé) <strong>sur les murs du gymnase</strong>, visible des gradins.</li>
-            <li><strong>Digital :</strong></li>
-            <li className="pl-4">Logo sur les visuels "Résultats du Week-end".</li>
-            <li className="pl-4">Une publication dédiée "Présentation du partenaire" par saison.</li>
-            <li><strong>Buvette :</strong> Logo diffusé sur l'écran TV pendant les matchs à domicile.</li>
-          </ul>
-          <p className="mt-2 font-bold">Investissement : ____450____ € / an</p>
-        </div>
-
-        {/* Pack Premium */}
-        <div className="mb-6 border-l-4 pl-4" style={{ borderColor: '#ffd700' }}>
-          <p className="font-bold text-base mb-1"><PackIcon />PACK PREMIUM</p>
-          <p className="mb-2">Pour un impact maximal et une <strong><u>relation privilégiée</u></strong>.</p>
-          <ul className="text-sm space-y-1 pl-2">
-            <li>Tous les avantages du Pack Privilège.</li>
-            <li><strong>Salle :</strong> Emplacement "Tête de liste" ou <strong>panneau grand format</strong> à hauteur des yeux.</li>
-            <li><strong>Digital Premium :</strong></li>
-            <li className="pl-4">Logo systématique sur le "Programme du Week-end".</li>
-            <li className="pl-4 font-bold">Logo sur les maillots! Et équipements, trainings, t shirts et autres..</li>
-            <li><strong>Action Commerciale :</strong> Autorisation de distribuer vos flyers/cartes de réduction à la buvette lors d'un match dédié.</li>
-          </ul>
-          <p className="mt-2 font-bold">Investissement : ____750____ € / an</p>
-        </div>
-      </section>
-
-      {/* ══ SECTION 4 — REJOIGNEZ L'ÉQUIPE ═════════════════════════════ */}
-      <section className="mb-8 p-5 border" style={{ borderColor: RED }}>
-        <SectionTitle num="4" title="REJOIGNEZ L'ÉQUIPE" />
-
-        <p className="mb-4">
-          Votre soutien permet directement de financer le matériel sportif, les inscriptions aux
-          championnats et l'organisation d'événements pour nos jeunes.
-        </p>
-
-        <p className="mb-3 font-medium">Contactez-nous pour réserver votre espace ou pour toute question :</p>
-
-        <div className="text-sm space-y-1 mb-5 pl-2">
-          <p><strong>Club :</strong> Royal Blaregnies Basket Club (RBBC)</p>
-          <p><strong>Adresse :</strong> Salle Emile Severyns, Rue de Sars, 7040 Blaregnies</p>
-          <p>
-            <strong>Site web :</strong>{' '}
-            <a href="https://www.rbbc.be" className="underline" style={{ color: BLUE }}>www.rbbc.be</a>
-            {'  '}mail :{' '}
-            <a href="mailto:comiterbbc@gmail.com" className="underline" style={{ color: BLUE }}>comiterbbc@gmail.com</a>
-          </p>
-          <p><strong>Compte :</strong> BE31 0003 3688 6555 (facture fournie) comm.: sponsor RBBC+ pack choisi</p>
-          <p>
-            <strong>Tel :</strong>{' '}
-            <a href="https://wa.me/32479471517" className="underline" style={{ color: BLUE }}>0479/471517</a>
-            {' '}(sponsoring uniquement) via WhatsApp aussi
-          </p>
-        </div>
-
-        <blockquote className="text-center italic text-sm border-t pt-4 mt-4" style={{ borderColor: '#ddd' }}>
-          « Le talent permet de gagner des matchs, mais le travail d'équipe et<br />
-          l'intelligence permettent de gagner les championnats. » – Michael Jordan
-        </blockquote>
-      </section>
-
-      {/* ══ GALERIE ÉQUIPES ═════════════════════════════════════════════ */}
-      <section className="mb-6">
-        <p className="font-bold text-center text-base mb-4" style={{ color: RED }}>Faites partie de notre équipe gagnante !</p>
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-          <img src={getImagePath('/P2A.jpg')} alt="Équipe" className="w-full h-40 object-cover" />
-          <img src={getImagePath('/P2B.jpg')} alt="Équipe" className="w-full h-40 object-cover" />
-          <img src={getImagePath('/P3D.jpg')} alt="Équipe" className="w-full h-40 object-cover" />
-          <img src={getImagePath('/P4.jpg')} alt="Équipe" className="w-full h-40 object-cover" />
-          <img src={getImagePath('/U16.jpg')} alt="Équipe U16" className="w-full h-40 object-cover" />
-          <img src={getImagePath('/U14G.jpg')} alt="Équipe U14" className="w-full h-40 object-cover" />
-        </div>
-      </section>
-
-    </main>
-
-    <Footer />
+// ─── Section label ──────────────────────────────────────────────────────────
+const SectionLabel = ({ num, title }: { num: string; title: string }) => (
+  <div className="mb-8">
+    <div className="flex items-center gap-3 mb-2">
+      <span className="text-[11px] font-bold tracking-[0.3em] uppercase" style={{ color: RED }}>
+        {num.padStart(2, '0')}
+      </span>
+      <div className="h-px w-10" style={{ backgroundColor: RED }} />
+    </div>
+    <h2
+      className="text-4xl sm:text-5xl uppercase leading-tight tracking-wide"
+      style={{ fontFamily: "'Bebas Neue', sans-serif", color: DARK }}
+    >
+      {title}
+    </h2>
   </div>
 )
+
+// ─── Pack card ──────────────────────────────────────────────────────────────
+type Benefit = { category: string; text: string }
+
+type Pack = {
+  name: string
+  tagline: string
+  price: string
+  accentColor: string
+  headerGradient: string
+  benefits: Benefit[]
+  highlighted?: boolean
+}
+
+const PackCard = ({ pack, delay }: { pack: Pack; delay: number }) => {
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true, margin: '-60px' })
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 40 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.6, delay, ease: [0.25, 0.46, 0.45, 0.94] }}
+      className={`relative flex flex-col overflow-hidden ${pack.highlighted ? 'shadow-2xl sm:scale-[1.02]' : 'shadow-md'}`}
+      style={{
+        border: `1px solid ${pack.accentColor}30`,
+      }}
+    >
+      {/* Metallic header */}
+      <div className="px-6 py-6 relative" style={{ background: pack.headerGradient }}>
+        <div className="text-[10px] font-bold uppercase tracking-[0.3em] text-white/60 mb-1">Pack</div>
+        <div
+          className="text-2xl font-black uppercase tracking-tight text-white"
+          style={{ fontFamily: "'Barlow Condensed', sans-serif" }}
+        >
+          {pack.name}
+        </div>
+        <div className="text-sm text-white/70 mt-1 italic">{pack.tagline}</div>
+      </div>
+
+      {/* Price */}
+      <div className="px-6 py-4 border-b" style={{ borderColor: '#e5e7eb', backgroundColor: '#f9fafb' }}>
+        <div className="flex items-baseline gap-1.5">
+          <span
+            className="text-5xl font-black leading-none"
+            style={{ fontFamily: "'Barlow Condensed', sans-serif", color: DARK }}
+          >
+            {pack.price}
+          </span>
+          <span className="text-sm text-gray-600 font-medium">€ / an</span>
+        </div>
+        <div className="text-[10px] text-gray-500 mt-1">
+          Facture fournie · comm. : sponsor RBBC + pack choisi
+        </div>
+      </div>
+
+      {/* Benefits */}
+      <div className="px-6 py-5 flex-1 bg-white space-y-3">
+        {pack.benefits.map((b, i) => (
+          <div key={i} className="flex items-start gap-2.5">
+            <div
+              className="w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0"
+              style={{ backgroundColor: pack.accentColor }}
+            />
+            <div className="text-sm leading-relaxed text-gray-800">
+              {b.category && (
+                <span className="font-semibold text-gray-900">{b.category} : </span>
+              )}
+              {b.text}
+            </div>
+          </div>
+        ))}
+      </div>
+
+    </motion.div>
+  )
+}
+
+// ─── Page ───────────────────────────────────────────────────────────────────
+const SponsoringPage = () => {
+  const packs: Pack[] = [
+    {
+      name: 'Partenaire',
+      tagline: 'Affirmer votre présence locale',
+      price: '250',
+      accentColor: '#cd7f32',
+      headerGradient: 'linear-gradient(135deg, #6b3410 0%, #cd7f32 55%, #8b4c1a 100%)',
+      benefits: [
+        { category: 'Salle', text: 'Logo sur le panneau collectif "Nos Partenaires" (entrée de salle).' },
+        { category: 'Digital', text: 'Mention de remerciement dans les publications saisonnières sur nos réseaux sociaux.' },
+        { category: 'Événement', text: 'Invitation à la soirée de fin de saison du club.' },
+      ],
+    },
+    {
+      name: 'Privilège',
+      tagline: 'Visibilité dynamique & continue',
+      price: '450',
+      accentColor: '#c0c0c0',
+      headerGradient: 'linear-gradient(135deg, #555 0%, #c0c0c0 55%, #777 100%)',
+      highlighted: true,
+      benefits: [
+        { category: '', text: 'Tous les avantages du Pack Partenaire.' },
+        { category: 'Salle', text: 'Panneau individuel (ou partagé) sur les murs du gymnase, visible des gradins.' },
+        { category: 'Digital', text: 'Logo sur les visuels "Résultats du Week-end". Publication dédiée "Présentation du partenaire" par saison.' },
+        { category: 'Buvette', text: "Logo diffusé sur l'écran TV pendant les matchs à domicile." },
+      ],
+    },
+    {
+      name: 'Premium',
+      tagline: 'Impact maximal, relation privilégiée',
+      price: '750',
+      accentColor: '#ffd700',
+      headerGradient: 'linear-gradient(135deg, #9a6f00 0%, #ffd700 55%, #c8a800 100%)',
+      benefits: [
+        { category: '', text: 'Tous les avantages du Pack Privilège.' },
+        { category: 'Salle', text: 'Emplacement "Tête de liste" ou panneau grand format à hauteur des yeux.' },
+        { category: 'Digital Premium', text: 'Logo systématique sur le "Programme du Week-end". Logo sur les maillots, équipements, trainings, t-shirts et autres.' },
+        { category: 'Action commerciale', text: "Autorisation de distribuer vos flyers/cartes de réduction à la buvette lors d'un match dédié." },
+      ],
+    },
+  ]
+
+  return (
+    <div className="bg-white min-h-screen" style={{ fontFamily: "'Barlow', sans-serif" }}>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Barlow:wght@400;500;600;700&family=Bebas+Neue&display=swap');
+      `}</style>
+
+      <SponsoringNavbar />
+
+      {/* ══ HERO — Fond parquet, joueurs sans background ════════════════════ */}
+      <section
+        className="relative overflow-hidden"
+        style={{
+          height: '58vh',
+          minHeight: '380px',
+          maxHeight: '520px',
+          backgroundColor: '#d4a050',
+          backgroundImage: `
+            repeating-linear-gradient(
+              90deg,
+              transparent 0px, transparent 62px,
+              rgba(0,0,0,0.06) 62px, rgba(0,0,0,0.06) 64px
+            ),
+            repeating-linear-gradient(
+              0deg,
+              transparent 0px, transparent 7px,
+              rgba(0,0,0,0.018) 7px, rgba(0,0,0,0.018) 8px
+            ),
+            linear-gradient(170deg, #e8bc72 0%, #d4a050 40%, #c8923c 70%, #d0a048 100%)
+          `,
+        }}
+      >
+        <motion.img
+          src={getImagePath('/headerrbbcjeunes-nobg.png')}
+          alt="Équipe RBBC"
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ objectPosition: 'center calc(70% + 20px)' }}
+          initial={{ scale: 1.06 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 1.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+        />
+
+        {/* Voile bas-gauche — protège uniquement la zone texte */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: 'radial-gradient(ellipse 75% 55% at 0% 100%, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.35) 55%, transparent 100%)',
+          }}
+        />
+
+        {/* Contenu — ancré en bas à gauche */}
+        <div className="relative h-full flex flex-col justify-end" style={{ paddingBottom: '47px' }}>
+          <div className="max-w-5xl mx-auto px-5 sm:px-14 w-full">
+            <motion.div
+              initial={{ opacity: 0, y: 22 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.75, delay: 0.25, ease: [0.25, 0.46, 0.45, 0.94] }}
+            >
+              {/* Titre principal : DOSSIER DE PARTENARIAT */}
+              <h1
+                className="font-black uppercase leading-none tracking-tight"
+                style={{
+                  fontFamily: "'Barlow Condensed', sans-serif",
+                  fontSize: 'clamp(2.4rem, 9vw, 6.5rem)',
+                  color: '#ffffff',
+                  textShadow: '0 2px 6px rgba(0,0,0,0.8), 0 4px 24px rgba(0,0,0,0.5)',
+                }}
+              >
+                Dossier de
+              </h1>
+              <h1
+                className="font-black uppercase leading-none tracking-tight mb-5"
+                style={{
+                  fontFamily: "'Barlow Condensed', sans-serif",
+                  fontSize: 'clamp(2.4rem, 9vw, 6.5rem)',
+                  color: RED,
+                  textShadow: '0 2px 6px rgba(0,0,0,0.75), 0 4px 24px rgba(0,0,0,0.45)',
+                }}
+              >
+                Partenariat
+              </h1>
+
+              {/* Saison */}
+              <p
+                className="text-sm font-semibold uppercase tracking-[0.3em]"
+                style={{ color: 'rgba(255,255,255,0.9)', textShadow: '0 1px 6px rgba(0,0,0,0.4)' }}
+              >
+                Saison 2026–2027
+              </p>
+            </motion.div>
+          </div>
+        </div>
+
+      </section>
+
+      <main>
+
+        {/* ══ SECTION 1 — gris-bleu clair ══════════════════════════════════ */}
+        <div style={{ backgroundColor: '#edf2f8' }}>
+          <div className="max-w-5xl mx-auto px-6 sm:px-10 py-16">
+        <FadeUp>
+          <SectionLabel num="1" title="Le RBBC : Un Pilier Sportif depuis 1961" />
+
+          <div className="grid sm:grid-cols-5 gap-10 items-start">
+            <div className="sm:col-span-3 space-y-4 text-gray-700 leading-relaxed text-[15px]">
+              <blockquote
+                className="text-2xl font-black italic leading-snug border-l-4 pl-5 mb-6"
+                style={{
+                  borderColor: RED,
+                  fontFamily: "'Barlow Condensed', sans-serif",
+                  color: DARK,
+                }}
+              >
+                « Plus qu'un club, une institution locale. »
+              </blockquote>
+
+              <p>
+                Fondé en 1961 à l'initiative de Stéphane Pilaete, le Royal Blaregnies Basket
+                Club traverse les décennies avec une{' '}
+                <strong className="text-gray-900">mission inchangée</strong> :{' '}
+                <strong className="text-gray-900">
+                  former des joueuses et joueurs dans un esprit de fair-play, de dépassement
+                  de soi et de cohésion
+                </strong>
+                .
+              </p>
+
+              <p>
+                Aujourd'hui, le RBBC est un{' '}
+                <strong className="text-gray-900">acteur majeur de la vie sociale</strong> de
+                l'entité de Quévy. Notre salle omnisports Emile Severyns est la{' '}
+                <strong className="text-gray-900">seule infrastructure</strong> de ce type
+                regroupant les habitants des{' '}
+                <strong className="text-gray-900">10 villages</strong> de la commune.
+              </p>
+
+              <p className="font-semibold" style={{ color: RED }}>
+                Chaque week-end, ce sont des dizaines de familles, de jeunes et de supporters
+                qui s'y rassemblent.
+              </p>
+
+              <p>
+                Avec plus de 10 équipes des U10 aux U18, 2 équipes d'hommes et une de dames,
+                ce sont près de{' '}
+                <strong className="text-gray-900">120 matchs qui se jouent à domicile</strong>{' '}
+                soutenus par de nombreux supporters.
+              </p>
+
+              <p className="font-bold text-gray-900">
+                Le club regroupe actuellement 200 affiliés et leurs familles.
+              </p>
+            </div>
+
+            <div className="sm:col-span-2">
+              <img
+                src={getImagePath('/sponsoring/section1-photo.jpg')}
+                alt="Équipe RBBC"
+                className="w-full h-72 object-cover"
+                style={{ objectPosition: 'center 25%' }}
+              />
+            </div>
+          </div>
+        </FadeUp>
+          </div>
+        </div>
+
+        {/* ══ POURQUOI SPONSORISER — bleu légèrement plus soutenu ══════════ */}
+        <div style={{ backgroundColor: '#e2eaf4' }}>
+          <div className="max-w-5xl mx-auto px-6 sm:px-10 py-16">
+        <FadeUp>
+          <div className="border-l-4 pl-6 mb-8" style={{ borderColor: RED }}>
+            <h3
+              className="text-2xl font-black uppercase"
+              style={{ fontFamily: "'Barlow Condensed', sans-serif", color: DARK }}
+            >
+              Sponsoriser le RBBC, c'est :
+            </h3>
+          </div>
+
+          <div className="grid sm:grid-cols-3 gap-4">
+            {[
+              {
+                title: 'Image & Valeurs',
+                text: "Associer votre image aux valeurs positives du sport : santé, jeunesse, cohésion d'équipe.",
+              },
+              {
+                title: 'Visibilité Ciblée',
+                text: "Bénéficier d'une exposition ciblée sur l'ensemble de la population de Quévy et ses 10 villages.",
+              },
+              {
+                title: 'Engagement Local',
+                text: 'Soutenir concrètement la formation des jeunes et la vie associative : fancy-fair, coupe du Hainaut, soirées, bingo, fête à Beria de Quévy, souper annuel...',
+              },
+            ].map((item, i) => (
+              <div
+                key={i}
+                className="p-6"
+                style={{ backgroundColor: '#ffffff', borderTop: `3px solid ${RED}` }}
+              >
+                <div
+                  className="text-xs font-bold uppercase tracking-[0.2em] mb-3"
+                  style={{ color: RED }}
+                >
+                  0{i + 1}
+                </div>
+                <div
+                  className="font-black text-base uppercase mb-3"
+                  style={{ fontFamily: "'Barlow Condensed', sans-serif", color: DARK }}
+                >
+                  {item.title}
+                </div>
+                <div className="text-sm text-gray-700 leading-relaxed">{item.text}</div>
+              </div>
+            ))}
+          </div>
+        </FadeUp>
+          </div>
+        </div>
+
+        {/* ══ SECTION 2 — gris-bleu clair ══════════════════════════════════ */}
+        <div style={{ backgroundColor: '#edf2f8' }}>
+          <div className="max-w-5xl mx-auto px-6 sm:px-10 py-16">
+        <FadeUp>
+          <SectionLabel num="2" title="Votre Visibilité : Une Exposition Unique" />
+
+          <p className="text-gray-700 mb-10 text-[15px] leading-relaxed">
+            En devenant partenaire, votre entreprise, restaurant ou commerce bénéficie d'une
+            exposition multi-supports au cœur de l'action :
+          </p>
+
+          <div className="grid sm:grid-cols-3 gap-5 mb-10 items-start">
+            {[
+              {
+                title: 'Sur le terrain',
+                sub: 'Salle Emile Severyns',
+                items: [
+                  'Panneaux publicitaires fixés aux murs du gymnase (intérieur).',
+                  'Totems et affiches dans les zones de passage.',
+                ],
+                img: getImagePath('/sponsoring/visibilite-terrain.jpg'),
+              },
+              {
+                title: 'Sur le digital',
+                sub: 'Réseaux Sociaux',
+                items: [
+                  'Logo intégré aux visuels hebdomadaires (programme du week-end, résultats du match, rendez-vous dédiés).',
+                  'Publication dédiée "Présentation du partenaire" par saison.',
+                ],
+                img: getImagePath('/sponsoring/visibilite-digital.jpg'),
+                contain: true,
+              },
+              {
+                title: 'En buvette',
+                sub: 'Convivialité',
+                items: [
+                  "Diffusion de votre logo ou vos offres sur l'écran TV pendant les matchs et les temps de repas.",
+                ],
+                img: getImagePath('/sponsoring/visibilite-buvette.jpg'),
+              },
+            ].map((channel, i) => (
+              <FadeUp key={i} delay={i * 0.1}>
+                <div className="border border-gray-100 overflow-hidden flex flex-col">
+                  <img
+                    src={channel.img}
+                    alt={channel.title}
+                    className={`w-full aspect-square ${'contain' in channel && channel.contain ? 'object-contain bg-gray-50' : 'object-cover'}`}
+                  />
+                  <div className="p-5">
+                    <div className="mb-4">
+                      <div
+                        className="text-[10px] uppercase tracking-[0.2em] font-semibold mb-1"
+                        style={{ color: RED }}
+                      >
+                        {channel.sub}
+                      </div>
+                      <div
+                        className="font-black text-xl uppercase leading-tight"
+                        style={{ fontFamily: "'Barlow Condensed', sans-serif", color: DARK }}
+                      >
+                        {channel.title}
+                      </div>
+                    </div>
+                    <ul className="space-y-2 flex-1">
+                      {channel.items.map((item, j) => (
+                        <li
+                          key={j}
+                          className="flex items-start gap-2 text-sm text-gray-700 leading-snug"
+                        >
+                          <span
+                            className="mt-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0"
+                            style={{ backgroundColor: RED }}
+                          />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </FadeUp>
+            ))}
+          </div>
+
+          {/* Carousel — vie associative & visuels */}
+          <Carousel images={[
+            { src: getImagePath('/sponsoring/vie-asso-1.jpg'), alt: 'Kermesse' },
+            { src: getImagePath('/sponsoring/vie-asso-2.jpg'), alt: 'Soirée club' },
+            { src: getImagePath('/sponsoring/vie-asso-3.jpg'), alt: 'Événement' },
+            { src: getImagePath('/sponsoring/equipe-1.jpg'),   alt: 'Visuel match dames' },
+            { src: getImagePath('/sponsoring/equipe-2.jpg'),   alt: 'Coupe du Hainaut' },
+            { src: getImagePath('/sponsoring/equipe-3.jpg'),   alt: 'Kermesse été' },
+            { src: getImagePath('/sponsoring/equipe-4.jpg'),   alt: 'Soirée manille' },
+            { src: getImagePath('/sponsoring/equipe-6.jpg'),   alt: 'Équipes RBBC' },
+          ]} />
+          <p className="text-xs italic text-center text-gray-600 mt-3">
+            Vie associative participative : le club est très représenté et populaire.
+          </p>
+        </FadeUp>
+          </div>
+        </div>
+
+        {/* ══ SECTION 3 — bleu moyen ════════════════════════════════════════ */}
+        <div id="formules" style={{ backgroundColor: '#dce6f2' }}>
+          <div className="max-w-5xl mx-auto px-6 sm:px-10 py-16">
+          <FadeUp>
+            <SectionLabel num="3" title="Nos Formules de Partenariat" />
+            <p className="text-gray-700 mb-10 text-[15px]">
+              Trois niveaux d'engagement pour s'adapter à vos objectifs.
+            </p>
+          </FadeUp>
+          <div className="grid sm:grid-cols-3 gap-4 sm:gap-5 items-start">
+            {packs.map((pack, i) => (
+              <PackCard key={i} pack={pack} delay={i * 0.12} />
+            ))}
+          </div>
+          </div>
+        </div>
+
+        {/* ══ GALERIE ÉQUIPES — bleu soutenu ═══════════════════════════════ */}
+        <div style={{ backgroundColor: '#cfdaec' }}>
+          <div className="max-w-5xl mx-auto px-6 sm:px-10 py-16">
+          <FadeUp>
+            <h3
+              className="text-3xl font-black uppercase text-center mb-8"
+              style={{ fontFamily: "'Barlow Condensed', sans-serif", color: RED }}
+            >
+              Faites partie de notre équipe gagnante !
+            </h3>
+            <img
+              src={getImagePath('/sponsoring/equipe-5.jpg')}
+              alt="Équipes RBBC"
+              className="h-auto block mx-auto"
+              style={{ width: '80%' }}
+            />
+          </FadeUp>
+          </div>
+        </div>
+
+        {/* ══ SECTION 4 — CTA / CONTACT — sombre ══════════════════════════ */}
+        <FadeUp>
+          <section
+            id="contact"
+            className="relative overflow-hidden"
+            style={{ backgroundColor: DARK }}
+          >
+            {/* Subtle grid texture */}
+            <div
+              className="absolute inset-0 opacity-[0.04]"
+              style={{
+                backgroundImage:
+                  'repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(255,255,255,1) 39px, rgba(255,255,255,1) 40px), repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(255,255,255,1) 39px, rgba(255,255,255,1) 40px)',
+              }}
+            />
+
+            <div className="relative px-5 sm:px-12 py-12 sm:py-16 max-w-5xl mx-auto">
+              <div
+                className="text-[10px] uppercase tracking-[0.35em] font-bold mb-3"
+                style={{ color: RED }}
+              >
+                04
+              </div>
+              <h2
+                className="text-5xl sm:text-6xl font-black uppercase mb-3 text-white leading-tight"
+                style={{ fontFamily: "'Barlow Condensed', sans-serif" }}
+              >
+                Rejoignez l'équipe
+              </h2>
+              <p className="text-white/80 text-base mb-10 max-w-lg leading-relaxed">
+                Votre soutien permet directement de financer le matériel sportif, les
+                inscriptions aux championnats et l'organisation d'événements pour nos jeunes.
+              </p>
+
+              {/* Contact grid */}
+              <div className="grid sm:grid-cols-2 gap-6 mb-10">
+                <div className="space-y-4">
+                  {[
+                    { label: 'Club', val: 'Royal Blaregnies Basket Club (RBBC)' },
+                    {
+                      label: 'Adresse',
+                      val: 'Salle Emile Severyns, Rue de Sars, 7040 Blaregnies',
+                    },
+                    {
+                      label: 'Compte bancaire',
+                      val: 'BE31 0003 3688 6555 — comm. : sponsor RBBC + pack choisi (facture fournie)',
+                    },
+                  ].map((item) => (
+                    <div
+                      key={item.label}
+                      className="pb-4 border-b"
+                      style={{ borderColor: 'rgba(255,255,255,0.08)' }}
+                    >
+                      <div className="text-[10px] uppercase tracking-wider text-white/60 mb-1">
+                        {item.label}
+                      </div>
+                      <div className="text-sm text-white/90 font-medium leading-snug">
+                        {item.val}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="space-y-4">
+                  {[
+                    {
+                      label: 'Site web',
+                      href: 'https://www.rbbc.be',
+                      val: 'www.rbbc.be',
+                    },
+                    {
+                      label: 'Email',
+                      href: 'mailto:comiterbbc@gmail.com',
+                      val: 'comiterbbc@gmail.com',
+                    },
+                    {
+                      label: 'Téléphone / WhatsApp',
+                      href: 'https://wa.me/32479471517',
+                      val: '0479 / 471 517 (sponsoring uniquement)',
+                    },
+                  ].map((item) => (
+                    <div
+                      key={item.label}
+                      className="pb-4 border-b"
+                      style={{ borderColor: 'rgba(255,255,255,0.08)' }}
+                    >
+                      <div className="text-[10px] uppercase tracking-wider text-white/60 mb-1">
+                        {item.label}
+                      </div>
+                      <a
+                        href={item.href}
+                        className="text-sm font-semibold transition-opacity hover:opacity-75"
+                        style={{ color: RED }}
+                      >
+                        {item.val}
+                      </a>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Action buttons */}
+              <div className="flex flex-col sm:flex-row gap-3 mb-10">
+                <a
+                  href="mailto:comiterbbc@gmail.com?subject=Demande d'information - Partenariat RBBC"
+                  className="inline-flex items-center justify-center px-8 py-4 font-bold uppercase tracking-wider text-sm text-white transition-opacity hover:opacity-90"
+                  style={{ backgroundColor: RED }}
+                >
+                  Devenir partenaire
+                </a>
+                <a
+                  href="https://wa.me/32479471517"
+                  className="inline-flex items-center justify-center px-8 py-4 font-bold uppercase tracking-wider text-sm transition-colors hover:bg-white/5"
+                  style={{
+                    border: '1px solid rgba(255,255,255,0.3)',
+                    color: 'rgba(255,255,255,0.9)',
+                  }}
+                >
+                  Nous contacter sur WhatsApp
+                </a>
+              </div>
+
+              <blockquote
+                className="pt-8 border-t text-sm italic leading-relaxed max-w-lg"
+                style={{
+                  borderColor: 'rgba(255,255,255,0.08)',
+                  color: 'rgba(255,255,255,0.6)',
+                }}
+              >
+                « Le talent permet de gagner des matchs, mais le travail d'équipe et
+                l'intelligence permettent de gagner les championnats. » — Michael Jordan
+              </blockquote>
+            </div>
+          </section>
+        </FadeUp>
+
+      </main>
+
+
+      <Footer />
+    </div>
+  )
+}
 
 export default SponsoringPage
