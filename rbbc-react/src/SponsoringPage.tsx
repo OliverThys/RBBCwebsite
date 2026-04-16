@@ -397,7 +397,7 @@ const SponsoringPage = () => {
 
             <div className="sm:col-span-2">
               <img
-                src={getImagePath('/sponsoring/section1-photo.jpg')}
+                src={getImagePath('/media/section1-photo.jpg')}
                 alt="Équipe RBBC"
                 className="w-full h-72 object-cover"
                 style={{ objectPosition: 'center 25%' }}
@@ -481,7 +481,7 @@ const SponsoringPage = () => {
                   'Panneaux publicitaires fixés aux murs du gymnase (intérieur).',
                   'Totems et affiches dans les zones de passage.',
                 ],
-                img: getImagePath('/sponsoring/visibilite-terrain.jpg'),
+                img: getImagePath('/media/visibilite-terrain.jpg'),
               },
               {
                 title: 'Sur le digital',
@@ -490,7 +490,7 @@ const SponsoringPage = () => {
                   'Logo intégré aux visuels hebdomadaires (programme du week-end, résultats du match, rendez-vous dédiés).',
                   'Publication dédiée "Présentation du partenaire" par saison.',
                 ],
-                img: getImagePath('/sponsoring/visibilite-digital.jpg'),
+                img: getImagePath('/media/visibilite-digital.jpg'),
                 contain: true,
               },
               {
@@ -499,7 +499,7 @@ const SponsoringPage = () => {
                 items: [
                   "Diffusion de votre logo ou vos offres sur l'écran TV pendant les matchs et les temps de repas.",
                 ],
-                img: getImagePath('/sponsoring/visibilite-buvette.jpg'),
+                img: getImagePath('/media/visibilite-buvette.jpg'),
               },
             ].map((channel, i) => (
               <FadeUp key={i} delay={i * 0.1}>
@@ -546,14 +546,14 @@ const SponsoringPage = () => {
 
           {/* Carousel — vie associative & visuels */}
           <Carousel images={[
-            { src: getImagePath('/sponsoring/vie-asso-1.jpg'), alt: 'Kermesse' },
-            { src: getImagePath('/sponsoring/vie-asso-2.jpg'), alt: 'Soirée club' },
-            { src: getImagePath('/sponsoring/vie-asso-3.jpg'), alt: 'Événement' },
-            { src: getImagePath('/sponsoring/equipe-1.jpg'),   alt: 'Visuel match dames' },
-            { src: getImagePath('/sponsoring/equipe-2.jpg'),   alt: 'Coupe du Hainaut' },
-            { src: getImagePath('/sponsoring/equipe-3.jpg'),   alt: 'Kermesse été' },
-            { src: getImagePath('/sponsoring/equipe-4.jpg'),   alt: 'Soirée manille' },
-            { src: getImagePath('/sponsoring/equipe-6.jpg'),   alt: 'Équipes RBBC' },
+            { src: getImagePath('/media/vie-asso-1.jpg'), alt: 'Kermesse' },
+            { src: getImagePath('/media/vie-asso-2.jpg'), alt: 'Soirée club' },
+            { src: getImagePath('/media/vie-asso-3.jpg'), alt: 'Événement' },
+            { src: getImagePath('/media/equipe-1.jpg'),   alt: 'Visuel match dames' },
+            { src: getImagePath('/media/equipe-2.jpg'),   alt: 'Coupe du Hainaut' },
+            { src: getImagePath('/media/equipe-3.jpg'),   alt: 'Kermesse été' },
+            { src: getImagePath('/media/equipe-4.jpg'),   alt: 'Soirée manille' },
+            { src: getImagePath('/media/equipe-6.jpg'),   alt: 'Équipes RBBC' },
           ]} />
           <p className="text-xs italic text-center text-gray-600 mt-3">
             Vie associative participative : le club est très représenté et populaire.
@@ -590,7 +590,7 @@ const SponsoringPage = () => {
               Faites partie de notre équipe gagnante !
             </h3>
             <img
-              src={getImagePath('/sponsoring/equipe-5.jpg')}
+              src={getImagePath('/media/equipe-5.jpg')}
               alt="Équipes RBBC"
               className="h-auto block mx-auto"
               style={{ width: '80%' }}
