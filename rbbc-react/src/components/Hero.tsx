@@ -1,135 +1,216 @@
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { getImagePath } from '../utils/images'
+import AnimatedCounter from './AnimatedCounter'
 
-const heroImage = getImagePath('/accueil1.jpg')
+const teamPhoto = getImagePath('/accueil1.jpg')
+const DARK = '#09101f'
+
+const parquetStyle: React.CSSProperties = {
+  backgroundColor: '#d4a050',
+  backgroundImage: `
+    repeating-linear-gradient(
+      90deg,
+      transparent 0px, transparent 62px,
+      rgba(0,0,0,0.06) 62px, rgba(0,0,0,0.06) 64px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px, transparent 7px,
+      rgba(0,0,0,0.018) 7px, rgba(0,0,0,0.018) 8px
+    ),
+    linear-gradient(170deg, #e8bc72 0%, #d4a050 40%, #c8923c 70%, #d0a048 100%)
+  `,
+}
+
+const stats = [
+  { value: 200, suffix: '',  label: 'membres' },
+  { value: 11,  suffix: '',  label: 'équipes' },
+  { value: 60,  suffix: '+', label: "ans d'histoire" },
+]
 
 const Hero = () => {
-  const { scrollY } = useScroll()
-  const opacity = useTransform(scrollY, [0, 500], [1, 0])
-  const y = useTransform(scrollY, [0, 500], [0, 80])
-
   const scrollTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
 
   return (
-    <section id="accueil" className="relative flex-1 min-h-0 flex flex-col overflow-hidden bg-[#0A0A0A]">
+    <section id="accueil" className="h-[100dvh] flex flex-col lg:flex-row overflow-hidden">
 
-      {/* Sponsoring badge — right side */}
-      <motion.div
-        initial={{ opacity: 0, x: 20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.6, delay: 1.4 }}
-        className="absolute z-20 flex flex-col items-center"
-        style={{ left: 'calc(50% + 300px)', top: 'calc(50% - 180px)', transform: 'translate(-50%, -50%)' }}
+      {/* ── PHOTO — en haut mobile, à droite desktop ─────────────────────── */}
+      <div
+        className="order-1 lg:order-2 relative overflow-hidden flex-none h-[42vh] lg:h-auto lg:flex-1"
+        style={parquetStyle}
       >
-        <Link
-          to="/sponsoring"
-          className="group flex flex-col items-center gap-2 text-center"
-        >
-          <div
-            className="w-px bg-gradient-to-b from-transparent via-amber-400/60 to-amber-400 hidden sm:block"
-            style={{ height: '80px' }}
-          />
-          <div
-            className="px-8 py-6 rounded-sm border border-amber-400/40 group-hover:border-amber-400 transition-all duration-300 group-hover:bg-amber-400/10"
-            style={{ background: 'rgba(0,0,0,0.45)', backdropFilter: 'blur(8px)' }}
-          >
-            <div className="text-xl uppercase tracking-[0.25em] font-semibold mb-2" style={{ color: 'rgba(251,191,36,0.7)' }}>
-              Saison 2025–26
-            </div>
-            <div className="text-[28px] font-bold tracking-wide whitespace-nowrap leading-tight" style={{ color: '#FCD34D' }}>
-              Sponsoring ouvert&nbsp;!
-            </div>
-            <div className="flex items-center justify-center gap-2 mt-4">
-              <span className="text-lg uppercase tracking-widest font-medium" style={{ color: 'rgba(251,191,36,0.6)' }}>
-                Voir le dossier
-              </span>
-              <svg className="w-5 h-5 group-hover:translate-x-0.5 transition-transform duration-200" style={{ color: 'rgba(251,191,36,0.6)' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </div>
-          </div>
-          <div
-            className="w-px bg-gradient-to-b from-amber-400 via-amber-400/60 to-transparent hidden sm:block"
-            style={{ height: '80px' }}
-          />
-        </Link>
-      </motion.div>
-
-      {/* Background photo */}
-      <div className="absolute inset-0">
-        <div
-          className="absolute inset-0 bg-cover bg-center scale-[1.03]"
-          style={{ backgroundImage: `url(${heroImage})` }}
+        <motion.img
+          src={teamPhoto}
+          alt="Équipe RBBC"
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ objectPosition: 'center 30%' }}
+          initial={{ scale: 1.04 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 1.8, ease: [0.25, 0.46, 0.45, 0.94] }}
         />
-        {/* Gradient overlays */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-black/10 md:from-black/85 md:via-black/50 md:to-black/20" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-black/40" />
+
+        {/* Badge sponsoring — desktop uniquement */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 1.2 }}
+          className="hidden lg:block absolute top-24 right-8 z-10"
+        >
+          <Link
+            to="/sponsoring"
+            className="group inline-flex items-center gap-5 px-8 py-5 rounded-sm border border-amber-400/40 hover:border-amber-400 transition-all duration-300"
+            style={{ background: 'rgba(9,16,31,0.68)', backdropFilter: 'blur(10px)' }}
+          >
+            <div>
+              <div className="text-xs uppercase tracking-[0.28em] font-semibold leading-none mb-2" style={{ color: 'rgba(251,191,36,0.65)' }}>
+                Saison 2025–26
+              </div>
+              <div className="text-2xl font-bold tracking-wide whitespace-nowrap leading-none" style={{ color: '#FCD34D' }}>
+                Sponsoring ouvert&nbsp;!
+              </div>
+            </div>
+            <svg className="w-6 h-6 flex-shrink-0 group-hover:translate-x-1 transition-transform duration-200" style={{ color: 'rgba(251,191,36,0.6)' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </Link>
+        </motion.div>
       </div>
 
-      {/* Content */}
-      <motion.div
-        style={{ opacity, y }}
-        className="relative z-10 flex flex-col justify-center flex-1 max-w-7xl mx-auto w-full px-6 sm:px-8 lg:px-12 pt-20"
+      {/* ── TEXTE — en bas mobile, à gauche desktop ──────────────────────── */}
+      <div
+        className="order-2 lg:order-1 relative flex flex-col bg-white px-6 sm:px-12 lg:px-14 pt-5 sm:pt-6 lg:pt-24 pb-4 sm:pb-6 lg:pb-10 flex-1 lg:flex-none lg:w-[40%] overflow-hidden"
+        style={{ borderRight: '1px solid #e5e7eb' }}
       >
-        {/* Club label */}
+        {/* Label */}
         <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="mb-4"
+          initial={{ opacity: 0, y: -6 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.15 }}
+          className="mb-3 lg:mb-auto"
         >
           <span className="section-label">Royal Blaregnies Basket Club</span>
         </motion.div>
 
-        {/* Main headline */}
+        {/* Badge sponsoring — mobile uniquement, haut droite du panneau blanc */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.5 }}
-          className="mb-5"
+          initial={{ opacity: 0, x: 10 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5, delay: 1.0 }}
+          className="lg:hidden absolute top-[76px] right-4 z-10"
         >
-          <h1 className="font-display leading-[0.9] text-white">
-            <span className="block text-[clamp(3rem,8vw,7rem)]">UN CLUB</span>
-            <span className="block text-[clamp(3rem,8vw,7rem)] text-red-700">FAMILIAL</span>
-            <span className="block text-[clamp(3rem,8vw,7rem)]">ET PASSIONNÉ</span>
-          </h1>
+          <Link
+            to="/sponsoring"
+            className="group inline-flex items-center gap-2 px-3 py-2 rounded-sm border border-amber-500/40 hover:border-amber-500 transition-all duration-200"
+            style={{ background: DARK }}
+          >
+            <div>
+              <div className="text-[8px] uppercase tracking-wider font-semibold leading-none mb-0.5" style={{ color: 'rgba(251,191,36,0.6)' }}>
+                Saison 2025–26
+              </div>
+              <div className="text-xs font-bold whitespace-nowrap" style={{ color: '#FCD34D' }}>
+                Sponsoring ouvert&nbsp;!
+              </div>
+            </div>
+            <svg className="w-3 h-3 flex-shrink-0 group-hover:translate-x-0.5 transition-transform" style={{ color: 'rgba(251,191,36,0.6)' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </Link>
         </motion.div>
 
-        {/* Subtitle */}
-        <motion.p
+
+        {/* Bloc central */}
+        <div className="relative py-2 sm:py-4 lg:py-0 lg:flex-1 flex flex-col justify-center" style={{ zIndex: 1 }}>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 28 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.65, delay: 0.3 }}
+            className="font-display leading-[0.88] mb-2 sm:mb-4 lg:mb-5"
+            style={{ fontSize: 'clamp(2.2rem, 7vw, 6rem)', color: DARK }}
+          >
+            UN VILLAGE<br />
+            <span style={{ color: '#B91C1C' }}>UNE PASSION</span><br />
+            UN CLUB
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            className="text-gray-500 text-sm sm:text-[15px] leading-relaxed mb-4 sm:mb-6 lg:mb-8 max-w-xs hidden sm:block"
+          >
+            Depuis 1961, le RBBC réunit les familles de Quévy autour du basket.
+            Portes ouvertes dès 6&nbsp;ans, tous niveaux.
+          </motion.p>
+
+          {/* Stats */}
+          <motion.div
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: 0.62 }}
+            className="flex items-stretch mb-4 sm:mb-6 lg:mb-8"
+          >
+            {stats.map((stat, i) => (
+              <div
+                key={stat.label}
+                className={`flex-1 ${i > 0 ? 'border-l border-gray-200 pl-3 sm:pl-6' : 'pr-3 sm:pr-6'}`}
+              >
+                <div
+                  className="font-display leading-none mb-0.5"
+                  style={{ fontSize: 'clamp(1.6rem, 4vw, 3.4rem)', color: DARK }}
+                >
+                  <AnimatedCounter end={stat.value} suffix={stat.suffix} duration={1.6} />
+                </div>
+                <div className="text-[9px] sm:text-[10px] text-gray-400 uppercase tracking-[0.15em] font-medium">
+                  {stat.label}
+                </div>
+              </div>
+            ))}
+          </motion.div>
+
+          {/* CTAs */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.78 }}
+            className="flex flex-wrap gap-2 sm:gap-3"
+          >
+            <button
+              onClick={() => scrollTo('contact')}
+              className="px-5 sm:px-7 py-2.5 sm:py-3.5 bg-red-700 hover:bg-red-600 text-white font-bold text-sm tracking-wide rounded-sm transition-colors duration-200"
+            >
+              Rejoindre le club
+            </button>
+            <button
+              onClick={() => scrollTo('equipes')}
+              className="group inline-flex items-center gap-2 px-5 sm:px-7 py-2.5 sm:py-3.5 border border-gray-300 hover:border-gray-900 font-semibold text-sm tracking-wide rounded-sm transition-all duration-200"
+              style={{ color: DARK }}
+            >
+              Voir les équipes
+              <svg className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </motion.div>
+        </div>
+
+        {/* Bas — fondé en */}
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.9 }}
-          className="text-white/60 text-base md:text-lg max-w-lg mb-6 leading-relaxed"
+          transition={{ duration: 0.5, delay: 0.95 }}
+          className="mt-3 lg:mt-auto flex items-center gap-2 sm:gap-3"
         >
-          Club familial en Province de Hainaut, ouvert à tous dès 6 ans.
-          Du minibasket aux seniors, encadré par des formateurs passionnés.
-        </motion.p>
-
-        {/* CTAs */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 1.1 }}
-          className="flex flex-wrap gap-4 mb-8"
-        >
-          <button
-            onClick={() => scrollTo('equipes')}
-            className="px-7 py-3.5 bg-red-700 hover:bg-red-600 text-white font-semibold text-sm tracking-wide transition-colors duration-200 rounded-sm"
-          >
-            Découvrir nos équipes
-          </button>
-          <button
-            onClick={() => scrollTo('contact')}
-            className="px-7 py-3.5 bg-transparent border border-white/30 hover:border-white text-white font-semibold text-sm tracking-wide transition-colors duration-200 rounded-sm"
-          >
-            Nous rejoindre
-          </button>
+          <div className="w-5 sm:w-6 h-px bg-gray-300 flex-shrink-0" />
+          <span className="text-[10px] sm:text-[11px] text-gray-400 uppercase tracking-[0.15em] sm:tracking-[0.2em]">
+            Fondé en 1961 · Blaregnies
+          </span>
         </motion.div>
-      </motion.div>
+      </div>
+
     </section>
   )
 }

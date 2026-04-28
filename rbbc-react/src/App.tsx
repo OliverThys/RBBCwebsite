@@ -2,7 +2,6 @@ import { useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
-import StatsBanner from './components/StatsBanner'
 import SponsorsBar from './components/SponsorsBar'
 import Teams from './components/Teams'
 import Trainings from './components/Trainings'
@@ -10,6 +9,7 @@ import Sponsors from './components/Sponsors'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import SponsoringPage from './SponsoringPage'
+import PhotosPage from './PhotosPage'
 
 function HomePage() {
   useEffect(() => {
@@ -21,14 +21,10 @@ function HomePage() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-black overflow-x-hidden">
+    <div className="min-h-screen bg-white overflow-x-hidden">
       <Navbar />
       <main className="overflow-x-hidden">
-        {/* Hero + StatsBanner = exactement 100dvh */}
-        <div className="h-[100dvh] flex flex-col">
-          <Hero />
-          <StatsBanner />
-        </div>
+        <Hero />
         <SponsorsBar />
         <Teams />
         <Trainings />
@@ -45,6 +41,7 @@ function App() {
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/sponsoring" element={<SponsoringPage />} />
+      <Route path="/photos" element={<PhotosPage />} />
     </Routes>
   )
 }

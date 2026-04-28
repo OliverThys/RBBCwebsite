@@ -1,0 +1,16 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  RewriteRule ^index\.html$ - [L]
+
+  # Serve sponsoring.html for /sponsoring (for correct OG meta tags)
+  RewriteRule ^sponsoring/?$ /sponsoring.html [L]
+
+  # Serve photos.html for /photos (React route, pas le dossier)
+  RewriteRule ^photos/?$ /photos.html [L]
+
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . /index.html [L]
+</IfModule>

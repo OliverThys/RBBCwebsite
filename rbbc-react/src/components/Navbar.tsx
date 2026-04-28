@@ -1,24 +1,23 @@
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { getImagePath } from '../utils/images'
 
 const navLinks = [
   { href: '#accueil', label: 'Accueil' },
-  { href: '#adresse', label: 'Adresse' },
   { href: '#equipes', label: 'Équipes' },
   { href: '#entrainements', label: 'Entraînements' },
   { href: '#sponsoring', label: 'Sponsoring' },
+  { href: '/photos', label: 'Photos', external: true },
   { href: '#contact', label: 'Contact' },
 ]
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
   const [activeSection, setActiveSection] = useState('accueil')
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 60)
       const sections = navLinks.map(l => l.href.replace('#', ''))
       const current = sections.find(section => {
         const el = document.getElementById(section)
@@ -51,11 +50,7 @@ const Navbar = () => {
         initial={{ y: -80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5, ease: 'easeOut' }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled
-            ? 'bg-[#0A0A0A]/95 backdrop-blur-md border-b border-white/8 shadow-2xl'
-            : 'bg-transparent'
-        }`}
+        className="fixed top-0 left-0 right-0 z-50 bg-white/96 backdrop-blur-md border-b border-gray-200 shadow-sm"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-18 py-4">
@@ -74,33 +69,40 @@ const Navbar = () => {
                 />
               </div>
               <div className="hidden md:block leading-none">
-                <div className="font-display text-xl text-white tracking-wide">RBBC</div>
-                <div className="text-[10px] text-white/40 uppercase tracking-widest">Royal Blaregnies</div>
+                <div className="font-display text-xl tracking-wide text-[#09101f]">RBBC</div>
+                <div className="text-[10px] text-gray-500 uppercase tracking-widest">Royal Blaregnies</div>
               </div>
             </a>
 
             {/* Desktop links */}
             <ul className="hidden lg:flex items-center gap-1">
               {navLinks.map((link) => {
-                const isActive = activeSection === link.href.replace('#', '')
+                const isActive = !link.external && activeSection === link.href.replace('#', '')
+                const linkClass = `relative px-4 py-2 text-sm font-medium transition-colors duration-200 ${
+                  isActive ? 'text-[#09101f]' : 'text-gray-500 hover:text-[#09101f]'
+                }`
                 return (
                   <li key={link.href}>
-                    <a
-                      href={link.href}
-                      onClick={(e) => scrollTo(e, link.href)}
-                      className={`relative px-4 py-2 text-sm font-medium transition-colors duration-200 ${
-                        isActive ? 'text-white' : 'text-white/50 hover:text-white'
-                      }`}
-                    >
-                      {link.label}
-                      {isActive && (
-                        <motion.span
-                          layoutId="navUnderline"
-                          className="absolute bottom-0 left-3 right-3 h-px bg-red-700"
-                          transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-                        />
-                      )}
-                    </a>
+                    {link.external ? (
+                      <Link to={link.href} className={linkClass}>
+                        {link.label}
+                      </Link>
+                    ) : (
+                      <a
+                        href={link.href}
+                        onClick={(e) => scrollTo(e, link.href)}
+                        className={linkClass}
+                      >
+                        {link.label}
+                        {isActive && (
+                          <motion.span
+                            layoutId="navUnderline"
+                            className="absolute bottom-0 left-3 right-3 h-px bg-red-700"
+                            transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                          />
+                        )}
+                      </a>
+                    )}
                   </li>
                 )
               })}
@@ -123,15 +125,15 @@ const Navbar = () => {
             >
               <motion.span
                 animate={isMobileMenuOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
-                className="block w-6 h-px bg-white origin-center transition-all"
+                className="block w-6 h-px bg-[#09101f] origin-center"
               />
               <motion.span
                 animate={isMobileMenuOpen ? { opacity: 0 } : { opacity: 1 }}
-                className="block w-6 h-px bg-white"
+                className="block w-6 h-px bg-[#09101f]"
               />
               <motion.span
                 animate={isMobileMenuOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
-                className="block w-6 h-px bg-white origin-center transition-all"
+                className="block w-6 h-px bg-[#09101f] origin-center"
               />
             </button>
           </div>
@@ -146,7 +148,7 @@ const Navbar = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/70 z-40 lg:hidden"
+              className="fixed inset-0 bg-black/30 z-40 lg:hidden"
               onClick={() => setIsMobileMenuOpen(false)}
             />
             <motion.div
@@ -154,7 +156,7 @@ const Navbar = () => {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', stiffness: 350, damping: 35 }}
-              className="fixed top-0 right-0 bottom-0 w-72 max-w-[85vw] bg-[#0A0A0A] border-l border-white/8 z-50 lg:hidden"
+              className="fixed top-0 right-0 bottom-0 w-72 max-w-[85vw] bg-white border-l border-gray-200 z-50 lg:hidden shadow-xl"
             >
               <div className="flex flex-col h-full p-8 pt-20">
                 <ul className="flex-1 space-y-1">
@@ -165,13 +167,23 @@ const Navbar = () => {
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: i * 0.06 }}
                     >
-                      <a
-                        href={link.href}
-                        onClick={(e) => scrollTo(e, link.href)}
-                        className="block px-4 py-3 text-white/70 hover:text-white hover:bg-white/5 rounded-sm text-lg font-medium transition-colors"
-                      >
-                        {link.label}
-                      </a>
+                      {link.external ? (
+                        <Link
+                          to={link.href}
+                          onClick={() => setIsMobileMenuOpen(false)}
+                          className="block px-4 py-3 text-gray-700 hover:text-[#09101f] hover:bg-gray-50 rounded-sm text-lg font-medium transition-colors"
+                        >
+                          {link.label}
+                        </Link>
+                      ) : (
+                        <a
+                          href={link.href}
+                          onClick={(e) => scrollTo(e, link.href)}
+                          className="block px-4 py-3 text-gray-700 hover:text-[#09101f] hover:bg-gray-50 rounded-sm text-lg font-medium transition-colors"
+                        >
+                          {link.label}
+                        </a>
+                      )}
                     </motion.li>
                   ))}
                 </ul>
