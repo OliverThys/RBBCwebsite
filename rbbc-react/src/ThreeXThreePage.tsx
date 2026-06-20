@@ -221,7 +221,7 @@ const HeroContent = ({ large }: { large: boolean }) => (
 
     {/* Eyebrow */}
     <div className="text-[11px] font-semibold uppercase tracking-[0.35em] mb-4" style={{ color: '#9CA3AF' }}>
-      Le RBBC & Méd Le Terrier organisent le
+      Le RBBC & MDJ Le Terrier organisent le
     </div>
 
     {/* Titre */}
@@ -451,7 +451,7 @@ const ThreeXThreePage = () => {
             <div className="space-y-4 text-[15px] leading-relaxed text-gray-600">
               <p>
                 Le <strong className="text-gray-900">Royal Blaregnies Basket Club</strong> et{' '}
-                <strong className="text-gray-900">Méd Le Terrier</strong> s'associent pour organiser, ce dimanche{' '}
+                <strong className="text-gray-900">MDJ Le Terrier</strong> s'associent pour organiser, ce dimanche{' '}
                 <strong className="text-gray-900">28 juin 2026</strong>, un grand tournoi de{' '}
                 <strong className="text-gray-900">street basket 3×3</strong> sur la Place de{' '}
                 <strong className="text-gray-900">Quévy-le-Petit</strong>.
