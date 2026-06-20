@@ -14,6 +14,7 @@ export default defineConfig({
         main: resolve(__dirname, 'index.html'),
         sponsoring: resolve(__dirname, 'sponsoring.html'),
         photos: resolve(__dirname, 'photos.html'),
+        '3x3': resolve(__dirname, '3x3.html'),
       },
       output: {
         manualChunks: {

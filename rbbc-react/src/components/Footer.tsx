@@ -1,12 +1,13 @@
 import React from 'react'
 import { getImagePath } from '../utils/images'
 
+const DARK = '#09101f'
+
 const Footer = () => {
   const currentYear = new Date().getFullYear()
 
   const navLinks = [
     { href: '#accueil', label: 'Accueil' },
-    { href: '#adresse', label: 'Adresse' },
     { href: '#equipes', label: 'Équipes' },
     { href: '#entrainements', label: 'Entraînements' },
     { href: '#sponsoring', label: 'Sponsoring' },
@@ -45,8 +46,8 @@ const Footer = () => {
   }
 
   return (
-    <footer className="bg-gray-900 border-t border-white/10">
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-16">
+    <footer style={{ backgroundColor: DARK }} className="border-t border-white/10">
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-14">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
 
           {/* Brand */}
@@ -64,7 +65,7 @@ const Footer = () => {
                 <div className="text-white/40 text-xs uppercase tracking-widest">Royal Blaregnies Basket Club</div>
               </div>
             </div>
-            <p className="text-white/40 text-sm leading-relaxed max-w-sm mb-5">
+            <p className="text-white/50 text-sm leading-relaxed max-w-sm mb-5">
               Club familial basé à Blaregnies, le RBBC accueille les garçons et les filles dès 6 ans.
               Nos formateurs accompagnent chaque joueur dans sa progression, du minibasket jusqu'en compétition.
             </p>
@@ -75,7 +76,7 @@ const Footer = () => {
                   href={s.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 bg-white/5 hover:bg-red-700 border border-white/8 hover:border-transparent rounded-sm flex items-center justify-center text-white/50 hover:text-white transition-all duration-200"
+                  className="w-10 h-10 bg-white/5 hover:bg-red-700 border border-white/10 hover:border-transparent rounded-sm flex items-center justify-center text-white/50 hover:text-white transition-all duration-200"
                   aria-label={s.name}
                 >
                   {s.icon}
@@ -86,14 +87,14 @@ const Footer = () => {
 
           {/* Navigation */}
           <div>
-            <h4 className="text-white/30 text-xs uppercase tracking-widest font-semibold mb-5">Navigation</h4>
+            <h4 className="text-white/40 text-xs uppercase tracking-widest font-semibold mb-5">Navigation</h4>
             <ul className="space-y-2.5">
               {navLinks.map(link => (
                 <li key={link.href}>
                   <a
                     href={link.href}
                     onClick={(e) => scrollTo(e, link.href)}
-                    className="text-white/50 hover:text-white text-sm transition-colors duration-200"
+                    className="text-white/55 hover:text-white text-sm transition-colors duration-200"
                   >
                     {link.label}
                   </a>
@@ -104,11 +105,11 @@ const Footer = () => {
 
           {/* Contact */}
           <div>
-            <h4 className="text-white/30 text-xs uppercase tracking-widest font-semibold mb-5">Contact</h4>
+            <h4 className="text-white/40 text-xs uppercase tracking-widest font-semibold mb-5">Contact</h4>
             <div className="space-y-3 text-sm">
               <a
                 href="mailto:comiterbbc@gmail.com"
-                className="flex items-center gap-2 text-white/50 hover:text-white transition-colors duration-200"
+                className="flex items-center gap-2 text-white/55 hover:text-white transition-colors duration-200"
               >
                 <svg className="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -117,14 +118,14 @@ const Footer = () => {
               </a>
               <a
                 href="tel:065567006"
-                className="flex items-center gap-2 text-white/50 hover:text-white transition-colors duration-200"
+                className="flex items-center gap-2 text-white/55 hover:text-white transition-colors duration-200"
               >
                 <svg className="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                 </svg>
                 065/56 70 06
               </a>
-              <p className="flex items-start gap-2 text-white/30">
+              <p className="flex items-start gap-2 text-white/35">
                 <svg className="w-3.5 h-3.5 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -136,8 +137,8 @@ const Footer = () => {
         </div>
 
         {/* Bottom */}
-        <div className="pt-8 border-t border-white/8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-white/25 text-xs">
+        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-white/30 text-xs">
             © {currentYear} Royal Blaregnies Basket Club — Fondé en 1961
           </p>
           <button

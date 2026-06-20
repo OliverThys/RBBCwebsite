@@ -3,15 +3,18 @@ import { Link } from 'react-router-dom'
 import { sponsors } from '../data/sponsors'
 import { getImagePath } from '../utils/images'
 
+const DARK = '#09101f'
+const RED = '#B91C1C'
+
 const benefits = [
-  { title: 'Visibilité',    description: 'Logo sur nos maillots et notre site, visible par des centaines de personnes.' },
-  { title: 'Partenariat',   description: 'Devenez partenaire d\'un club familial bien implanté dans la région du Hainaut depuis plus de 60 ans.' },
-  { title: 'Réseau local',  description: 'Accédez à notre réseau de partenaires de la Province de Hainaut.' },
-  { title: 'Impact sportif',description: 'Soutenez directement le développement du basketball chez les jeunes.' },
+  { title: 'Visibilité',     description: 'Logo sur nos supports et notre site, visible par des centaines de personnes à chaque match.' },
+  { title: 'Partenariat',    description: 'Devenez partenaire d\'un club familial implanté dans la région du Hainaut depuis plus de 60 ans.' },
+  { title: 'Réseau local',   description: 'Accédez à notre réseau de partenaires de la Province de Hainaut.' },
+  { title: 'Impact sportif', description: 'Soutenez directement le développement du basketball chez les jeunes de la commune.' },
 ]
 
 const Sponsors = () => (
-  <section id="sponsoring" className="relative py-14 md:py-20 bg-off-black overflow-hidden">
+  <section id="sponsoring" className="relative py-14 md:py-20 overflow-hidden" style={{ backgroundColor: '#e2eaf4' }}>
     <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
 
       {/* Header */}
@@ -23,9 +26,9 @@ const Sponsors = () => (
         className="mb-10"
       >
         <div className="section-label mb-4">Nos partenaires</div>
-        <h2 className="font-display text-[clamp(2.5rem,6vw,5rem)] text-white leading-none">
+        <h2 className="font-display text-[clamp(2.2rem,5.5vw,4.5rem)] leading-none" style={{ color: DARK }}>
           ILS NOUS<br />
-          <span className="text-red-700">SOUTIENNENT</span>
+          <span style={{ color: RED }}>SOUTIENNENT</span>
         </h2>
       </motion.div>
 
@@ -68,7 +71,7 @@ const Sponsors = () => (
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.04 }}
-                className="group relative h-20 sm:h-24 bg-white rounded-sm overflow-hidden border border-white/10 hover:border-red-700/40 transition-colors duration-300"
+                className="group relative h-20 sm:h-24 bg-white rounded-sm overflow-hidden border border-gray-200 hover:border-red-300 hover:shadow-md transition-all duration-300"
               >
                 {inner}
               </motion.div>
@@ -90,7 +93,7 @@ const Sponsors = () => (
           />
           <div className="relative">
             <h3 className="font-display text-2xl sm:text-3xl text-white mb-3">DEVENEZ PARTENAIRE</h3>
-            <p className="text-white/70 text-sm leading-relaxed">
+            <p className="text-white/80 text-sm leading-relaxed">
               Contactez le comité pour discuter des opportunités de sponsoring adaptées à votre entreprise.
             </p>
           </div>
@@ -106,23 +109,12 @@ const Sponsors = () => (
             </Link>
             <a
               href="mailto:comiterbbc@gmail.com"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-transparent border-2 border-white/30 hover:border-white text-white font-bold text-sm rounded-sm transition-colors duration-200"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-transparent border-2 border-white/40 hover:border-white text-white font-bold text-sm rounded-sm transition-colors duration-200"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
               Envoyer un email
-            </a>
-            <a
-              href="https://wa.me/32479471517"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-transparent border-2 border-white/30 hover:border-white text-white font-bold text-sm rounded-sm transition-colors duration-200"
-            >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-              </svg>
-              0479/471 517
             </a>
           </div>
         </motion.div>
@@ -137,12 +129,12 @@ const Sponsors = () => (
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4, delay: index * 0.07 }}
-            className="flex items-start gap-4 p-5 bg-surface border border-white/10 rounded-sm hover:border-red-700/30 transition-colors duration-300 group"
+            className="flex items-start gap-4 p-5 bg-white border border-gray-200 rounded-sm hover:border-red-300 hover:shadow-sm transition-all duration-300 group"
           >
-            <div className="w-0.5 h-full min-h-[2rem] bg-red-700/60 group-hover:bg-red-700 rounded-full flex-shrink-0 transition-colors duration-300" />
+            <div className="w-0.5 min-h-[2rem] bg-red-200 group-hover:bg-red-700 rounded-full flex-shrink-0 transition-colors duration-300" />
             <div>
-              <h4 className="font-display text-lg text-white mb-1">{benefit.title}</h4>
-              <p className="text-white/65 text-xs leading-relaxed">{benefit.description}</p>
+              <h4 className="font-display text-lg mb-1" style={{ color: DARK }}>{benefit.title}</h4>
+              <p className="text-gray-600 text-xs leading-relaxed">{benefit.description}</p>
             </div>
           </motion.div>
         ))}

@@ -3,6 +3,9 @@ import { useState } from 'react'
 import { teams } from '../data/teams'
 import { getImagePath } from '../utils/images'
 
+const DARK = '#09101f'
+const RED = '#B91C1C'
+
 type Filter = 'all' | 'seniors' | 'jeunes'
 
 const filters: { value: Filter; label: string }[] = [
@@ -17,7 +20,7 @@ const Teams = () => {
   const filteredTeams = filter === 'all' ? teams : teams.filter(t => t.category === filter)
 
   return (
-    <section id="equipes" className="relative py-14 md:py-20 bg-off-black overflow-hidden">
+    <section id="equipes" className="relative py-14 md:py-20 overflow-hidden" style={{ backgroundColor: '#edf2f8' }}>
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
 
         {/* Header */}
@@ -30,22 +33,22 @@ const Teams = () => {
         >
           <div>
             <div className="section-label mb-4">Nos équipes</div>
-            <h2 className="font-display text-[clamp(2.5rem,6vw,5rem)] text-white leading-none">
+            <h2 className="font-display text-[clamp(2.2rem,5.5vw,4.5rem)] leading-none" style={{ color: DARK }}>
               FILLES ET GARÇONS<br />
-              <span className="text-red-700">TOUS LES NIVEAUX</span>
+              <span style={{ color: RED }}>TOUS LES NIVEAUX</span>
             </h2>
           </div>
 
           {/* Filters */}
-          <div className="flex items-center gap-1 bg-surface-2 rounded-sm p-1 border border-white/10 self-start sm:self-auto">
+          <div className="flex items-center gap-1 bg-white rounded-sm p-1 border border-gray-200 self-start sm:self-auto shadow-sm">
             {filters.map(btn => (
               <button
                 key={btn.value}
                 onClick={() => setFilter(btn.value)}
                 className={`px-4 py-2 text-sm font-semibold rounded-sm transition-all duration-200 ${
                   filter === btn.value
-                    ? 'bg-red-700 text-white'
-                    : 'text-white/50 hover:text-white'
+                    ? 'bg-red-700 text-white shadow-sm'
+                    : 'text-gray-500 hover:text-gray-800'
                 }`}
               >
                 {btn.label}
@@ -54,7 +57,7 @@ const Teams = () => {
           </div>
         </motion.div>
 
-        {/* Photo grid — landscape aspect, all teams visible */}
+        {/* Photo grid */}
         <motion.div layout className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3">
           <AnimatePresence mode="popLayout">
             {filteredTeams.map((team, index) => (
@@ -65,9 +68,8 @@ const Teams = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.94 }}
                 transition={{ duration: 0.28, delay: index * 0.03 }}
-                className="group relative aspect-[4/3] overflow-hidden rounded-sm"
+                className="group relative aspect-[4/3] overflow-hidden rounded-sm shadow-sm"
               >
-                {/* Photo */}
                 <img
                   src={getImagePath(team.image)}
                   alt={team.name}
@@ -75,10 +77,7 @@ const Teams = () => {
                   loading="lazy"
                 />
 
-                {/* Gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-
-                {/* Hover overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent" />
                 <div className="absolute inset-0 bg-red-700/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
                 {/* Category badge */}
@@ -86,13 +85,13 @@ const Teams = () => {
                   <span className={`px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide rounded-sm ${
                     team.category === 'seniors'
                       ? 'bg-red-700 text-white'
-                      : 'bg-white/85 text-gray-800'
+                      : 'bg-white text-gray-800'
                   }`}>
                     {team.category === 'seniors' ? 'Senior' : 'Jeune'}
                   </span>
                 </div>
 
-                {/* Name + CTA */}
+                {/* Name */}
                 <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4">
                   <h3 className="font-display text-base sm:text-lg text-white leading-none mb-2">
                     {team.name}
@@ -104,7 +103,7 @@ const Teams = () => {
                         e.preventDefault()
                         document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
                       }}
-                      className="inline-flex items-center gap-1.5 text-[11px] font-bold text-red-400 hover:text-red-300 uppercase tracking-widest"
+                      className="inline-flex items-center gap-1.5 text-[11px] font-bold text-red-300 hover:text-red-200 uppercase tracking-widest"
                     >
                       Rejoindre
                       <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -124,11 +123,11 @@ const Teams = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-6 p-5 sm:p-8 border border-white/10 bg-surface-2 rounded-sm"
+          className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-6 p-5 sm:p-8 bg-white rounded-sm border border-gray-200 shadow-sm"
         >
           <div>
-            <h3 className="font-display text-2xl md:text-3xl text-white mb-1">Rejoins l'aventure</h3>
-            <p className="text-white/50 text-sm">Fille ou garçon, débutant ou confirmé — nos formateurs t'accueillent.</p>
+            <h3 className="font-display text-2xl md:text-3xl mb-1" style={{ color: DARK }}>Rejoins l'aventure</h3>
+            <p className="text-gray-600 text-sm">Fille ou garçon, débutant ou confirmé — nos formateurs t'accueillent.</p>
           </div>
           <a
             href="#contact"

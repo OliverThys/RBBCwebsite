@@ -10,6 +10,7 @@ import Contact from './components/Contact'
 import Footer from './components/Footer'
 import SponsoringPage from './SponsoringPage'
 import PhotosPage from './PhotosPage'
+import ThreeXThreePage from './ThreeXThreePage'
 
 function HomePage() {
   useEffect(() => {
@@ -42,6 +43,7 @@ function App() {
       <Route path="/" element={<HomePage />} />
       <Route path="/sponsoring" element={<SponsoringPage />} />
       <Route path="/photos" element={<PhotosPage />} />
+      <Route path="/3x3" element={<ThreeXThreePage />} />
     </Routes>
   )
 }

@@ -223,8 +223,9 @@ const SponsoringPage = () => {
       highlighted: true,
       benefits: [
         { category: '', text: 'Tous les avantages du Pack Partenaire.' },
-        { category: 'Salle', text: 'Panneau individuel (ou partagé) sur les murs du gymnase, visible des gradins.' },
+        { category: 'Salle', text: 'Présence visuelle du partenaire dans l’enceinte sportive, selon les possibilités validées.' },
         { category: 'Digital', text: 'Logo sur les visuels "Résultats du Week-end". Publication dédiée "Présentation du partenaire" par saison.' },
+        { category: 'Site web', text: 'Logo affiché dans la section "Nos Partenaires" du site officiel, avec lien cliquable vers votre site.' },
         { category: 'Buvette', text: "Logo diffusé sur l'écran TV pendant les matchs à domicile." },
       ],
     },
@@ -236,9 +237,10 @@ const SponsoringPage = () => {
       headerGradient: 'linear-gradient(135deg, #9a6f00 0%, #ffd700 55%, #c8a800 100%)',
       benefits: [
         { category: '', text: 'Tous les avantages du Pack Privilège.' },
-        { category: 'Salle', text: 'Emplacement "Tête de liste" ou panneau grand format à hauteur des yeux.' },
-        { category: 'Digital Premium', text: 'Logo systématique sur le "Programme du Week-end". Logo sur les maillots, équipements, trainings, t-shirts et autres.' },
-        { category: 'Action commerciale', text: "Autorisation de distribuer vos flyers/cartes de réduction à la buvette lors d'un match dédié." },
+        { category: 'Salle', text: 'Visibilité renforcée dans les espaces de communication du club.' },
+        { category: 'Digital Premium', text: 'Logo systématique sur le "Programme du Week-end".' },
+        { category: 'Site web', text: 'Logo mis en avant (taille prioritaire) dans la section "Nos Partenaires" du site officiel, avec lien cliquable vers votre site.' },
+        { category: 'Options complémentaires', text: 'Options complémentaires à forte valeur ajoutée disponibles, en concertation avec le référent sponsoring.' },
       ],
     },
   ]
@@ -247,17 +249,16 @@ const SponsoringPage = () => {
     <div className="bg-white min-h-screen" style={{ fontFamily: "'Barlow', sans-serif" }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Barlow:wght@400;500;600;700&family=Bebas+Neue&display=swap');
+        .hero-players { object-position: center top; }
       `}</style>
 
       <SponsoringNavbar />
 
       {/* ══ HERO — Fond parquet, joueurs sans background ════════════════════ */}
       <section
-        className="relative overflow-hidden"
+        className="relative overflow-hidden h-[42vh] sm:h-[58vh] max-h-[520px]"
         style={{
-          height: '58vh',
-          minHeight: '380px',
-          maxHeight: '520px',
+          minHeight: '220px',
           backgroundColor: '#d4a050',
           backgroundImage: `
             repeating-linear-gradient(
@@ -278,7 +279,7 @@ const SponsoringPage = () => {
           src={getImagePath('/headerrbbcjeunes-nobg.png')}
           alt="Équipe RBBC"
           className="absolute inset-0 w-full h-full object-cover"
-          style={{ objectPosition: 'center calc(70% + 20px)' }}
+          style={{ objectPosition: 'center 65%' }}
           initial={{ scale: 1.06 }}
           animate={{ scale: 1 }}
           transition={{ duration: 1.6, ease: [0.25, 0.46, 0.45, 0.94] }}
@@ -293,7 +294,7 @@ const SponsoringPage = () => {
         />
 
         {/* Contenu — ancré en bas à gauche */}
-        <div className="relative h-full flex flex-col justify-end" style={{ paddingBottom: '47px' }}>
+        <div className="relative h-full flex flex-col justify-end" style={{ paddingBottom: 'clamp(20px, 5vh, 47px)' }}>
           <div className="max-w-5xl mx-auto px-5 sm:px-14 w-full">
             <motion.div
               initial={{ opacity: 0, y: 22 }}
@@ -478,7 +479,7 @@ const SponsoringPage = () => {
                 title: 'Sur le terrain',
                 sub: 'Salle Emile Severyns',
                 items: [
-                  'Panneaux publicitaires fixés aux murs du gymnase (intérieur).',
+                  'Supports de visibilité dans la salle, selon les modalités en vigueur.',
                   'Totems et affiches dans les zones de passage.',
                 ],
                 img: getImagePath('/media/visibilite-terrain.jpg'),

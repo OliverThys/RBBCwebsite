@@ -16,12 +16,12 @@ const SponsorItem = ({ sponsor, prefix }: { sponsor: typeof sponsors[0]; prefix:
     <img
       src={getImagePath(sponsor.image)}
       alt={sponsor.name}
-      className="h-full w-auto object-contain opacity-70 hover:opacity-100 transition-opacity duration-300"
+      className="h-full w-auto object-contain opacity-60 hover:opacity-100 transition-opacity duration-300"
       loading="lazy"
     />
   )
 
-  const wrapperClass = "flex-shrink-0 h-12 md:h-14 flex items-center"
+  const wrapperClass = 'flex-shrink-0 h-10 md:h-12 flex items-center'
 
   if (sponsor.link) {
     return (
@@ -69,10 +69,10 @@ const SponsorsBar = () => {
   }, [])
 
   return (
-    <section className="bg-surface border-y border-white/10 py-6 overflow-hidden">
+    <section className="bg-gray-50 border-y border-gray-200 py-5 overflow-hidden">
       <div className="flex items-center gap-6 mb-4 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
         <span className="section-label flex-shrink-0">Nos partenaires</span>
-        <div className="flex-1 h-px bg-white/10" />
+        <div className="flex-1 h-px bg-gray-200" />
       </div>
 
       <div className="relative overflow-hidden">
