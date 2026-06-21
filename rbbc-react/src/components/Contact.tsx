@@ -9,7 +9,7 @@ const Contact = () => (
   <section id="contact" className="overflow-hidden">
 
     {/* ─── Part claire — infos contact ─────────────────────────── */}
-    <div className="py-14 md:py-20 relative" style={{ backgroundColor: '#edf2f8' }}>
+    <div className="py-16 md:py-24 relative bg-white border-t border-gray-100">
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
 
         {/* Header */}
@@ -20,8 +20,8 @@ const Contact = () => (
           transition={{ duration: 0.6 }}
           className="mb-10"
         >
-          <div className="section-label mb-4">Viens nous rejoindre</div>
-          <h2 className="font-display text-[clamp(2.2rem,5.5vw,4.5rem)] leading-none" style={{ color: DARK }}>
+          <div className="text-[10px] font-bold uppercase tracking-[0.35em] mb-4" style={{ color: '#EA580C' }}>Viens nous rejoindre</div>
+          <h2 className="font-display leading-none" style={{ fontSize: 'clamp(3rem, 8vw, 5rem)', color: DARK }}>
             ON T'ATTEND<br />
             <span style={{ color: RED }}>AU RBBC</span>
           </h2>
@@ -36,7 +36,7 @@ const Contact = () => (
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="lg:col-span-3 relative min-h-[280px] lg:min-h-[380px] rounded-sm overflow-hidden shadow-sm"
+            className="lg:col-span-3 relative min-h-[280px] lg:min-h-[380px] overflow-hidden"
           >
             <img
               src={getImagePath('/adresse.jpg')}
@@ -55,14 +55,14 @@ const Contact = () => (
                   href={contactInfo.address.mapsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-white/15 hover:bg-white/25 border border-white/25 hover:border-white/50 text-white text-sm font-semibold rounded-sm transition-all duration-200 backdrop-blur-sm"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-white/15 hover:bg-white/25 border border-white/25 hover:border-white/50 text-white text-sm font-semibold  transition-all duration-200 backdrop-blur-sm"
                 >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
                   </svg>
                   Itinéraire
                 </a>
-                <div className="inline-flex items-center gap-2 px-4 py-2.5 bg-white/10 border border-white/20 text-white/75 text-sm rounded-sm">
+                <div className="inline-flex items-center gap-2 px-4 py-2.5 bg-white/10 border border-white/20 text-white/75 text-sm ">
                   <svg className="w-4 h-4 text-white/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
@@ -81,10 +81,10 @@ const Contact = () => (
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="bg-white border border-gray-200 hover:border-red-200 rounded-sm p-6 transition-colors duration-300 shadow-sm"
+              className="bg-white border border-gray-200 hover:border-red-200 p-6 transition-colors duration-300"
             >
               <div className="flex items-center gap-3 mb-5">
-                <div className="w-9 h-9 bg-red-50 border border-red-200 rounded-sm flex items-center justify-center flex-shrink-0">
+                <div className="w-9 h-9 bg-red-50 border border-red-200  flex items-center justify-center flex-shrink-0">
                   <svg className="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
@@ -96,7 +96,7 @@ const Contact = () => (
               </div>
               <div className="space-y-3">
                 <a href={`tel:${contactInfo.committee.phone.replace(/\//g, '')}`} className="flex items-center gap-3 group">
-                  <div className="w-8 h-8 bg-gray-100 rounded-sm flex items-center justify-center flex-shrink-0">
+                  <div className="w-8 h-8 bg-gray-100  flex items-center justify-center flex-shrink-0">
                     <svg className="w-3.5 h-3.5 text-gray-400 group-hover:text-red-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                     </svg>
@@ -104,7 +104,7 @@ const Contact = () => (
                   <span className="text-gray-700 group-hover:text-gray-900 text-sm transition-colors">{contactInfo.committee.phone}</span>
                 </a>
                 <a href={`mailto:${contactInfo.committee.email}`} className="flex items-center gap-3 group">
-                  <div className="w-8 h-8 bg-gray-100 rounded-sm flex items-center justify-center flex-shrink-0">
+                  <div className="w-8 h-8 bg-gray-100  flex items-center justify-center flex-shrink-0">
                     <svg className="w-3.5 h-3.5 text-gray-400 group-hover:text-red-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
@@ -120,7 +120,7 @@ const Contact = () => (
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="flex-1 relative bg-red-700 rounded-sm p-6 overflow-hidden flex flex-col justify-between shadow-sm"
+              className="flex-1 relative bg-red-700 p-6 overflow-hidden flex flex-col justify-between"
             >
               <div className="absolute inset-0 opacity-[0.07]" style={{ backgroundImage: 'radial-gradient(circle, white 1px, transparent 1px)', backgroundSize: '20px 20px' }} />
               <div className="relative">
@@ -130,7 +130,7 @@ const Contact = () => (
               <div className="relative mt-6 space-y-2.5">
                 <a
                   href={`mailto:${contactInfo.committee.email}`}
-                  className="flex items-center justify-center gap-2 w-full py-3 bg-white text-red-700 font-bold text-sm rounded-sm hover:bg-red-50 transition-colors duration-200"
+                  className="flex items-center justify-center gap-2 w-full py-3 bg-white text-red-700 font-bold text-sm  hover:bg-red-50 transition-colors duration-200"
                 >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -139,7 +139,7 @@ const Contact = () => (
                 </a>
                 <a
                   href={`tel:${contactInfo.committee.phone.replace(/\//g, '')}`}
-                  className="flex items-center justify-center gap-2 w-full py-3 border-2 border-white/35 hover:border-white text-white font-bold text-sm rounded-sm transition-colors duration-200"
+                  className="flex items-center justify-center gap-2 w-full py-3 border-2 border-white/35 hover:border-white text-white font-bold text-sm  transition-colors duration-200"
                 >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
@@ -148,14 +148,14 @@ const Contact = () => (
                 </a>
                 <div className="flex gap-2 pt-1">
                   <a href="https://www.facebook.com/BlaregniesBasketClub/" target="_blank" rel="noopener noreferrer"
-                    className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-white/10 hover:bg-white/20 rounded-sm text-white text-xs font-semibold transition-colors duration-200" aria-label="Facebook">
+                    className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-white/10 hover:bg-white/20  text-white text-xs font-semibold transition-colors duration-200" aria-label="Facebook">
                     <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                     </svg>
                     Facebook
                   </a>
                   <a href="https://www.instagram.com/royalblaregniesbasketclub?igsh=MTh4eXVzeGp4Z3lmMw==" target="_blank" rel="noopener noreferrer"
-                    className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-white/10 hover:bg-white/20 rounded-sm text-white text-xs font-semibold transition-colors duration-200" aria-label="Instagram">
+                    className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-white/10 hover:bg-white/20  text-white text-xs font-semibold transition-colors duration-200" aria-label="Instagram">
                     <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073z"/>
                     </svg>

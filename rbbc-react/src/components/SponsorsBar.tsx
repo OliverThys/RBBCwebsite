@@ -11,42 +11,18 @@ const shuffleArray = <T,>(array: T[]): T[] => {
   return shuffled
 }
 
-const SponsorItem = ({ sponsor, prefix }: { sponsor: typeof sponsors[0]; prefix: string }) => {
-  const img = (
-    <img
-      src={getImagePath(sponsor.image)}
-      alt={sponsor.name}
-      className="h-full w-auto object-contain opacity-60 hover:opacity-100 transition-opacity duration-300"
-      loading="lazy"
-    />
-  )
-
-  const wrapperClass = 'flex-shrink-0 h-10 md:h-12 flex items-center'
-
-  if (sponsor.link) {
-    return (
-      <div key={`${prefix}-${sponsor.id}`} className={wrapperClass}>
-        <a href={sponsor.link} target="_blank" rel="noopener noreferrer" className="block h-full hover:scale-105 transition-transform duration-300">
-          {img}
-        </a>
-      </div>
-    )
-  }
-  if (sponsor.phone) {
-    return (
-      <div key={`${prefix}-${sponsor.id}`} className={wrapperClass}>
-        <a href={`tel:${sponsor.phone}`} className="block h-full hover:scale-105 transition-transform duration-300">
-          {img}
-        </a>
-      </div>
-    )
-  }
-  return (
-    <div key={`${prefix}-${sponsor.id}`} className={wrapperClass}>
-      {img}
-    </div>
-  )
-}
+const SponsorItem = ({ sponsor, prefix }: { sponsor: typeof sponsors[0]; prefix: string }) => (
+  <div key={`${prefix}-${sponsor.id}`} className="flex-shrink-0 h-10 md:h-12 flex items-center">
+    <a href={sponsor.link} target="_blank" rel="noopener noreferrer" className="block h-full hover:scale-105 transition-transform duration-300">
+      <img
+        src={getImagePath(sponsor.image)}
+        alt={sponsor.name}
+        className="h-full w-auto object-contain opacity-60 hover:opacity-100 transition-opacity duration-300"
+        loading="lazy"
+      />
+    </a>
+  </div>
+)
 
 const SponsorsBar = () => {
   const firstSetRef = useRef<HTMLDivElement>(null)
@@ -69,10 +45,10 @@ const SponsorsBar = () => {
   }, [])
 
   return (
-    <section className="bg-gray-50 border-y border-gray-200 py-5 overflow-hidden">
+    <section className="bg-white border-y border-gray-100 py-5 overflow-hidden">
       <div className="flex items-center gap-6 mb-4 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-        <span className="section-label flex-shrink-0">Nos partenaires</span>
-        <div className="flex-1 h-px bg-gray-200" />
+        <span className="flex-shrink-0 text-[10px] font-bold uppercase tracking-[0.35em]" style={{ color: '#EA580C' }}>Nos partenaires</span>
+        <div className="flex-1 h-px bg-gray-100" />
       </div>
 
       <div className="relative overflow-hidden">

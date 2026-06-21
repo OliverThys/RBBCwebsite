@@ -20,7 +20,7 @@ const Teams = () => {
   const filteredTeams = filter === 'all' ? teams : teams.filter(t => t.category === filter)
 
   return (
-    <section id="equipes" className="relative py-14 md:py-20 overflow-hidden" style={{ backgroundColor: '#edf2f8' }}>
+    <section id="equipes" className="relative py-16 md:py-24 overflow-hidden" style={{ backgroundColor: '#F7F6F3' }}>
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
 
         {/* Header */}
@@ -32,22 +32,22 @@ const Teams = () => {
           className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-8"
         >
           <div>
-            <div className="section-label mb-4">Nos équipes</div>
-            <h2 className="font-display text-[clamp(2.2rem,5.5vw,4.5rem)] leading-none" style={{ color: DARK }}>
+            <div className="text-[10px] font-bold uppercase tracking-[0.35em] mb-4" style={{ color: '#EA580C' }}>Nos équipes</div>
+            <h2 className="font-display leading-none" style={{ fontSize: 'clamp(3rem, 8vw, 5rem)', color: DARK }}>
               FILLES ET GARÇONS<br />
               <span style={{ color: RED }}>TOUS LES NIVEAUX</span>
             </h2>
           </div>
 
           {/* Filters */}
-          <div className="flex items-center gap-1 bg-white rounded-sm p-1 border border-gray-200 self-start sm:self-auto shadow-sm">
+          <div className="flex items-center gap-0 bg-white p-1 border border-gray-200 self-start sm:self-auto">
             {filters.map(btn => (
               <button
                 key={btn.value}
                 onClick={() => setFilter(btn.value)}
-                className={`px-4 py-2 text-sm font-semibold rounded-sm transition-all duration-200 ${
+                className={`px-4 py-2 text-sm font-semibold transition-all duration-200 ${
                   filter === btn.value
-                    ? 'bg-red-700 text-white shadow-sm'
+                    ? 'bg-red-700 text-white'
                     : 'text-gray-500 hover:text-gray-800'
                 }`}
               >
@@ -68,7 +68,7 @@ const Teams = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.94 }}
                 transition={{ duration: 0.28, delay: index * 0.03 }}
-                className="group relative aspect-[4/3] overflow-hidden rounded-sm shadow-sm"
+                className="group relative aspect-[4/3] overflow-hidden"
               >
                 <img
                   src={getImagePath(team.image)}
@@ -123,11 +123,11 @@ const Teams = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-6 p-5 sm:p-8 bg-white rounded-sm border border-gray-200 shadow-sm"
+          className="mt-10 flex flex-col sm:flex-row items-center justify-between gap-6 pt-8 border-t border-gray-200"
         >
           <div>
-            <h3 className="font-display text-2xl md:text-3xl mb-1" style={{ color: DARK }}>Rejoins l'aventure</h3>
-            <p className="text-gray-600 text-sm">Fille ou garçon, débutant ou confirmé — nos formateurs t'accueillent.</p>
+            <h3 className="font-display text-2xl md:text-3xl leading-none mb-1" style={{ color: DARK }}>Rejoins l'aventure</h3>
+            <p className="text-gray-500 text-sm mt-2">Fille ou garçon, débutant ou confirmé — nos formateurs t'accueillent.</p>
           </div>
           <a
             href="#contact"
@@ -135,7 +135,7 @@ const Teams = () => {
               e.preventDefault()
               document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
             }}
-            className="flex-shrink-0 px-7 py-3.5 bg-red-700 hover:bg-red-600 text-white font-semibold text-sm tracking-wide transition-colors duration-200 rounded-sm"
+            className="flex-shrink-0 px-7 py-3.5 bg-red-700 hover:bg-red-600 text-white font-semibold text-sm tracking-wide transition-colors duration-200"
           >
             Nous contacter
           </a>

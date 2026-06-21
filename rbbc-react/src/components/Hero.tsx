@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
 import { getImagePath } from '../utils/images'
 import AnimatedCounter from './AnimatedCounter'
 
@@ -46,37 +45,12 @@ const Hero = () => {
           src={teamPhoto}
           alt="Équipe RBBC"
           className="absolute inset-0 w-full h-full object-cover"
-          style={{ objectPosition: 'center 30%' }}
+          style={{ objectPosition: 'center 40%' }}
           initial={{ scale: 1.04 }}
           animate={{ scale: 1 }}
           transition={{ duration: 1.8, ease: [0.25, 0.46, 0.45, 0.94] }}
         />
 
-        {/* Badge sponsoring — desktop uniquement */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 1.2 }}
-          className="hidden lg:block absolute top-24 right-8 z-10"
-        >
-          <Link
-            to="/sponsoring"
-            className="group inline-flex items-center gap-5 px-8 py-5 rounded-sm border border-amber-400/40 hover:border-amber-400 transition-all duration-300"
-            style={{ background: 'rgba(9,16,31,0.68)', backdropFilter: 'blur(10px)' }}
-          >
-            <div>
-              <div className="text-xs uppercase tracking-[0.28em] font-semibold leading-none mb-2" style={{ color: 'rgba(251,191,36,0.65)' }}>
-                Saison 2025–26
-              </div>
-              <div className="text-2xl font-bold tracking-wide whitespace-nowrap leading-none" style={{ color: '#FCD34D' }}>
-                Sponsoring ouvert&nbsp;!
-              </div>
-            </div>
-            <svg className="w-6 h-6 flex-shrink-0 group-hover:translate-x-1 transition-transform duration-200" style={{ color: 'rgba(251,191,36,0.6)' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-          </Link>
-        </motion.div>
       </div>
 
       {/* ── TEXTE — en bas mobile, à gauche desktop ──────────────────────── */}
@@ -84,41 +58,18 @@ const Hero = () => {
         className="order-2 lg:order-1 relative flex flex-col bg-white px-6 sm:px-12 lg:px-14 pt-5 sm:pt-6 lg:pt-24 pb-4 sm:pb-6 lg:pb-10 flex-1 lg:flex-none lg:w-[40%] overflow-hidden"
         style={{ borderRight: '1px solid #e5e7eb' }}
       >
-        {/* Label */}
+        {/* Eyebrow */}
         <motion.div
           initial={{ opacity: 0, y: -6 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.15 }}
           className="mb-3 lg:mb-auto"
         >
-          <span className="section-label">Royal Blaregnies Basket Club</span>
+          <div className="text-[10px] font-bold uppercase tracking-[0.35em]" style={{ color: '#EA580C' }}>
+            Royal Blaregnies Basket Club
+          </div>
         </motion.div>
 
-        {/* Badge sponsoring — mobile uniquement, haut droite du panneau blanc */}
-        <motion.div
-          initial={{ opacity: 0, x: 10 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5, delay: 1.0 }}
-          className="lg:hidden absolute top-[76px] right-4 z-10"
-        >
-          <Link
-            to="/sponsoring"
-            className="group inline-flex items-center gap-2 px-3 py-2 rounded-sm border border-amber-500/40 hover:border-amber-500 transition-all duration-200"
-            style={{ background: DARK }}
-          >
-            <div>
-              <div className="text-[8px] uppercase tracking-wider font-semibold leading-none mb-0.5" style={{ color: 'rgba(251,191,36,0.6)' }}>
-                Saison 2025–26
-              </div>
-              <div className="text-xs font-bold whitespace-nowrap" style={{ color: '#FCD34D' }}>
-                Sponsoring ouvert&nbsp;!
-              </div>
-            </div>
-            <svg className="w-3 h-3 flex-shrink-0 group-hover:translate-x-0.5 transition-transform" style={{ color: 'rgba(251,191,36,0.6)' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-          </Link>
-        </motion.div>
 
 
         {/* Bloc central */}
@@ -128,8 +79,8 @@ const Hero = () => {
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.65, delay: 0.3 }}
-            className="font-display leading-[0.88] mb-2 sm:mb-4 lg:mb-5"
-            style={{ fontSize: 'clamp(2.2rem, 7vw, 6rem)', color: DARK }}
+            className="font-display mb-3 sm:mb-5 lg:mb-6"
+            style={{ fontSize: 'clamp(2.8rem, 8vw, 6.5rem)', lineHeight: 1, color: DARK }}
           >
             UN VILLAGE<br />
             <span style={{ color: '#B91C1C' }}>UNE PASSION</span><br />
@@ -180,13 +131,13 @@ const Hero = () => {
           >
             <button
               onClick={() => scrollTo('contact')}
-              className="px-5 sm:px-7 py-2.5 sm:py-3.5 bg-red-700 hover:bg-red-600 text-white font-bold text-sm tracking-wide rounded-sm transition-colors duration-200"
+              className="px-5 sm:px-7 py-2.5 sm:py-3.5 bg-red-700 hover:bg-red-600 text-white font-bold text-sm tracking-wide transition-colors duration-200"
             >
               Rejoindre le club
             </button>
             <button
               onClick={() => scrollTo('equipes')}
-              className="group inline-flex items-center gap-2 px-5 sm:px-7 py-2.5 sm:py-3.5 border border-gray-300 hover:border-gray-900 font-semibold text-sm tracking-wide rounded-sm transition-all duration-200"
+              className="group inline-flex items-center gap-2 px-5 sm:px-7 py-2.5 sm:py-3.5 border border-gray-300 hover:border-gray-900 font-semibold text-sm tracking-wide transition-all duration-200"
               style={{ color: DARK }}
             >
               Voir les équipes

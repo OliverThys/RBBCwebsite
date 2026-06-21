@@ -25,14 +25,10 @@
 }
 
 @layer utilities {
-  /* Section separator line accent */
   .section-label {
-    @apply inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-red-700;
-  }
-
-  .section-label::before {
-    content: '';
-    @apply block w-8 h-px bg-red-700;
+    @apply inline-block text-[10px] font-bold uppercase;
+    letter-spacing: 0.35em;
+    color: #EA580C;
   }
 }
 
