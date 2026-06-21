@@ -279,6 +279,12 @@ const ThreeXThreePage = () => {
         "Des partenaires locaux assurent la restauration sur place. Snacks, boissons et petite faim : de quoi tenir toute la journée sans quitter la place.",
     },
     {
+      time: "Dans l'après-midi",
+      titre: 'Katy Wambe — Marraine',
+      texte:
+        "Internationale belge et ancienne professionnelle draftée en WNBA, la marraine de l'événement sera présente dans l'après-midi pour un échange avec les équipes, une session questions-réponses et, peut-être, la remise des prix.",
+    },
+    {
       time: 'Dès la soirée',
       titre: 'Soirée DJ — MDJ Aulnois',
       texte:
@@ -510,6 +516,71 @@ const ThreeXThreePage = () => {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══ KATY WAMBE — marraine ═══════════════════════════════════════════ */}
+      <section className="py-24 sm:py-32 border-t border-gray-100">
+        <div className="max-w-5xl mx-auto px-6 sm:px-10">
+          <div className="grid md:grid-cols-2 gap-16 items-center">
+
+            {/* Photo avec cadre décalé */}
+            <FadeUp>
+              <div className="pl-4 pb-4">
+                <div className="relative">
+                  <div
+                    className="absolute -bottom-4 -left-4 w-full h-full"
+                    style={{ border: `3px solid ${ORANGE}`, zIndex: 0 }}
+                  />
+                  <img
+                    src={getImagePath('/media/3x3/katywambe.jpeg')}
+                    alt="Katy Wambe — ex Belgian Cats"
+                    className="relative w-full object-cover object-top"
+                    style={{ zIndex: 1, maxHeight: '480px' }}
+                  />
+                </div>
+              </div>
+            </FadeUp>
+
+            {/* Texte */}
+            <FadeUp delay={0.15}>
+              <div className="text-[10px] font-bold uppercase tracking-[0.35em] mb-4" style={{ color: ORANGE }}>
+                Marraine de l'événement
+              </div>
+              <span
+                className="inline-flex items-center px-3 py-1 mb-6 text-[10px] font-bold uppercase tracking-[0.2em] text-white"
+                style={{ backgroundColor: RED }}
+              >
+                Internationale belge
+              </span>
+              <h3
+                className="font-black uppercase mb-5 block"
+                style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(3rem, 7vw, 5rem)', color: DARK, lineHeight: 1 }}
+              >
+                Katy Wambe
+              </h3>
+              <div className="space-y-4 text-[15px] leading-relaxed" style={{ color: '#4B5563' }}>
+                <p>
+                  Meneuse de jeu native de <strong className="text-gray-900">Tournai</strong>,
+                  Katy Wambe a mené une carrière professionnelle en Belgique (Belfius Namur),
+                  en France (USVO, Union Hainaut, Villeneuve) et en Italie (Familia Schio, Taranto).
+                  Internationale belge, elle a également été{' '}
+                  <strong className="text-gray-900">draftée en WNBA</strong> par les Detroit Shock en 2002.
+                </p>
+                <p>
+                  Marraine de ce premier tournoi street basket de Quévy, elle sera présente dans
+                  l'après-midi pour un échange avec les joueurs, une session de questions-réponses
+                  et, peut-être, la remise des prix aux équipes victorieuses.
+                </p>
+              </div>
+              <div className="mt-8 pt-6 border-t border-gray-100">
+                <span className="text-xs uppercase tracking-[0.25em] text-gray-400">
+                  Présence confirmée · Dans l'après-midi
+                </span>
+              </div>
+            </FadeUp>
+
           </div>
         </div>
       </section>
