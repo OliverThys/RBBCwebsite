@@ -14,6 +14,16 @@ export interface Album {
 
 const albums: Album[] = [
   {
+    slug: '3x3-streetbasket-2026',
+    title: 'Tournoi Street Basket 3×3',
+    date: '2026-06-28',
+    cover: '/photos/3x3/3x3-og.jpg',
+    description: '1ère édition du tournoi street basket 3×3 organisé par le RBBC et MDJ Le Terrier — Place de Quévy-le-Petit.',
+    photos: Array.from({ length: 118 }, (_, i) => ({
+      src: `/photos/3x3/${String(i + 1).padStart(3, '0')}.jpg`,
+    })),
+  },
+  {
     slug: 'fete-fin-saison-2026',
     title: 'Fête de fin de saison 2026',
     date: '2026-04-25',
